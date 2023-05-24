@@ -1,0 +1,9 @@
+# Introduction to the OBIS contribution to MPA Europe
+
+The EU Horizon project "Marine Protected Areas Europe [(MPA Europe, https://mpa-europe.eu)](https://mpa-europe.eu) aims to identify the locations within the European seas where MPAs would protect the highest number of species, habitats and ecosystems. This information is crucial to establish a functional MPA network and will help managers to propose further areas for conservation in the future. Innovative and bold, MPA Europe will also go one step further by considering the potential blue carbon benefits of the prioritization.
+
+[OBIS (Ocean Biodiversity Information System)](https://obis.org/) will contribute with three pieces of information which will be supplied to the area prioritization process: (i) species distribution models (SDMs) of at least half of the European marine species; (ii) diversity metrics for European seas; and (iii) habitat maps considering habitat forming species. In all cases, models will be created using OBIS data and will include predictions for future scenarios according to CMIP6.
+
+## About this documentation
+
+Transparency and reproducibility are an integral part of our contribution to the project. Thus, here you will find included all the details about the approaches and decisions we took in each part of the work. This is a complement to the available codes/data.
