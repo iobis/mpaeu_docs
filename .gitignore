@@ -5,6 +5,10 @@
 .Rproj*
 .Rproj.user/
 .Rproj.user
+.quarto
+.quarto/
+/.quarto/
+/_site/
 
 # Session Data files
 .RData
@@ -42,9 +46,6 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
-
-# pkgdown site
-docs/
 
 # translation temp files
 po/*~
