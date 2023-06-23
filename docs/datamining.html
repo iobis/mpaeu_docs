@@ -149,7 +149,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#obisdi-package" id="toc-obisdi-package" class="nav-link active" data-scroll-target="#obisdi-package"><span class="header-section-number">4.1</span> <code>obisdi</code> package</a></li>
+  <li><a href="#additional-data-from-literature-and-repositories" id="toc-additional-data-from-literature-and-repositories" class="nav-link" data-scroll-target="#additional-data-from-literature-and-repositories"><span class="header-section-number">4.2</span> Additional data from literature and repositories</a>
+  <ul class="collapse">
+  <li><a href="#biotime" id="toc-biotime" class="nav-link" data-scroll-target="#biotime"><span class="header-section-number">4.2.1</span> BioTIME</a></li>
+  <li><a href="#literature-databases" id="toc-literature-databases" class="nav-link" data-scroll-target="#literature-databases"><span class="header-section-number">4.2.2</span> Literature databases</a></li>
+  <li><a href="#data-repositories" id="toc-data-repositories" class="nav-link" data-scroll-target="#data-repositories"><span class="header-section-number">4.2.3</span> Data repositories</a></li>
+  </ul></li>
+  <li><a href="#additional-data-from-gbif" id="toc-additional-data-from-gbif" class="nav-link" data-scroll-target="#additional-data-from-gbif"><span class="header-section-number">4.3</span> Additional data from GBIF</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -171,9 +184,67 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<p>As part of the <strong>Deliverable 1</strong> of the <strong>WP3</strong>, we looked for additional marine biodiversity data related to Europe that was available elsewhere but not on OBIS. This included data published in the literature, data repositories and other biodiversity databases like <a href="&quot;https://gbif.org&quot;">GBIF</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Continuous process">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Continuous process
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This process is still ongoing and will keep until the end of the project.</p>
+</div>
+</div>
+<p>We used the following procedures for each source:</p>
+<ul>
+<li>Literature/repositories: after finding the appropriate and relevant sources (see below) we ingested the data using the <code>obisdi</code> package structure.</li>
+<li>GBIF: after identifying potential datasets available on GBIF, we followed the data harvesting procedure followed by OBIS nodes (details below).</li>
+</ul>
+<section id="obisdi-package" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="obisdi-package"><span class="header-section-number">4.1</span> <code>obisdi</code> package</h2>
+<p>For enabling a streamlined and standard ingestion of data throughout the project we developed the <code>obisdi</code> package, which is <a href="https://github.com/iobis/obisdi">available on GitHub.</a> The idea behind the package (and basically all the structure) came from the <a href="https://github.com/trias-project">Tracking Invasive Alien Species (TrIAS)</a> project’ checklist recipe <a href="https://github.com/trias-project/checklist-recipe">(see more here)</a>, which provides a standard structure for mapping data to the Darwin Core standard. Using this structure, all the mapping is fully documented and can be tracked. Also, it’s possible to directly ingest the data to the IPT from a GitHub repository.</p>
+<p>Every project created with the <code>obisdi</code> package have the following structure:</p>
+<ul>
+<li>a folder for data, containing two other folders - one for <em>raw</em> data (where the original data files are stored) and one for <em>processed</em> data (where the final edited files are stored).</li>
+<li>a README file containing the basic details about the dataset and the repository</li>
+<li>an RMarkdown file which contains the mapping to the DwC standard.</li>
+</ul>
+<p>By <em>knitting</em> the RMarkdown files, it’s also possible to generate a docs folder that can be used as a website (through GitHub pages), providing an easy access information for the general community.</p>
+</section>
+<section id="additional-data-from-literature-and-repositories" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="additional-data-from-literature-and-repositories"><span class="header-section-number">4.2</span> Additional data from literature and repositories</h2>
+<section id="biotime" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="biotime"><span class="header-section-number">4.2.1</span> BioTIME</h3>
+</section>
+<section id="literature-databases" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="literature-databases"><span class="header-section-number">4.2.2</span> Literature databases</h3>
+<p><strong>Web of Science</strong></p>
+<p><span style="color: #006fdf">TS=((marine OR ocean* OR coastal) AND ((“biodiversity data”) OR (dataset) OR (“time series” OR time-series) AND (species OR occurrence OR biodiversity OR fauna)))</span></p>
+<p><strong>Google Scholar</strong></p>
+</section>
+<section id="data-repositories" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="data-repositories"><span class="header-section-number">4.2.3</span> Data repositories</h3>
+<p><strong>Zenodo</strong></p>
+<p><strong>Dryad</strong></p>
+<p><strong>FigShare</strong></p>
+</section>
+</section>
+<section id="additional-data-from-gbif" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="additional-data-from-gbif"><span class="header-section-number">4.3</span> Additional data from GBIF</h2>
+<p>After we obtained the list of species occurring on the study area, we <a href="./datadownload.html">downloaded</a> the occurrence data from GBIF. From the occurrence data, we identified the unique datasets from which the data came from. We then counted the number of data each dataset contributed to the final data. We selected those datasets that had a high contribution of data as potential datasets that could be included in OBIS.</p>
+<p>For the datasets with potential for inclusion, we first identified those that are already part of OBIS and excluded them from the search. With the remaining datasets, we ran a code to identify the number of marine species within the dataset. All datasets with at least 50% of marine species were tagged as potentially relevant for inclusion on OBIS.</p>
+<p>The harvesting of the datasets to OBIS is done with the contribution and approval of an OBIS node. To do that, we follow this procedure:</p>
+<ol type="1">
+<li>An <strong>issue</strong> is open on the GitHub repo https://github.com/iobis/obis-network-datasets, indicating the dataset</li>
+<li>One of the OBIS nodes will reveal the issue and verify the relevance and quality of the dataset</li>
+<li>If the dataset is deemed valuable, then the OBIS node approves it and its harvested to the OBIS dataset.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

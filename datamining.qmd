@@ -1,3 +1,82 @@
 # Obtaining additional biodiversity data
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+As part of the __Deliverable 1__ of the __WP3__, we looked for additional marine biodiversity data related to Europe that was available elsewhere but not on OBIS. This included data published in the literature, data repositories and other biodiversity databases like [GBIF]("https://gbif.org"). 
+
+::: {.callout-note title="Continuous process"}
+This process is still ongoing and will keep until the end of the project.
+:::
+
+We used the following procedures for each source:
+
+- Literature/repositories: after finding the appropriate and relevant sources (see below) we ingested the data using the `obisdi` package structure.
+- GBIF: after identifying potential datasets available on GBIF, we followed the data harvesting procedure followed by OBIS nodes (details below).
+
+## `obisdi` package
+
+For enabling a streamlined and standard ingestion of data throughout the project we developed the `obisdi` package, which is [available on GitHub.](https://github.com/iobis/obisdi) The idea behind the package (and basically all the structure) came from the [Tracking Invasive Alien Species (TrIAS)](https://github.com/trias-project) project' checklist recipe [(see more here)](https://github.com/trias-project/checklist-recipe), which provides a standard structure for mapping data to the Darwin Core standard. Using this structure, all the mapping is fully documented and can be tracked. Also, it's possible to directly ingest the data to the IPT from a GitHub repository.
+
+Every project created with the `obisdi` package have the following structure:
+
+- a folder for data, containing two other folders - one for _raw_ data (where the original data files are stored) and one for _processed_ data (where the final edited files are stored).
+- a README file containing the basic details about the dataset and the repository
+- an RMarkdown file which contains the mapping to the DwC standard.
+
+By _knitting_ the RMarkdown files, it's also possible to generate a docs folder that can be used as a website (through GitHub pages), providing an easy access information for the general community.
+
+## Additional data from literature and repositories
+
+### BioTIME
+
+BioTIME is a database containing time series of ecological data from the terrestrial, freshwater and marine realm. We downloaded the full database [(available here)](https://biotime.st-andrews.ac.uk/getFullDownload.php) and using the metadata information we identified those marine studies (on the Europe region) which were not available on OBIS. This identification procedure was based on a fuzzy matching of the titles with the OBIS dataset titles. For those that were probably relevant, we manually checked the datasets to confirm its relevance.
+
+At the end we identified XXXXX new datasets that could be included, and proceeded with the data ingestion.
+
+::: {.callout-warning}
+At this moment, only one of the identified datasets was already ingested. The others are under processing and will soon be ingested.
+:::
+
+### Literature
+
+We searched on  **Web of Science** for articles that could potentially contain datasets valuable for our project. We used the following search string:
+
+[TS=((marine OR ocean* OR coastal) AND (("biodiversity data") OR (dataset) OR ("time series" OR time-series) AND (species OR occurrence OR biodiversity OR fauna)))]{style="color: #006fdf"}
+
+From the returned list (~xxxx articles) we (1) matched the titles with the dataset names or bibliographic citations from OBIS to verify if the dataset was already included on OBIS, and (2) screened (manually) to identify if the dataset was really valuable. Note that this is NOT a systematic review, but an exploratory search.
+
+### Data repositories
+
+We searched in each of the following data repositories for potential datasets for inclusion:
+
+**Zenodo**
+
+We used the search string XXX
+
+**Dryad**
+
+We used the search string XXX
+
+**FigShare**
+
+We used the search string XXX
+
+Once one dataset was identified for inclusion, it was ingested using the `obisdi` structure. A total of XXX datasets were already identified (still on process, this number can grow) and XXX were already processed.
+
+### Other sources
+
+We also received suggestions of datasets directly from the participants of the project. We checked if the suggested dataset was not already on OBIS and, if not, we ingested the dataset.
+
+## Additional data from GBIF
+
+After we obtained the list of species occurring on the study area, we [downloaded](datadownload.qmd) the occurrence data from GBIF. From the occurrence data, we identified the unique datasets from which the data came from. We then counted the number of data each dataset contributed to the final data. We selected those datasets that had a high contribution of data as potential datasets that could be included in OBIS.
+
+For the datasets with potential for inclusion, we first identified those that are already part of OBIS and excluded them from the search. With the remaining datasets, we ran a code to identify the number of marine species within the dataset. All datasets with at least 50% of marine species were tagged as potentially relevant for inclusion on OBIS.
+
+The harvesting of the datasets to OBIS is done with the contribution and approval of an OBIS node. To do that, we follow this procedure:
+
+1. An __issue__ is open on the GitHub repo https://github.com/iobis/obis-network-datasets, indicating the dataset
+2. One of the OBIS nodes will reveal the issue and verify the relevance and quality of the dataset
+3. If the dataset is deemed valuable, then the OBIS node approves it and its harvested to the OBIS dataset. 
+
+::: {.callout-note}
+Only datasets with CC0, CC-BY or CC-BY-NC license were considered for inclusion. More information on the [OBIS manual.](https://manual.obis.org/policy.html)
+:::

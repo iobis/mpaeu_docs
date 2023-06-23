@@ -47,5 +47,26 @@
     "title": "4  Obtaining additional biodiversity data",
     "section": "",
     "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "datamining.html#obisdi-package",
+    "href": "datamining.html#obisdi-package",
+    "title": "4  Obtaining additional biodiversity data",
+    "section": "4.1 obisdi package",
+    "text": "4.1 obisdi package\nFor enabling a streamlined and standard ingestion of data throughout the project we developed the obisdi package, which is available on GitHub. The idea behind the package (and basically all the structure) came from the Tracking Invasive Alien Species (TrIAS) project’ checklist recipe (see more here), which provides a standard structure for mapping data to the Darwin Core standard. Using this structure, all the mapping is fully documented and can be tracked. Also, it’s possible to directly ingest the data to the IPT from a GitHub repository.\nEvery project created with the obisdi package have the following structure:\n\na folder for data, containing two other folders - one for raw data (where the original data files are stored) and one for processed data (where the final edited files are stored).\na README file containing the basic details about the dataset and the repository\nan RMarkdown file which contains the mapping to the DwC standard.\n\nBy knitting the RMarkdown files, it’s also possible to generate a docs folder that can be used as a website (through GitHub pages), providing an easy access information for the general community."
+  },
+  {
+    "objectID": "datamining.html#additional-data-from-literature-and-repositories",
+    "href": "datamining.html#additional-data-from-literature-and-repositories",
+    "title": "4  Obtaining additional biodiversity data",
+    "section": "4.2 Additional data from literature and repositories",
+    "text": "4.2 Additional data from literature and repositories\n\n4.2.1 BioTIME\n\n\n4.2.2 Literature databases\nWeb of Science\nTS=((marine OR ocean* OR coastal) AND ((“biodiversity data”) OR (dataset) OR (“time series” OR time-series) AND (species OR occurrence OR biodiversity OR fauna)))\nGoogle Scholar\n\n\n4.2.3 Data repositories\nZenodo\nDryad\nFigShare"
+  },
+  {
+    "objectID": "datamining.html#additional-data-from-gbif",
+    "href": "datamining.html#additional-data-from-gbif",
+    "title": "4  Obtaining additional biodiversity data",
+    "section": "4.3 Additional data from GBIF",
+    "text": "4.3 Additional data from GBIF\nAfter we obtained the list of species occurring on the study area, we downloaded the occurrence data from GBIF. From the occurrence data, we identified the unique datasets from which the data came from. We then counted the number of data each dataset contributed to the final data. We selected those datasets that had a high contribution of data as potential datasets that could be included in OBIS.\nFor the datasets with potential for inclusion, we first identified those that are already part of OBIS and excluded them from the search. With the remaining datasets, we ran a code to identify the number of marine species within the dataset. All datasets with at least 50% of marine species were tagged as potentially relevant for inclusion on OBIS.\nThe harvesting of the datasets to OBIS is done with the contribution and approval of an OBIS node. To do that, we follow this procedure:\n\nAn issue is open on the GitHub repo https://github.com/iobis/obis-network-datasets, indicating the dataset\nOne of the OBIS nodes will reveal the issue and verify the relevance and quality of the dataset\nIf the dataset is deemed valuable, then the OBIS node approves it and its harvested to the OBIS dataset."
   }
 ]
