@@ -156,12 +156,11 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#selecting-species-for-modeling" id="toc-selecting-species-for-modeling" class="nav-link active" data-scroll-target="#selecting-species-for-modeling"><span class="header-section-number">3.1</span> Selecting species for modeling</a></li>
   <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">3.2</span> Downloading data</a></li>
-  <li><a href="#quality-control-steps" id="toc-quality-control-steps" class="nav-link" data-scroll-target="#quality-control-steps"><span class="header-section-number">3.3</span> Quality control steps</a>
+  <li><a href="#quality-control-steps-under-development" id="toc-quality-control-steps-under-development" class="nav-link" data-scroll-target="#quality-control-steps-under-development"><span class="header-section-number">3.3</span> Quality control steps (under development)</a>
   <ul class="collapse">
   <li><a href="#duplicate-records-removal" id="toc-duplicate-records-removal" class="nav-link" data-scroll-target="#duplicate-records-removal"><span class="header-section-number">3.3.1</span> Duplicate records removal</a></li>
   <li><a href="#remove-records-on-land" id="toc-remove-records-on-land" class="nav-link" data-scroll-target="#remove-records-on-land"><span class="header-section-number">3.3.2</span> Remove records on land</a></li>
-  <li><a href="#geographical-outliers-flagging" id="toc-geographical-outliers-flagging" class="nav-link" data-scroll-target="#geographical-outliers-flagging"><span class="header-section-number">3.3.3</span> Geographical outliers (flagging)</a></li>
-  <li><a href="#environmental-outliers-flagging" id="toc-environmental-outliers-flagging" class="nav-link" data-scroll-target="#environmental-outliers-flagging"><span class="header-section-number">3.3.4</span> Environmental outliers (flagging)</a></li>
+  <li><a href="#geographical-and-environmental-outliers-flagging" id="toc-geographical-and-environmental-outliers-flagging" class="nav-link" data-scroll-target="#geographical-and-environmental-outliers-flagging"><span class="header-section-number">3.3.3</span> Geographical and environmental outliers (flagging)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -195,15 +194,16 @@ ul.task-list li input[type="checkbox"] {
 <li>remove Archaea, Bacteria, Fungi and Protozoa taxa</li>
 <li>include only marine or brackish species</li>
 </ul>
-<p>From that we obtained a final list of <span style="color: #006fdf">27112</span> species.</p>
+<p>From that we obtained a final list of <span style="color: #006fdf">22159</span> species.</p>
+<p>In the case of GBIF, we first downloaded all data occurring within our study area. Then, using the <code>worrms</code> package we verified which of those species were marine. Then we performed the same filters used with the OBIS data. This resulted in <span style="color: #006fdf">22782</span> unique species.</p>
 </section>
 <section id="downloading-data" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">3.2</span> Downloading data</h2>
-<p>OBIS data was obtained from the full export available at <a href="https://obis.org/data/access/">https://obis.org/data/access/</a>.</p>
-<p>GBIF data was downloaded through the <code>rgbif</code> package. We limited the number of downloaded records to 30000 [TO VERIFY IF COULD BE CIRCUMVENTED].</p>
+<p>OBIS data was obtained from the full export available at <a href="https://obis.org/data/access/">https://obis.org/data/access/</a>. However, code for downloading the data through the <code>robis</code> package is available. This is done through the <code>obissdm</code> package (which is being developed to support this project)</p>
+<p>GBIF data was downloaded using the <code>rgbif</code> package, via the <code>obissdm</code> package.</p>
 </section>
-<section id="quality-control-steps" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="quality-control-steps"><span class="header-section-number">3.3</span> Quality control steps</h2>
+<section id="quality-control-steps-under-development" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="quality-control-steps-under-development"><span class="header-section-number">3.3</span> Quality control steps (under development)</h2>
 <section id="duplicate-records-removal" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="duplicate-records-removal"><span class="header-section-number">3.3.1</span> Duplicate records removal</h3>
 <p>We removed duplicated data points using <a href="https://www.ibm.com/docs/en/streams/4.3.0?topic=334-geohashes">GeoHash</a> with a precision of 6 (width ≤ 1.22km X height 0.61km), and the year. Thus, for each combination of GeoHash cell and year, only one record was kept. That part is implemented in the <code>mp_dup_check</code> function, of the project package <code>msdm</code>.</p>
@@ -223,7 +223,7 @@ Note
 </section>
 <section id="remove-records-on-land" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="remove-records-on-land"><span class="header-section-number">3.3.2</span> Remove records on land</h3>
-<p>Records on land were removed based on [TODO - see if use GHRSS or openmap].</p>
+<p>Records on land were removed based on <em>openmap</em>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -238,12 +238,10 @@ Note
 </div>
 </div>
 </section>
-<section id="geographical-outliers-flagging" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="geographical-outliers-flagging"><span class="header-section-number">3.3.3</span> Geographical outliers (flagging)</h3>
-<p>The novelty of our approach is that for computing the distance between points we considered the existence of barriers. This is specially important for marine species. So for example, the distance between a point on the Pacific side of the Panama strait, and on the Atlantic side, would be XXX when considering only the cartesian distance. However, when we consider the barrier, the distance is of XXX.</p>
-</section>
-<section id="environmental-outliers-flagging" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="environmental-outliers-flagging"><span class="header-section-number">3.3.4</span> Environmental outliers (flagging)</h3>
+<section id="geographical-and-environmental-outliers-flagging" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="geographical-and-environmental-outliers-flagging"><span class="header-section-number">3.3.3</span> Geographical and environmental outliers (flagging)</h3>
+<p>For the assessment of geographical outliers we implemented an innovative method that considers the existence of barriers when calculating the distance between points. Usually, geographical outliers are calculated based on the cartesian distance between the points. However, for marine species (indeed, also for terrestrial ones) the barriers are important because it constrains dispersal. Consider for example one species on the two sides of the Panama strait (Atlantic and Pacific). A straight line between the two points would be a short distance. However, if we take in account the barrier, then the animal (or its larvae) would need to travel a much longer distance to reach the other side of the strait.</p>
+<p>In both the geographical and the environmental (Sea Surface Temperature, bathymetry and salinity) outlier assessment, we used a threshold of 3 times the inter quantile range to identify extreme points, but we just flagged the most extreme outlier until a limit of 1% of the points (i.e.&nbsp;if there were more points above the threshold, just the most extreme ones were flagged).</p>
 
 
 </section>

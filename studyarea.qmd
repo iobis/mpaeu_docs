@@ -1,3 +1,7 @@
 # Defining the study area
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Our first effort was in establishing a consistent study area shape that could be used by all the work package teams. Using as a reference the study area portrayed in the MPA Europe technical description, we defined the boundaries of the final shape from a product developed by the Flanders Marine Institute  that intersects the Exclusive Economic Zones (EEZ) and the IHO (International Hydrographic Organization) seas map.
+
+![The study area](images/studyarea.png)
+
+The whole process of creating the study area, as well as the produced shapefiles are available at the GitHub repository [mpaeu_studyarea](https://github.com/iobis/mpaeu_studyarea).

@@ -9,15 +9,17 @@ The first step was to establish the species occurring on the study area. We used
 - remove Archaea, Bacteria, Fungi and Protozoa taxa
 - include only marine or brackish species
 
-From that we obtained a final list of [27112]{style="color: #006fdf"} species.
+From that we obtained a final list of [22159]{style="color: #006fdf"} species.
+
+In the case of GBIF, we first downloaded all data occurring within our study area. Then, using the `worrms` package we verified which of those species were marine. Then we performed the same filters used with the OBIS data. This resulted in [22782]{style="color: #006fdf"} unique species.
 
 ## Downloading data
 
-OBIS data was obtained from the full export available at [https://obis.org/data/access/](https://obis.org/data/access/).
+OBIS data was obtained from the full export available at [https://obis.org/data/access/](https://obis.org/data/access/). However, code for downloading the data through the `robis` package is available. This is done through the `obissdm` package (which is being developed to support this project)
 
-GBIF data was downloaded through the `rgbif` package. We limited the number of downloaded records to 30000 [TO VERIFY IF COULD BE CIRCUMVENTED].
+GBIF data was downloaded using the `rgbif` package, via the `obissdm` package.
 
-## Quality control steps
+## Quality control steps (under development)
 
 ### Duplicate records removal
 
@@ -29,14 +31,14 @@ We note that, specifically for the SDMs, before modeling we do an additional dup
 
 ### Remove records on land
 
-Records on land were removed based on [TODO - see if use GHRSS or openmap].
+Records on land were removed based on _openmap_.
 
 ::: {.callout-note}
 We further filtered the records for the SDMs by keeping only those overlapping the environmental variable layers (which present some differences to the land layer used before).
 :::
 
-### Geographical outliers (flagging)
+### Geographical and environmental outliers (flagging)
 
-The novelty of our approach is that for computing the distance between points we considered the existence of barriers. This is specially important for marine species. So for example, the distance between a point on the Pacific side of the Panama strait, and on the Atlantic side, would be XXX when considering only the cartesian distance. However, when we consider the barrier, the distance is of XXX.
+For the assessment of geographical outliers we implemented an innovative method that considers the existence of barriers when calculating the distance between points. Usually, geographical outliers are calculated based on the cartesian distance between the points. However, for marine species (indeed, also for terrestrial ones) the barriers are important because it constrains dispersal. Consider for example one species on the two sides of the Panama strait (Atlantic and Pacific). A straight line between the two points would be a short distance. However, if we take in account the barrier, then the animal (or its larvae) would need to travel a much longer distance to reach the other side of the strait.
 
-### Environmental outliers (flagging)
+In both the geographical and the environmental (Sea Surface Temperature, bathymetry and salinity) outlier assessment, we used a threshold of 3 times the inter quantile range to identify extreme points, but we just flagged the most extreme outlier until a limit of 1% of the points (i.e. if there were more points above the threshold, just the most extreme ones were flagged).
