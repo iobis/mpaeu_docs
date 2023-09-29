@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MPA Europe - OBIS contribution documentation - 5&nbsp; Testing SDM methods</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./datamining.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/quarto-contrib/bookup_fonts_embed-0.0/fonts-download.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./methods-testing.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Testing SDM methods</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MPA Europe - OBIS contribution documentation</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the OBIS contribution to MPA Europe</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Content</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./studyarea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining the study area</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datadownload.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datamining.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining additional biodiversity data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./methods-testing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Testing SDM methods</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#point-process-framework" id="toc-point-process-framework" class="nav-link active" data-scroll-target="#point-process-framework"><span class="header-section-number">5.1</span> Point-process framework</a></li>
+  <li><a href="#chosen-algorithms" id="toc-chosen-algorithms" class="nav-link" data-scroll-target="#chosen-algorithms"><span class="header-section-number">5.2</span> Chosen algorithms</a></li>
+  <li><a href="#test-with-virtual-species" id="toc-test-with-virtual-species" class="nav-link" data-scroll-target="#test-with-virtual-species"><span class="header-section-number">5.3</span> Test with virtual species</a></li>
+  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting"><span class="header-section-number">5.4</span> Model fitting</a>
+  <ul class="collapse">
+  <li><a href="#environmental-data" id="toc-environmental-data" class="nav-link" data-scroll-target="#environmental-data"><span class="header-section-number">5.4.1</span> Environmental data</a></li>
+  <li><a href="#quadrature-sampling" id="toc-quadrature-sampling" class="nav-link" data-scroll-target="#quadrature-sampling"><span class="header-section-number">5.4.2</span> Quadrature sampling</a></li>
+  <li><a href="#model-tuning-and-evaluation" id="toc-model-tuning-and-evaluation" class="nav-link" data-scroll-target="#model-tuning-and-evaluation"><span class="header-section-number">5.4.3</span> Model tuning and evaluation</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">5.4.4</span> Results</a></li>
+  </ul></li>
+  <li><a href="#test-with-real-species" id="toc-test-with-real-species" class="nav-link" data-scroll-target="#test-with-real-species"><span class="header-section-number">5.5</span> Test with real species</a>
+  <ul class="collapse">
+  <li><a href="#results-1" id="toc-results-1" class="nav-link" data-scroll-target="#results-1"><span class="header-section-number">5.5.1</span> Results</a></li>
+  </ul></li>
+  <li><a href="#overview-and-chosen-approach" id="toc-overview-and-chosen-approach" class="nav-link" data-scroll-target="#overview-and-chosen-approach"><span class="header-section-number">5.6</span> Overview and chosen approach</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5.7</span> References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Testing SDM methods</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="callout callout-style-default callout-note callout-titled" title="Under development">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Under development
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This section is still under development.</p>
+</div>
+</div>
+<p>The <strong>Deliverable 2</strong> of the <strong>WP3</strong> aims to produce species distribution models (SDM) for at least half of all marine species occurring in the study area of the MPA Europe project. As a first step, we tested which modeling approach would be better suited for our research problem. Specifically, we sought a model that would:</p>
+<ul>
+<li>Perform effectively under various conditions, including low and high sampling scenarios</li>
+<li>Exhibit sufficient flexibility to work in conditions when a careful individual tuning is unattainable (for example, we will not be able to chose <em>a priori</em> the better environmental layers for each species, but only for broad groups)</li>
+<li>Avoid or minimize overfitting</li>
+<li>Have short fitting and prediction time</li>
+</ul>
+<p>Previous studies have already explored the performance of SDM algorithms and parameters <span class="citation" data-cites="marmion2008 inman2021 barbet-massin2012 valavi2022">(<a href="#ref-marmion2008" role="doc-biblioref">Marmion et al. 2008</a>; <a href="#ref-inman2021" role="doc-biblioref">Inman et al. 2021</a>; <a href="#ref-barbet-massin2012" role="doc-biblioref">Barbet-Massin et al. 2012</a>; <a href="#ref-valavi2022" role="doc-biblioref">Valavi et al. 2022</a>)</span>. Worth of note, <span class="citation" data-cites="valavi2021">Valavi et al. (<a href="#ref-valavi2021" role="doc-biblioref">2021</a>)</span> evaluated the performance of several presence-only methods under a point process approach, the same framework we are adopting here. Therefore, our tests were not aimed at conducting an exhaustive examination of SDM parameterization. Instead, building upon the aforementioned research, we concentrated on identifying the optimal settings for our specific modeling challenge.</p>
+<p>In special, a very sensitive point for our study was the speed of fitting and prediction, given the necessity to fit a substantial number of models.</p>
+<section id="point-process-framework" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="point-process-framework"><span class="header-section-number">5.1</span> Point-process framework</h2>
+<p>All modeling exercises were done considering a point process framework. Spatial Point Process Models (PPMs) are used to model any type of events that arise as points in space <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. Those points have random number and location, but are related to an underlying process. It was only recently that PPMs were more intensively applied to SDMs <span class="citation" data-cites="renner2015 warton2010">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>; <a href="#ref-warton2010" role="doc-biblioref">Warton and Shepherd 2010</a>)</span>, although widely used in spatial analysis (examples of applications range from disease mapping to detection of landslides; e.g. <span class="citation" data-cites="lombardo2018">Lombardo, Opitz, and Huser (<a href="#ref-lombardo2018" role="doc-biblioref">2018</a>)</span>).</p>
+<p>The interest in PPMs for SDMs was mainly driven by the challenge of modelling presence-only data, when all the information available is the points where the species was registered <span class="citation" data-cites="fithian2013">(<a href="#ref-fithian2013" role="doc-biblioref">Fithian and Hastie 2013</a>)</span>. Usually, one need to sample pseudo-absences (points that reflect places where the species is absent), but the number and place of pseudo-absences can have a great influence on models <span class="citation" data-cites="barbet-massin2012">(<a href="#ref-barbet-massin2012" role="doc-biblioref">Barbet-Massin et al. 2012</a>)</span>. Instead, on a PPM framework, quadrature (or background) points are used as a device only to describe the available environmental conditions <span class="citation" data-cites="fithian2013">(<a href="#ref-fithian2013" role="doc-biblioref">Fithian and Hastie 2013</a>)</span>. Points are sampled at random and the number of points can be chosen based on the accuracy of the likelihood estimate <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. In theory, all the points of the environment could be used, but this would increase computational time.</p>
+<p>In the case of a PPM, and considering that the points does not present a strong bias, the resulting intensity of the point process can be used as a proxy to the suitability of the habitat (under the assumption that the species is more easily registered where the habitat suitability is higher) <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. One important point to note is that the results of any PPM model (and in general, any presence-only model) should not be interpreted as probability of occurrence, but instead as a relative occurrence rate (following <span class="citation" data-cites="merow2013">(<a href="#ref-merow2013" role="doc-biblioref">Merow, Smith, and Silander 2013</a>)</span>).</p>
+<p>PPMs are closely related to the widely used Maxent <span class="citation" data-cites="renner2013">(<a href="#ref-renner2013" role="doc-biblioref">Renner and Warton 2013</a>)</span>. Indeed, even the pseudo-absence (or presence-background) modeling can approximate a Poisson point process model, under certain conditions <span class="citation" data-cites="renner2015 warton2010">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>; <a href="#ref-warton2010" role="doc-biblioref">Warton and Shepherd 2010</a>)</span>.</p>
+</section>
+<section id="chosen-algorithms" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="chosen-algorithms"><span class="header-section-number">5.2</span> Chosen algorithms</h2>
+<p>Based on <span class="citation" data-cites="valavi2021">Valavi et al. (<a href="#ref-valavi2021" role="doc-biblioref">2021</a>)</span> and in our previous experience, we selected the following algorithms to test:</p>
+<ul>
+<li>GLM (Generalized Linear Models)</li>
+<li>LASSO (LASSO Regularized GLM, through <code>glmnet</code>)</li>
+<li>Maxent (Maximum Entropy algorithm, through <code>maxnet</code> implementation)</li>
+<li>BRT (Boosted Regression Trees)</li>
+<li>RandomForest</li>
+</ul>
+<p>We also considered for very experimental purposes one other implementation of Boosted Regression Trees (also called GBM - Gradient Boosting Model), the LightGBM. This machine learning method performs very well in machine learning tasks and is much faster than other GBM implementations. However, as it was designed for large datasets it can suffer from overfitting.</p>
+<p>GLMs were fitted with four variations: no weighting, naive-weighting, IWLR (Infinitely Weighted Linear Regression) and DWPR (Down-Weighted Poisson Regression). BRT were fitted with no weight and with naive-weighting. Random Forest were fitted with no-weighted classification and down-sampled classification.</p>
+<p>Algorithms were implemented as modules in the <a href="https://github.com/iobis/mpaeu_msdm"><code>obissdm</code> package</a>. This package was specifically designed to hold the primary functions utilized in our modeling framework, thus facilitating more comprehensive documentation.</p>
+</section>
+<section id="test-with-virtual-species" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="test-with-virtual-species"><span class="header-section-number">5.3</span> Test with virtual species</h2>
+<p>For the first part of the SDM methods testing, we created 2 virtual species (in which we have full control of the generative process; for more information on virtual species see <span class="citation" data-cites="leroy2015">Leroy et al. (<a href="#ref-leroy2015" role="doc-biblioref">2015</a>)</span> and <span class="citation" data-cites="zurell2010">Zurell et al. (<a href="#ref-zurell2010" role="doc-biblioref">2010</a>)</span>). Because we know the true distribution of the virtual species, we can better explore the differences in performance of the distinct algorithms under distinct conditions <span class="citation" data-cites="meynard2019">(<a href="#ref-meynard2019" role="doc-biblioref">Meynard, Leroy, and Kaplan 2019</a>)</span>. We performed a set of testings considering the following scenarios:</p>
+<ul>
+<li>Two conditions of environmental data: all environmental variables known (species 101) and one variable unknown (Gaussian noise) (species 103)</li>
+<li>Two sampling conditions: with bias and without bias</li>
+<li>Two data availability conditions: low (30 points) and high (150 points)</li>
+</ul>
+<p>This sums up to 8 modeling settings. Because the sampling process of points is random, we generated 10 samples of presence points for each species (yielding a total 80 models to be fitted). We also generated 10 samples (for each species) of presence-absence points to be used as independent evaluation datasets.</p>
+</section>
+<section id="model-fitting" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="model-fitting"><span class="header-section-number">5.4</span> Model fitting</h2>
+<section id="environmental-data" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="environmental-data"><span class="header-section-number">5.4.1</span> Environmental data</h3>
+<p>Environmental data for both the present period and for two future scenarios for the year 2100 (SSP2 and SSP5) were obtained from the new version of Bio-ORACLE (not published yet, but see <span class="citation" data-cites="assis2018">Assis et al. (<a href="#ref-assis2018" role="doc-biblioref">2018</a>)</span>) using the package <code>biooracler</code>. Specifically, for producing and fitting the models of the virtual species we used the following variables (all for surface):</p>
+<ul>
+<li>Sea Temperature</li>
+<li>Salinity</li>
+<li>Phosphate</li>
+<li>Total Phytoplankton</li>
+<li>Bathymetry</li>
+</ul>
+<p>All variables were cropped to the study area, but considering a buffer to expand it. Variables were masked to a bathymetry of -1500m</p>
+</section>
+<section id="quadrature-sampling" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="quadrature-sampling"><span class="header-section-number">5.4.2</span> Quadrature sampling</h3>
+<p>Quadrature points were randomly sampled in a number of 150000. We chose this number using a Down-Weighted Poisson Regression over different numbers of quadrature points <span class="citation" data-cites="renner2015 el-gabbas2018">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>; <a href="#ref-el-gabbas2018" role="doc-biblioref">El-Gabbas and Dormann 2018</a>)</span>. The chosen number was enough to likelihood convergence in all species.</p>
+</section>
+<section id="model-tuning-and-evaluation" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="model-tuning-and-evaluation"><span class="header-section-number">5.4.3</span> Model tuning and evaluation</h3>
+<p>For model tuning and evaluation we used a spatial block cross-validation strategy, with 5 folds. Spatial block cross-validation is better suited for assessing spatial models, as it ensures that testing data will show at least a certain degree of environmental difference from the information used to train the model <span class="citation" data-cites="roberts2017">(<a href="#ref-roberts2017" role="doc-biblioref">Roberts et al. 2017</a>)</span>. We tested two types of spatial blocks: grid blocks and latitudinal bins. In the first, a grid of squares with a certain size are defined over the study area and randomly assigned into folds, while in the second, the study area is divided in a fixed number of latitudinal bins which are randomly assigned into folds (e.g. <span class="citation" data-cites="assis2023">Assis et al. (<a href="#ref-assis2023" role="doc-biblioref">2023</a>)</span>).</p>
+<p>The size of the block can be defined to reflect the spatial correlation between variables <span class="citation" data-cites="valavi2018">(<a href="#ref-valavi2018" role="doc-biblioref">Valavi et al. 2018</a>)</span>. However, for this test we defined a fixed block size for all tests to improve the fitting speed. The size (5 degrees) is deemed large enough to provide environmental variability to the testing data.</p>
+<p>Models were evaluated using AUC (Area Under the Receiver-Operating-Characteristic Curve) and CBI (Continuous Boyce Index), which are better suited for presence-only models. We also obtained TSS (True Skill Statistics) for three distinct thresholds (Maximum Sensitivity + Specificity, P10 and Minimum Training Presence). Final predictions for both the current and future period were compared with the original species suitable area using the I statistic of niche overlap, with a higher niche overlap meaning that the model better reflected the original condition. Binary maps produced with the P10 threshold were compared with the binary occurrence maps of the virtual species using Jaccard.</p>
+</section>
+<section id="results" class="level3" data-number="5.4.4">
+<h3 data-number="5.4.4" class="anchored" data-anchor-id="results"><span class="header-section-number">5.4.4</span> Results</h3>
+<p>In general, all models had a good performance, except for the classification Random Forest. Forest based methods are know to have problems with class imbalance, a problem solved with the down-sampled implementation. Some methods had an excellent performance both for model evaluation (AUC, CBI) and capacity of predicting a similar distribution than the true one (I, Jaccard metrics): LASSO, Maxent and BRT naive. Indeed, LASSO and Maxent were expected to behavior similarly as under the hood <code>maxnet</code> uses LASSO.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/auc_metrics_vsp.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">AUC metrics for the virtual species testing.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tss_metrics_vsp.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">CBI metrics for the virtual species testing. Values below 0 indicates counter prediction (low values where presence was expected).</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tss_metrics_vsp.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">TSS metrics for the virtual species testing.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/i_metrics_vsp.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">I metrics for the virtual species testing.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/i_metrics_ssp1_vsp.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">I metrics for the virtual species testing considering the SSP1 scenario.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/jacc_metrics_vsp.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Jaccard metrics for the virtual species testing.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/map_current.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Example showing the real distribution in the current period and the predicted distribution by 4 distinct models. Warmer colors are higher relative occurrence rate.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/map_future.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Example showing the real distribution in the future period (SSP1 - 2100) and the predicted distribution by 4 distinct models. Warmer colors are higher relative occurrence rate.</figcaption>
+</figure>
+</div>
+<p>From those models, LASSO was the one with fastest tuning-prediction time.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/timings_vsp.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">TSS metrics for the virtual species testing.</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="test-with-real-species" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="test-with-real-species"><span class="header-section-number">5.5</span> Test with real species</h2>
+<p>For the second part of the SDM methods testing, we selected 4 fish species occurring in our study area for which we had a good number of points coverage and, thus, a better knowledge of the current distribution of the species. We also chose those species because IUCN range maps are available and thus we could assess how well our models agree with the range maps (although we acknowledge that IUCN range maps can have important bias).</p>
+<p>We tested in this part 4 algorithms that scored better with the virtual species test: LASSO, Maxent, BRT and RF Down-sampled.</p>
+<p>Model fitting followed the same methods described for the virtual species test. Occurrence data for the species were obtained from both OBIS and GBIF. To reduce bias, only 1 occurrence point per cell was kept. Ideally, this record pruning would also consider the spatial autocorrelation and points would be pruned in a distance that reduces such correlation (see for one application). However, calculating the spatial autocorrelation for each species that will be modeled can introduce a significant additional time. Thus, for those tests we considered two simpler strategies (although we will try one other approach in the future): (1) keeping 1 point per cell in the same resolution of the environmental variables and (2) keeping 1 point per cell in a grid with a coarsened resolution (the double of the environmental layers, 0.1 degrees).</p>
+<p>We chose a set of environmental variables to be used with all 5 species: sea temperature, salinity, phosphate, total phytoplankton and sea water velocity. The correlation level of those variables is low, as assessed through VIF (Variance Inflation Factor) using the function <code>vifstep</code> with a threshold of 6 (package <code>usdm</code>, <span class="citation" data-cites="naimi2013">Naimi et al. (<a href="#ref-naimi2013" role="doc-biblioref">2013</a>)</span>). Despite the same set of variables was used to all species, the type of the variable varied according to the species’ mode of life (e.g.&nbsp;bottom temperature for benthic species). Data for the mode of life was obtained through an automated search in three databases: Sealifebase, Fishbase, and WoRMS. The search was done in this order, so that if the information was found in multiple sources, the first one was used. In case the information was not found for a particular species, the function tried to find the mode of life of the parent level. The function was also developed in a way to be conservative. So, if a species was registered as both benthic and pelagic, we used variables for benthic environment.</p>
+<p>For benthic, demersal or pelagic species associated with the bottom we set variables describing conditions in the maximum depth. Mesopelagic species would be modeled with conditions for the mean depth, while both pelagic and species for which no information was found were set to be modeled with surface conditions.</p>
+<section id="results-1" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="results-1"><span class="header-section-number">5.5.1</span> Results</h3>
+<p>Again, all models in general performed well, although the Maxent CBI result for <em>Pagrus auriga</em> was poor (counter prediction).</p>
+<div class="cell" data-caption="Standard points metrics">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Metrics for distinct fish species</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Species</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Model</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AUC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">CBI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">LASSO NAIVE</td>
+<td style="text-align: right;">0.9579113</td>
+<td style="text-align: right;">0.6944080</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">MAXNET</td>
+<td style="text-align: right;">0.9278172</td>
+<td style="text-align: right;">-0.3580859</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.9526472</td>
+<td style="text-align: right;">0.4740936</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">BRT NAIVE</td>
+<td style="text-align: right;">0.9729053</td>
+<td style="text-align: right;">0.7421134</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">LASSO NAIVE</td>
+<td style="text-align: right;">0.9713942</td>
+<td style="text-align: right;">0.7885390</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">MAXNET</td>
+<td style="text-align: right;">0.9535204</td>
+<td style="text-align: right;">0.7874382</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.9767534</td>
+<td style="text-align: right;">0.7510097</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">BRT NAIVE</td>
+<td style="text-align: right;">0.9267527</td>
+<td style="text-align: right;">0.6133649</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">LASSO NAIVE</td>
+<td style="text-align: right;">0.9182766</td>
+<td style="text-align: right;">0.8043597</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">MAXNET</td>
+<td style="text-align: right;">0.9297201</td>
+<td style="text-align: right;">0.8483099</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.9410502</td>
+<td style="text-align: right;">0.9431927</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">BRT NAIVE</td>
+<td style="text-align: right;">0.9826825</td>
+<td style="text-align: right;">0.8899457</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">LASSO NAIVE</td>
+<td style="text-align: right;">0.9783434</td>
+<td style="text-align: right;">0.9247209</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">MAXNET</td>
+<td style="text-align: right;">0.9812059</td>
+<td style="text-align: right;">0.8305053</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.9841448</td>
+<td style="text-align: right;">0.9642206</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Aggregating the points to a coarser resolution had a small effect in the results.</p>
+<div class="cell" data-caption="Aggregated points metrics">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Aggregated (coarser resolution) points metrics for distinct fish species</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Species</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Model</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AUC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">CBI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">LASSO NAIVE</td>
+<td style="text-align: right;">0.9668805</td>
+<td style="text-align: right;">0.6126929</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">MAXNET</td>
+<td style="text-align: right;">0.8952810</td>
+<td style="text-align: right;">-0.1096416</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.9534657</td>
+<td style="text-align: right;">0.3234745</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">BRT NAIVE</td>
+<td style="text-align: right;">0.9727463</td>
+<td style="text-align: right;">0.7777396</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">LASSO NAIVE</td>
+<td style="text-align: right;">0.9614321</td>
+<td style="text-align: right;">0.8900431</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">MAXNET</td>
+<td style="text-align: right;">0.9678948</td>
+<td style="text-align: right;">0.6614255</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.9743048</td>
+<td style="text-align: right;">0.8677961</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">BRT NAIVE</td>
+<td style="text-align: right;">0.9206924</td>
+<td style="text-align: right;">0.7825685</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">LASSO NAIVE</td>
+<td style="text-align: right;">0.8955754</td>
+<td style="text-align: right;">0.8044800</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">MAXNET</td>
+<td style="text-align: right;">0.9132706</td>
+<td style="text-align: right;">0.8247683</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.9321905</td>
+<td style="text-align: right;">0.9087753</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">BRT NAIVE</td>
+<td style="text-align: right;">0.9812337</td>
+<td style="text-align: right;">0.9058282</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">LASSO NAIVE</td>
+<td style="text-align: right;">0.9748347</td>
+<td style="text-align: right;">0.9123480</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">MAXNET</td>
+<td style="text-align: right;">0.9798795</td>
+<td style="text-align: right;">0.9078488</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.9833917</td>
+<td style="text-align: right;">0.9444118</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Models in general reflected the spatial distribution of the occurrence points well.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/map_pagrus.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Distribution model of <em>Pagrus pagrus</em>, according to LASSO and RF down-sampled. IUCN range map and occurrence points are shown on the first image.</figcaption>
+</figure>
+</div>
+<p>None of the models showed high levels of agreement with the IUCN maps. This discrepancy could be caused by issues related to the expert range maps. However, it might also highlight a potential difficulty in selecting a method to binarize the models. In this study, we opted for the P10 threshold, which determines the value at which 90% of the presence points would be classified as ‘present’. This represents a relatively conservative approach, but alternative methods may yield better results.</p>
+<div class="cell" data-caption="Aggregated points metrics">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Jaccard metric between binary distribution map (p10 threshold) and IUCN range maps for different models. STD refers to those modeled with the standard 1 point per cell, while AGG refers to the aggregated version.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Species</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Model</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Jaccard</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">STD LASSO NAIVE</td>
+<td style="text-align: right;">0.2535797</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">STD MAXNET</td>
+<td style="text-align: right;">0.2457328</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">AGG BRT NAIVE</td>
+<td style="text-align: right;">0.2218551</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Hippoglossus hippoglossus</td>
+<td style="text-align: left;">STD RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.0903114</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">STD LASSO NAIVE</td>
+<td style="text-align: right;">0.3148879</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">STD MAXNET</td>
+<td style="text-align: right;">0.2791559</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">AGG BRT NAIVE</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus auriga</td>
+<td style="text-align: left;">STD RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.0520648</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">STD LASSO NAIVE</td>
+<td style="text-align: right;">0.4874864</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">STD MAXNET</td>
+<td style="text-align: right;">0.3373778</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">AGG BRT NAIVE</td>
+<td style="text-align: right;">0.4464283</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Pagrus pagrus</td>
+<td style="text-align: left;">STD RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.0558340</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">STD LASSO NAIVE</td>
+<td style="text-align: right;">0.3025897</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">STD MAXNET</td>
+<td style="text-align: right;">0.2486340</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">AGG BRT NAIVE</td>
+<td style="text-align: right;">0.2554269</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-style: italic;">Solea solea</td>
+<td style="text-align: left;">STD RF DOWNSAMPLED</td>
+<td style="text-align: right;">0.0972130</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><em>NOTE: BRT model failed for <strong>Pagrus auriga</strong> when aggregated.</em></p>
+</section>
+</section>
+<section id="overview-and-chosen-approach" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="overview-and-chosen-approach"><span class="header-section-number">5.6</span> Overview and chosen approach</h2>
+<p>Based on the findings presented here, it is suggested that both LASSO and Maxnet are viable options. Additionally, BRT and RF Down-weighted could be considered as potential candidates. Since LASSO and Maxnet are closely related, we recommend using LASSO due to its faster implementation.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Availability of codes">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Availability of codes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The codes for this modeling exercise are available on the GitHub repository <a href="https://github.com/iobis/mpaeu_sdm">iobis/mpaeu_sdm</a>. However, the data is not available due to size limitations on GitHub. Soon this data will be available in other repository.</p>
+</div>
+</div>
+</section>
+<section id="references" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="references"><span class="header-section-number">5.7</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-assis2023" class="csl-entry" role="listitem">
+Assis, Jorge, Filipe Alberto, Erasmo C. Macaya, Nelson Castilho Coelho, Sylvain Faugeron, Gareth A. Pearson, Lydia Ladah, et al. 2023. <span>“Past Climate-Driven Range Shifts Structuring Intraspecific Biodiversity Levels of the Giant Kelp (Macrocystis Pyrifera) at Global Scales.”</span> <em>Scientific Reports</em> 13 (1). <a href="https://doi.org/10.1038/s41598-023-38944-7">https://doi.org/10.1038/s41598-023-38944-7</a>.
+</div>
+<div id="ref-assis2018" class="csl-entry" role="listitem">
+Assis, Jorge, Lennert Tyberghein, Samuel Bosch, Heroen Verbruggen, and Ester A Serrao. 2018. <span>“Bio-ORACLE V2.0: Extending Marine Data Layers for Bioclimatic Modelling.”</span> <em>Global Ecology and Biogeography</em> 27: 277:284. <a href="https://doi.org/10.1111/geb.12693">https://doi.org/10.1111/geb.12693</a>.
+</div>
+<div id="ref-barbet-massin2012" class="csl-entry" role="listitem">
+Barbet-Massin, Morgane, Frédéric Jiguet, Cécile Hélène Albert, and Wilfried Thuiller. 2012. <span>“Selecting Pseudo-Absences for Species Distribution Models: How, Where and How Many?: <span><em>How to Use Pseudo-Absences in Niche Modelling?</em></span>”</span> <em>Methods in Ecology and Evolution</em> 3 (2): 327–38. <a href="https://doi.org/10.1111/j.2041-210X.2011.00172.x">https://doi.org/10.1111/j.2041-210X.2011.00172.x</a>.
+</div>
+<div id="ref-el-gabbas2018" class="csl-entry" role="listitem">
+El-Gabbas, Ahmed, and Carsten F. Dormann. 2018. <span>“Improved Species-Occurrence Predictions in Data-Poor Regions: Using Large-Scale Data and Bias Correction with down-Weighted Poisson Regression and Maxent.”</span> <em>Ecography</em> 41 (7): 1161–72. <a href="https://doi.org/10.1111/ecog.03149">https://doi.org/10.1111/ecog.03149</a>.
+</div>
+<div id="ref-fithian2013" class="csl-entry" role="listitem">
+Fithian, William, and Trevor Hastie. 2013. <span>“Finite-Sample Equivalence in Statistical Models for Presence-Only Data.”</span> <em>The Annals of Applied Statistics</em> 7 (4). <a href="https://doi.org/10.1214/13-AOAS667">https://doi.org/10.1214/13-AOAS667</a>.
+</div>
+<div id="ref-inman2021" class="csl-entry" role="listitem">
+Inman, Richard, Janet Franklin, Todd Esque, and Kenneth Nussear. 2021. <span>“Comparing Sample Bias Correction Methods for Species Distribution Modeling Using Virtual Species.”</span> <em>Ecosphere</em> 12 (3). <a href="https://doi.org/10.1002/ecs2.3422">https://doi.org/10.1002/ecs2.3422</a>.
+</div>
+<div id="ref-leroy2015" class="csl-entry" role="listitem">
+Leroy, Boris, Christine N. Meynard, Céline Bellard, and Franck Courchamp. 2015. <span>“Virtualspecies, an R Package to Generate Virtual Species Distributions.”</span> <em>Ecography</em> 39 (6): 599–607. <a href="https://doi.org/10.1111/ecog.01388">https://doi.org/10.1111/ecog.01388</a>.
+</div>
+<div id="ref-lombardo2018" class="csl-entry" role="listitem">
+Lombardo, Luigi, Thomas Opitz, and Raphaël Huser. 2018. <span>“Point Process-Based Modeling of Multiple Debris Flow Landslides Using INLA: An Application to the 2009 Messina Disaster.”</span> <em>Stochastic Environmental Research and Risk Assessment</em> 32 (7): 2179–98. <a href="https://doi.org/10.1007/s00477-018-1518-0">https://doi.org/10.1007/s00477-018-1518-0</a>.
+</div>
+<div id="ref-marmion2008" class="csl-entry" role="listitem">
+Marmion, Mathieu, Miia Parviainen, Miska Luoto, Risto K. Heikkinen, and Wilfried Thuiller. 2008. <span>“Evaluation of Consensus Methods in Predictive Species Distribution Modelling.”</span> <em>Diversity and Distributions</em>, 11.
+</div>
+<div id="ref-merow2013" class="csl-entry" role="listitem">
+Merow, Cory, Matthew J. Smith, and John A. Silander. 2013. <span>“A Practical Guide to MaxEnt for Modeling Species’ Distributions: What It Does, and Why Inputs and Settings Matter.”</span> <em>Ecography</em> 36 (10): 1058–69. <a href="https://doi.org/10.1111/j.1600-0587.2013.07872.x">https://doi.org/10.1111/j.1600-0587.2013.07872.x</a>.
+</div>
+<div id="ref-meynard2019" class="csl-entry" role="listitem">
+Meynard, Christine N., Boris Leroy, and David M. Kaplan. 2019. <span>“Testing Methods in Species Distribution Modelling Using Virtual Species: What Have We Learnt and What Are We Missing?”</span> <em>Ecography</em> 42 (12): 2021–36. <a href="https://doi.org/10.1111/ecog.04385">https://doi.org/10.1111/ecog.04385</a>.
+</div>
+<div id="ref-naimi2013" class="csl-entry" role="listitem">
+Naimi, Babak, Nicholas A. S. Hamm, Thomas A. Groen, Andrew K. Skidmore, and Albertus G. Toxopeus. 2013. <span>“Where Is Positional Uncertainty a Problem for Species Distribution Modelling?”</span> <em>Ecography</em> 37 (2): 191–203. <a href="https://doi.org/10.1111/j.1600-0587.2013.00205.x">https://doi.org/10.1111/j.1600-0587.2013.00205.x</a>.
+</div>
+<div id="ref-renner2015" class="csl-entry" role="listitem">
+Renner, Ian W., Jane Elith, Adrian Baddeley, William Fithian, Trevor Hastie, Steven J. Phillips, Gordana Popovic, and David I. Warton. 2015. <span>“Point Process Models for Presence<span>-</span>Only Analysis.”</span> Edited by Robert B. O’Hara. <em>Methods in Ecology and Evolution</em> 6 (4): 366–79. <a href="https://doi.org/10.1111/2041-210X.12352">https://doi.org/10.1111/2041-210X.12352</a>.
+</div>
+<div id="ref-renner2013" class="csl-entry" role="listitem">
+Renner, Ian W., and David I. Warton. 2013. <span>“Equivalence of MAXENT and Poisson Point Process Models for Species Distribution Modeling in Ecology.”</span> <em>Biometrics</em> 69 (1): 274–81. <a href="https://doi.org/10.1111/j.1541-0420.2012.01824.x">https://doi.org/10.1111/j.1541-0420.2012.01824.x</a>.
+</div>
+<div id="ref-roberts2017" class="csl-entry" role="listitem">
+Roberts, David R., Volker Bahn, Simone Ciuti, Mark S. Boyce, Jane Elith, Gurutzeta Guillera-Arroita, Severin Hauenstein, et al. 2017. <span>“Cross-Validation Strategies for Data with Temporal, Spatial, Hierarchical, or Phylogenetic Structure.”</span> <em>Ecography</em> 40 (8): 913–29. <a href="https://doi.org/10.1111/ecog.02881">https://doi.org/10.1111/ecog.02881</a>.
+</div>
+<div id="ref-valavi2018" class="csl-entry" role="listitem">
+Valavi, Roozbeh, Jane Elith, José J. Lahoz-Monfort, and Gurutzeta Guillera-Arroita. 2018. <span>“blockCV: An r Package for Generating Spatially or Environmentally Separated Folds for <span><em>k</em></span><span>-</span>Fold Cross<span>-</span>Validation of Species Distribution Models.”</span> Edited by David Warton. <em>Methods in Ecology and Evolution</em> 10 (2): 225–32. <a href="https://doi.org/10.1111/2041-210x.13107">https://doi.org/10.1111/2041-210x.13107</a>.
+</div>
+<div id="ref-valavi2021" class="csl-entry" role="listitem">
+———. 2021. <span>“Modelling Species Presence<span>-</span>Only Data with Random Forests.”</span> <em>Ecography</em> 44 (12): 1731–42. <a href="https://doi.org/10.1111/ecog.05615">https://doi.org/10.1111/ecog.05615</a>.
+</div>
+<div id="ref-valavi2022" class="csl-entry" role="listitem">
+Valavi, Roozbeh, Gurutzeta Guillera-Arroita, José J. Lahoz-Monfort, and Jane Elith. 2022. <span>“Predictive Performance of Presence<span>-</span>Only Species Distribution Models: A Benchmark Study with Reproducible Code.”</span> <em>Ecological Monographs</em> 92 (1). <a href="https://doi.org/10.1002/ecm.1486">https://doi.org/10.1002/ecm.1486</a>.
+</div>
+<div id="ref-warton2010" class="csl-entry" role="listitem">
+Warton, David I., and Leah C. Shepherd. 2010. <span>“Poisson Point Process Models Solve the <span>“</span>Pseudo-Absence Problem<span>”</span> for Presence-Only Data in Ecology.”</span> <em>The Annals of Applied Statistics</em> 4 (3). <a href="https://doi.org/10.1214/10-AOAS331">https://doi.org/10.1214/10-AOAS331</a>.
+</div>
+<div id="ref-zurell2010" class="csl-entry" role="listitem">
+Zurell, Damaris, Uta Berger, Juliano S. Cabral, Florian Jeltsch, Christine N. Meynard, Tamara Münkemüller, Nana Nehrbass, et al. 2010. <span>“The Virtual Ecologist Approach: Simulating Data and Observers.”</span> <em>Oikos</em> 119 (4): 622–35. <a href="https://doi.org/10.1111/j.1600-0706.2009.18284.x">https://doi.org/10.1111/j.1600-0706.2009.18284.x</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./datamining.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining additional biodiversity data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

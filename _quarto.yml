@@ -25,6 +25,7 @@ book:
         - studyarea.qmd
         - datadownload.qmd
         - datamining.qmd
+        - methods-testing.qmd
   # appendices:
   #   - references.qmd
 
