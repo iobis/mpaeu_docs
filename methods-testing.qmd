@@ -101,7 +101,7 @@ In general, all models had a good performance, except for the classification Ran
 
 ![Example showing the real distribution in the future period (SSP1 - 2100) and the predicted distribution by 4 distinct models. Warmer colors are higher relative occurrence rate.](images/map_future.png){fig-align="center"}
 
-From those models, LASSO was the one with fastest tuning-prediction time.
+From those models with best performance, LASSO was the one with fastest tuning-prediction time, although with very close timings to Maxent.
 
 ![TSS metrics for the virtual species testing.](images/timings_vsp.png){fig-align="center"}
 
