@@ -1,0 +1,204 @@
+{
+  "taxonID": [135185],
+  "scientificName": ["Dendrophyllia cornigera"],
+  "group": ["others"],
+  "model_date": ["2024-08-14"],
+  "model_acro": ["mpaeu"],
+  "n_init_points": [80],
+  "model_fit_points": [80],
+  "model_eval_points": [0],
+  "algorithms": ["maxent", "rf", "xgboost"],
+  "algorithms_parameters": {
+    "maxent": {
+      "features": ["lq"],
+      "remult": [0.5, 1, 1.5, 2]
+    },
+    "rf": {
+      "n_trees": [500],
+      "mtry": ["default", "double", "total"],
+      "method": ["classification"],
+      "type": ["down-sampled"]
+    },
+    "xgboost": {
+      "shrinkage": [0.1, 0.3],
+      "gamma": [0, 4],
+      "depth": [3, 5],
+      "rounds": [10, 50, 100],
+      "scale_pos_weight": [1]
+    }
+  },
+  "model_result": {
+    "maxent": ["succeeded"],
+    "rf": ["succeeded"],
+    "xgboost": ["succeeded"],
+    "ensemble": ["succeeded"]
+  },
+  "model_bestparams": {
+    "maxent": [
+      {
+        "remult": 1.5,
+        "features": "lq"
+      }
+    ],
+    "rf": {
+      "n_trees": [500],
+      "mtry": ["default"],
+      "method": ["classification"],
+      "type": ["down-sampled"]
+    },
+    "xgboost": {
+      "depth": [3],
+      "gamma": [0],
+      "scale_pos_weight": [1],
+      "rounds": [100],
+      "shrinkage": [0.3],
+      "objective": ["binary:logistic"]
+    }
+  },
+  "model_details": {
+    "ecoregions": [3, 5, 18, 21],
+    "ecoregions_included": [3, 5, 18, 21],
+    "limited_by_depth": [true],
+    "depth_buffer": [100],
+    "block_size": [17.7824],
+    "background_size": [10000],
+    "control_bias": {},
+    "hypothesis_tested": {
+      "basevars": ["thetao_mean", "thetao_range", "bathymetry_mean", "distcoast", "sws_max", "so_mean", "o2_mean"],
+      "complexity": ["thetao_mean", "thetao_range", "bathymetry_mean", "distcoast", "sws_max", "so_mean", "o2_mean", "rugosity"]
+    },
+    "best_hypothesis": ["complexity"],
+    "variables": ["thetao_mean", "thetao_range", "bathymetry_mean", "distcoast", "sws_max", "so_mean", "o2_mean", "rugosity"]
+  },
+  "model_good": ["maxent", "rf"],
+  "model_good_metric": ["cbi"],
+  "model_good_threshold": [0.3],
+  "model_posteval": {
+    "maxent": {
+      "thermal_range": [-0.7467, 0.3295, 7.7113, 20.3575, 28.1484],
+      "thermal_range_binary": [6.4337, 7.8512, 12.1886, 16.7314, 19.3186],
+      "thermal_envelope": [
+        {
+          "status": "inside_tenv",
+          "frequency": 117175,
+          "percentage": 100
+        }
+      ]
+    },
+    "rf": {
+      "thermal_range": [-0.7467, 0.3295, 7.7113, 20.3575, 28.1484],
+      "thermal_range_binary": [10.5027, 11.309, 13.038, 15.1007, 16.8277],
+      "thermal_envelope": [
+        {
+          "status": "inside_tenv",
+          "frequency": 2763,
+          "percentage": 100
+        }
+      ]
+    },
+    "xgboost": {},
+    "ensemble": {
+      "thermal_range": [-0.7467, 0.3295, 7.7113, 20.3575, 28.1484],
+      "thermal_range_binary": [8.914, 10.1016, 13.224, 17.4058, 19.4388],
+      "thermal_envelope": [
+        {
+          "status": "inside_tenv",
+          "frequency": 22482,
+          "percentage": 100
+        }
+      ]
+    },
+    "niche": [
+      {
+        "model": "ensemble",
+        "D": 0.6194,
+        "I": 0.755
+      },
+      {
+        "model": "maxent",
+        "D": 0.63,
+        "I": 0.7658
+      },
+      {
+        "model": "rf",
+        "D": 0.4792,
+        "I": 0.6342
+      }
+    ],
+    "hyperniche": [
+      {
+        "hyperniche_jaccard": 0.5525,
+        "hyperniche_sorensen": 0.7117,
+        "hyperniche_frac_unique_1": 0.1283,
+        "hyperniche_frac_unique_2": 0.3986,
+        "model": "maxent"
+      },
+      {
+        "hyperniche_jaccard": 0.3962,
+        "hyperniche_sorensen": 0.5676,
+        "hyperniche_frac_unique_1": 0.0962,
+        "hyperniche_frac_unique_2": 0.5863,
+        "model": "rf"
+      },
+      {
+        "hyperniche_jaccard": 0.246,
+        "hyperniche_sorensen": 0.3949,
+        "hyperniche_frac_unique_1": 0.1478,
+        "hyperniche_frac_unique_2": 0.743,
+        "model": "ensemble"
+      }
+    ]
+  },
+  "other_details": {},
+  "timings": [
+    {
+      "what": "Species data loading",
+      "time_mins": 0.0007
+    },
+    {
+      "what": "Data loading",
+      "time_mins": 0.0024
+    },
+    {
+      "what": "Data preparing",
+      "time_mins": 0.4211
+    },
+    {
+      "what": "Sample bias assessment",
+      "time_mins": 0.605
+    },
+    {
+      "what": "Model selection",
+      "time_mins": 0.8766
+    },
+    {
+      "what": "Model fit",
+      "time_mins": 2.9968
+    },
+    {
+      "what": "Model prediction",
+      "time_mins": 63.1144
+    },
+    {
+      "what": "Response curves",
+      "time_mins": 63.2407
+    },
+    {
+      "what": "Variable importance",
+      "time_mins": 63.5231
+    },
+    {
+      "what": "Ensemble",
+      "time_mins": 66.4181
+    },
+    {
+      "what": "Masks",
+      "time_mins": 67.0632
+    },
+    {
+      "what": "Post-evaluation",
+      "time_mins": 71.6979
+    }
+  ],
+  "obissdm_version": ["0.3.0"]
+}

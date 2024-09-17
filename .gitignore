@@ -54,3 +54,7 @@ po/*~
 rsconnect/
 
 /.quarto/
+
+file_explorer/
+
+files/results/
