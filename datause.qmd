@@ -256,7 +256,10 @@ plot(current, main = "Native area mask")
 
 ## QGIS
 
-Soon...
+On QGIS we can apply the mask by using the 
+
+`if ( "taxonid=135185_model=mpaeu_mask_cog@1" = 1, 1, -99999)`
+
 
 :::
 

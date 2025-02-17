@@ -23,10 +23,12 @@ book:
     - part: "Content"
       chapters:
         - studyarea.qmd
+        - sdms.qmd
         - datadownload.qmd
         - datamining.qmd
         - methods-testing.qmd
         - datause.qmd
+        - citations.qmd
   # appendices:
   #   - references.qmd
 

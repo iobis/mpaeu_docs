@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Obtaining occurrence data from OBIS and GBIF – MPA Europe - OBIS contribution documentation</title>
+<title>3&nbsp; Species distribution models – MPA Europe - OBIS contribution documentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./datamining.html" rel="next">
-<link href="./sdms.html" rel="prev">
+<link href="./datadownload.html" rel="next">
+<link href="./studyarea.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -71,6 +91,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -84,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./datadownload.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./sdms.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Species distribution models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -140,13 +163,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sdms.html" class="sidebar-item-text sidebar-link">
+  <a href="./sdms.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Species distribution models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datadownload.html" class="sidebar-item-text sidebar-link active">
+  <a href="./datadownload.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></span></a>
   </div>
 </li>
@@ -186,23 +209,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#selecting-species-for-modeling" id="toc-selecting-species-for-modeling" class="nav-link active" data-scroll-target="#selecting-species-for-modeling"><span class="header-section-number">4.1</span> Selecting species for modeling</a></li>
-  <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">4.2</span> Downloading data</a></li>
-  <li><a href="#quality-control-steps-under-development" id="toc-quality-control-steps-under-development" class="nav-link" data-scroll-target="#quality-control-steps-under-development"><span class="header-section-number">4.3</span> Quality control steps (under development)</a>
-  <ul class="collapse">
-  <li><a href="#duplicate-records-removal" id="toc-duplicate-records-removal" class="nav-link" data-scroll-target="#duplicate-records-removal"><span class="header-section-number">4.3.1</span> Duplicate records removal</a></li>
-  <li><a href="#remove-records-on-land" id="toc-remove-records-on-land" class="nav-link" data-scroll-target="#remove-records-on-land"><span class="header-section-number">4.3.2</span> Remove records on land</a></li>
-  <li><a href="#geographical-and-environmental-outliers-flagging" id="toc-geographical-and-environmental-outliers-flagging" class="nav-link" data-scroll-target="#geographical-and-environmental-outliers-flagging"><span class="header-section-number">4.3.3</span> Geographical and environmental outliers (flagging)</a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
+  <li><a href="#framework-used-in-this-project" id="toc-framework-used-in-this-project" class="nav-link" data-scroll-target="#framework-used-in-this-project"><span class="header-section-number">3.2</span> Framework used in this project</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./datadownload.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./sdms.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Species distribution models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Species distribution models</span></h1>
 </div>
 
 
@@ -219,66 +236,100 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="selecting-species-for-modeling" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="selecting-species-for-modeling"><span class="header-section-number">4.1</span> Selecting species for modeling</h2>
-<p>The first step was to establish the species occurring on the study area. We used the <code>robis</code> function <code>dataset</code> to retrieve all species occurring on the study area. Further on we filtered the dataset to:</p>
-<ul>
-<li>retain only taxa at the species level</li>
-<li>retain only taxa with accepted taxonomic status</li>
-<li>remove Archaea, Bacteria, Fungi and Protozoa taxa</li>
-<li>include only marine or brackish species</li>
-</ul>
-<p>From that we obtained a final list of <span style="color: #006fdf">22159</span> species.</p>
-<p>In the case of GBIF, we first downloaded all data occurring within our study area. Then, using the <code>worrms</code> package we verified which of those species were marine. Then we performed the same filters used with the OBIS data. This resulted in <span style="color: #006fdf">22782</span> unique species.</p>
+<section id="introduction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
+<p>MPA Europe will produce a priority map of conservation areas in Europe, designed to protect the highest proportion of biodiversity. Consequently, a critical aspect of the project is understanding species distributions. Despite the growing number of available records in OBIS and other databases, significant gaps remain in our knowledge of species ranges. To address this, MPA Europe is utilizing species distribution models (SDMs) to generate high-resolution (~5 km grid) species range maps.</p>
+<p>SDMs are statistical models used to predict the potential geographic distribution of a species based on the relationship between observed species occurrences and environmental variables. These models estimate areas where environmental conditions are suitable for the presence of a species, producing maps of predicted habitat suitability<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. You can find more details about SDMs in the review of <span class="citation" data-cites="elith_species_2009">Elith and Leathwick (<a href="#ref-elith_species_2009" role="doc-biblioref">2009</a>)</span>, and more broadly ecological niche modelling in <span class="citation" data-cites="peterson_ecological_2011">Peterson et al. (<a href="#ref-peterson_ecological_2011" role="doc-biblioref">2011</a>)</span>.</p>
+<p>In a simplified look, species data (in the form of information of where the species occur, and ideally where it is absent) and environmental data (e.g.&nbsp;temperature, salinity) are used as input in a model (<a href="https://support.bccvl.org.au/support/solutions/articles/6000127048-introduction-to-species-distribution-models">see example here</a>). A statistical model is an abstraction<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> that help us to understand the relationship between variables. Many algorithms can be used to produce a species distribution model, depending on the available data. Once the model is fitted, it can then be used to predict the suitability in new locations according to the local environmental conditions.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{
+  init: {
+    'themeVariables': {
+      'lineColor': '#757575'
+    }
+  }
+}%%
+
+flowchart LR
+    n1["Environmental data"]
+    n2["Model"]
+    n3["Species data"]
+    n4["Range map"]
+    classDef commonStyle color:#000000,fill:#D9D9D9,stroke:#737373,stroke-width:1px
+    class n1,n3 commonStyle
+    n1 --&gt; n2
+    style n2 fill:#016DD7,stroke:#016DD7,color:white
+    n3 --&gt; n2
+    n2 --&gt; n4
+    style n4 fill:#00D0B1,stroke:#00D0B1,color:white
+    linkStyle 0,1,2 stroke:#757575,stroke-width:0.5px,marker-width:0.5px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Of course, this is just a simplification. Many steps are necessary to obtain the data, process it, fit the model, evaluate the models and finally make predictions. In this project we followed those steps:</p>
+<ol type="1">
+<li>Obtain species list (all species occurring in the study area)</li>
+<li>Obtain occurrence data for the selected species</li>
+<li>Apply quality control procedures to the occurrence data</li>
+<li>Obtain environmental data</li>
+<li>Obtain ecological information (in our case, the habitat of species, benthic or pelagic)</li>
+<li>Fit models</li>
+<li>Evaluate models</li>
+<li>Produce map predictions</li>
+</ol>
+<p>Each of those are detailed on the next sections of this documentation. But first we detail the statistical framework adopted in the WP3.</p>
 </section>
-<section id="downloading-data" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">4.2</span> Downloading data</h2>
-<p>OBIS data was obtained from the full export available at <a href="https://obis.org/data/access/">https://obis.org/data/access/</a>. However, code for downloading the data through the <code>robis</code> package is available. This is done through the <code>obissdm</code> package (which is being developed to support this project)</p>
-<p>GBIF data was downloaded using the <code>rgbif</code> package, via the <code>obissdm</code> package.</p>
-</section>
-<section id="quality-control-steps-under-development" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="quality-control-steps-under-development"><span class="header-section-number">4.3</span> Quality control steps (under development)</h2>
-<section id="duplicate-records-removal" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="duplicate-records-removal"><span class="header-section-number">4.3.1</span> Duplicate records removal</h3>
-<p>We removed duplicated data points using <a href="https://www.ibm.com/docs/en/streams/4.3.0?topic=334-geohashes">GeoHash</a> with a precision of 6 (width ≤ 1.22km X height 0.61km), and the year. Thus, for each combination of GeoHash cell and year, only one record was kept. That part is implemented in the <code>mp_dup_check</code> function, of the project package <code>msdm</code>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We note that, specifically for the SDMs, before modeling we do an additional duplicate removal in order to keep only a single record per cell.</p>
-</div>
-</div>
-</section>
-<section id="remove-records-on-land" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="remove-records-on-land"><span class="header-section-number">4.3.2</span> Remove records on land</h3>
-<p>Records on land were removed based on <em>openmap</em>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We further filtered the records for the SDMs by keeping only those overlapping the environmental variable layers (which present some differences to the land layer used before).</p>
-</div>
-</div>
-</section>
-<section id="geographical-and-environmental-outliers-flagging" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="geographical-and-environmental-outliers-flagging"><span class="header-section-number">4.3.3</span> Geographical and environmental outliers (flagging)</h3>
-<p>For the assessment of geographical outliers we implemented an innovative method that considers the existence of barriers when calculating the distance between points. Usually, geographical outliers are calculated based on the cartesian distance between the points. However, for marine species (indeed, also for terrestrial ones) the barriers are important because it constrains dispersal. Consider for example one species on the two sides of the Panama strait (Atlantic and Pacific). A straight line between the two points would be a short distance. However, if we take in account the barrier, then the animal (or its larvae) would need to travel a much longer distance to reach the other side of the strait.</p>
-<p>In both the geographical and the environmental (Sea Surface Temperature, bathymetry and salinity) outlier assessment, we used a threshold of 3 times the inter quantile range to identify extreme points, but we just flagged the most extreme outlier until a limit of 1% of the points (i.e.&nbsp;if there were more points above the threshold, just the most extreme ones were flagged).</p>
+<section id="framework-used-in-this-project" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="framework-used-in-this-project"><span class="header-section-number">3.2</span> Framework used in this project</h2>
+<p>All modeling was done considering a point process framework. Spatial Point Process Models (PPMs) are used to model any type of events that arise as points in space <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. Those points have random number and location, but are related to an underlying process. It was only recently that PPMs were more intensively applied to SDMs <span class="citation" data-cites="renner2015 warton2010">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>; <a href="#ref-warton2010" role="doc-biblioref">Warton and Shepherd 2010</a>)</span>, although widely used in spatial analysis (examples of applications range from disease mapping to detection of landslides; e.g. <span class="citation" data-cites="lombardo2018">Lombardo, Opitz, and Huser (<a href="#ref-lombardo2018" role="doc-biblioref">2018</a>)</span>).</p>
+<p>The interest in PPMs for SDMs was mainly driven by the challenge of modelling presence-only data, when all the information available is the geographical locations where the species was recorded <span class="citation" data-cites="fithian2013">(<a href="#ref-fithian2013" role="doc-biblioref">Fithian and Hastie 2013</a>)</span>. Usually, one would sample pseudo-absences (points that should reflect places where the species is absent), but the number and place of pseudo-absences can have a great influence on models <span class="citation" data-cites="barbet-massin2012">(<a href="#ref-barbet-massin2012" role="doc-biblioref">Barbet-Massin et al. 2012</a>)</span>. Also there is no clear justification to pseudo-absences: the location was not sampled and thus it is impossible to really know if the species is absent. Instead, on a PPM framework, quadrature (or background) points are used only as a device to describe the available environmental conditions <span class="citation" data-cites="fithian2013">(<a href="#ref-fithian2013" role="doc-biblioref">Fithian and Hastie 2013</a>)</span>. Points are sampled at random and the number of points can be chosen based on the accuracy of the likelihood estimate <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. In theory, all the points of the environment could be used, but this would increase computational time.</p>
+<p>In the case of a PPM, and considering that the points does not present a strong bias, the resulting intensity of the point process can be used as a proxy to the suitability of the habitat (under the assumption that the species is more easily recorded where the habitat suitability is higher) <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. One important point to note is that the results of any PPM model (and in general, any presence-only model) <strong>should not be interpreted as probability of occurrence</strong>, but instead as a relative occurrence rate (following <span class="citation" data-cites="merow2013">(<a href="#ref-merow2013" role="doc-biblioref">Merow, Smith, and Silander 2013</a>)</span>).</p>
+<p>PPMs are closely related to the widely used Maxent <span class="citation" data-cites="renner2013">(<a href="#ref-renner2013" role="doc-biblioref">Renner and Warton 2013</a>)</span>. Indeed, even the pseudo-absence (or presence-background) modeling can approximate a Poisson point process model, under certain conditions <span class="citation" data-cites="renner2015 warton2010">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>; <a href="#ref-warton2010" role="doc-biblioref">Warton and Shepherd 2010</a>)</span>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-barbet-massin2012" class="csl-entry" role="listitem">
+Barbet-Massin, Morgane, Frédéric Jiguet, Cécile Hélène Albert, and Wilfried Thuiller. 2012. <span>“Selecting Pseudo-Absences for Species Distribution Models: How, Where and How Many?: <span><em>How to Use Pseudo-Absences in Niche Modelling?</em></span>”</span> <em>Methods in Ecology and Evolution</em> 3 (2): 327–38. <a href="https://doi.org/10.1111/j.2041-210X.2011.00172.x">https://doi.org/10.1111/j.2041-210X.2011.00172.x</a>.
+</div>
+<div id="ref-elith_species_2009" class="csl-entry" role="listitem">
+Elith, Jane, and John R. Leathwick. 2009. <span>“Species <span>Distribution</span> <span>Models</span>: <span>Ecological</span> <span>Explanation</span> and <span>Prediction</span> <span>Across</span> <span>Space</span> and <span>Time</span>.”</span> <em>Annual Review of Ecology, Evolution, and Systematics</em> 40 (1): 677–97. <a href="https://doi.org/10.1146/annurev.ecolsys.110308.120159">https://doi.org/10.1146/annurev.ecolsys.110308.120159</a>.
+</div>
+<div id="ref-fithian2013" class="csl-entry" role="listitem">
+Fithian, William, and Trevor Hastie. 2013. <span>“Finite-Sample Equivalence in Statistical Models for Presence-Only Data.”</span> <em>The Annals of Applied Statistics</em> 7 (4). <a href="https://doi.org/10.1214/13-AOAS667">https://doi.org/10.1214/13-AOAS667</a>.
+</div>
+<div id="ref-lombardo2018" class="csl-entry" role="listitem">
+Lombardo, Luigi, Thomas Opitz, and Raphaël Huser. 2018. <span>“Point Process-Based Modeling of Multiple Debris Flow Landslides Using INLA: An Application to the 2009 Messina Disaster.”</span> <em>Stochastic Environmental Research and Risk Assessment</em> 32 (7): 2179–98. <a href="https://doi.org/10.1007/s00477-018-1518-0">https://doi.org/10.1007/s00477-018-1518-0</a>.
+</div>
+<div id="ref-merow2013" class="csl-entry" role="listitem">
+Merow, Cory, Matthew J. Smith, and John A. Silander. 2013. <span>“A Practical Guide to MaxEnt for Modeling Species’ Distributions: What It Does, and Why Inputs and Settings Matter.”</span> <em>Ecography</em> 36 (10): 1058–69. <a href="https://doi.org/10.1111/j.1600-0587.2013.07872.x">https://doi.org/10.1111/j.1600-0587.2013.07872.x</a>.
+</div>
+<div id="ref-peterson_ecological_2011" class="csl-entry" role="listitem">
+Peterson, A. Townsend, Jorge Soberón, Richard G. Pearson, Robert P. Anderson, Enrique Martínez-Meyer, Miguel Nakamura, and Miguel B. Araújo. 2011. <em>Ecological <span>Niches</span> and <span>Geographic</span> <span>Distributions</span> (<span>MPB</span>-49)</em>. 1st ed. Princeton University Press. <a href="https://doi.org/10.23943/princeton/9780691136868.001.0001">https://doi.org/10.23943/princeton/9780691136868.001.0001</a>.
+</div>
+<div id="ref-renner2015" class="csl-entry" role="listitem">
+Renner, Ian W., Jane Elith, Adrian Baddeley, William Fithian, Trevor Hastie, Steven J. Phillips, Gordana Popovic, and David I. Warton. 2015. <span>“Point Process Models for Presence<span>-</span>Only Analysis.”</span> Edited by Robert B. O’Hara. <em>Methods in Ecology and Evolution</em> 6 (4): 366–79. <a href="https://doi.org/10.1111/2041-210X.12352">https://doi.org/10.1111/2041-210X.12352</a>.
+</div>
+<div id="ref-renner2013" class="csl-entry" role="listitem">
+Renner, Ian W., and David I. Warton. 2013. <span>“Equivalence of MAXENT and Poisson Point Process Models for Species Distribution Modeling in Ecology.”</span> <em>Biometrics</em> 69 (1): 274–81. <a href="https://doi.org/10.1111/j.1541-0420.2012.01824.x">https://doi.org/10.1111/j.1541-0420.2012.01824.x</a>.
+</div>
+<div id="ref-warton2010" class="csl-entry" role="listitem">
+Warton, David I., and Leah C. Shepherd. 2010. <span>“Poisson Point Process Models Solve the <span>“</span>Pseudo-Absence Problem<span>”</span> for Presence-Only Data in Ecology.”</span> <em>The Annals of Applied Statistics</em> 4 (3). <a href="https://doi.org/10.1214/10-AOAS331">https://doi.org/10.1214/10-AOAS331</a>.
+</div>
+</div>
 </section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Note that SDM is a broad term, covering many statistical approaches used to model the distribution of species according to environmental variables. Some methods are capable of detecting the probability of occurrence of a species, while others offer just a relative suitability score.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is an important aspect: models are designed to help us understand and capture general trends, providing insights into natural phenomena or enabling predictions. However, models are not perfect; many fine-scale aspects that contribute to the true (and often unknown) distribution of species are not fully represented.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -848,13 +899,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./sdms.html" class="pagination-link" aria-label="Species distribution models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Species distribution models</span></span>
+      <a href="./studyarea.html" class="pagination-link" aria-label="Defining the study area">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining the study area</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./datamining.html" class="pagination-link" aria-label="Obtaining additional biodiversity data">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Obtaining additional biodiversity data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./datadownload.html" class="pagination-link" aria-label="Obtaining occurrence data from OBIS and GBIF">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

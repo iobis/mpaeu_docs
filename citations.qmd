@@ -1,0 +1,115 @@
+# Citations
+
+```{=html}
+<style>
+    table { 
+      border-collapse: collapse; 
+      width: 100%;
+      table-layout: fixed;
+    }
+    th, td { 
+      border: 1px solid #ccc; 
+      padding: 8px; 
+      text-align: left; 
+    }
+    th { 
+      background-color: #f2f2f2; 
+    }
+    #searchInput {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 300px;
+      border-width: thin !important;
+      border-color: #c4c0c0;
+    }
+</style>
+
+<input type="text" id="searchInput" placeholder="Search table...">
+<div id="table-container">Loading data...</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      // Function to create and display the table from the datasets array
+      function generateTable(datasets) {
+        const container = document.getElementById('table-container');
+        container.innerHTML = ''; // Clear the loading message
+
+        const table = document.createElement('table');
+        table.id = "datasetsTable"; // assign an id for filtering
+        
+        // Create table header
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const headers = ['Title', 'Source', 'Nodes', 'URL'];
+        headers.forEach(headerText => {
+          const th = document.createElement('th');
+          th.textContent = headerText;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create table body
+        const tbody = document.createElement('tbody');
+        datasets.forEach(item => {
+          const row = document.createElement('tr');
+          headers.forEach(key => {
+            const td = document.createElement('td');
+            if (key === 'URL') {
+              const a = document.createElement('a');
+              a.href = item[key];
+              a.textContent = item[key];
+              a.target = '_blank';
+              td.appendChild(a);
+            } else {
+              td.textContent = item[key];
+            }
+            row.appendChild(td);
+          });
+          tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+        container.appendChild(table);
+      }
+
+      // Function to filter table rows based on search input
+      function filterTable() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById("datasetsTable");
+        if (!table) return;
+        const trs = table.getElementsByTagName("tr");
+        
+        // Loop over all table rows, skipping header row
+        for (let i = 1; i < trs.length; i++) {
+          let rowText = trs[i].textContent.toLowerCase();
+          trs[i].style.display = rowText.includes(filter) ? "" : "none";
+        }
+      }
+      
+      // Add event listener for search input
+      document.getElementById("searchInput").addEventListener("keyup", filterTable);
+
+      // Fetch the JSON file, parse it, and extract the datasets component
+      fetch('https://raw.githubusercontent.com/iobis/mpaeu_sdm/refs/heads/main/datasets_citation.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data && data.datasets && Array.isArray(data.datasets)) {
+            generateTable(data.datasets);
+          } else {
+            document.getElementById('table-container').textContent = 'JSON structure is not as expected.';
+          }
+        })
+        .catch(error => {
+          console.error('Error loading JSON:', error);
+          document.getElementById('table-container').textContent = 'Error loading data.';
+        });
+    });
+  </script>
+```

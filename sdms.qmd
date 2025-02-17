@@ -1,0 +1,60 @@
+---
+bibliography: references.bib
+---
+
+# Species distribution models
+
+## Introduction
+
+MPA Europe will produce a priority map of conservation areas in Europe, designed to protect the highest proportion of biodiversity. Consequently, a critical aspect of the project is understanding species distributions. Despite the growing number of available records in OBIS and other databases, significant gaps remain in our knowledge of species ranges. To address this, MPA Europe is utilizing species distribution models (SDMs) to generate high-resolution (~5 km grid) species range maps.
+
+SDMs are statistical models used to predict the potential geographic distribution of a species based on the relationship between observed species occurrences and environmental variables. These models estimate areas where environmental conditions are suitable for the presence of a species, producing maps of predicted habitat suitability^[Note that SDM is a broad term, covering many statistical approaches used to model the distribution of species according to environmental variables. Some methods are capable of detecting the probability of occurrence of a species, while others offer just a relative suitability score.]. You can find more details about SDMs in the review of @elith_species_2009, and more broadly ecological niche modelling in @peterson_ecological_2011.
+
+In a simplified look, species data (in the form of information of where the species occur, and ideally where it is absent) and environmental data (e.g. temperature, salinity) are used as input in a model ([see example here](https://support.bccvl.org.au/support/solutions/articles/6000127048-introduction-to-species-distribution-models)). A statistical model is an abstraction^[This is an important aspect: models are designed to help us understand and capture general trends, providing insights into natural phenomena or enabling predictions. However, models are not perfect; many fine-scale aspects that contribute to the true (and often unknown) distribution of species are not fully represented.] that help us to understand the relationship between variables. Many algorithms can be used to produce a species distribution model, depending on the available data. Once the model is fitted, it can then be used to predict the suitability in new locations according to the local environmental conditions.
+
+``` {mermaid}
+%%{
+  init: {
+    'themeVariables': {
+      'lineColor': '#757575'
+    }
+  }
+}%%
+
+flowchart LR
+	n1["Environmental data"]
+    n2["Model"]
+    n3["Species data"]
+    n4["Range map"]
+    classDef commonStyle color:#000000,fill:#D9D9D9,stroke:#737373,stroke-width:1px
+    class n1,n3 commonStyle
+    n1 --> n2
+	style n2 fill:#016DD7,stroke:#016DD7,color:white
+	n3 --> n2
+	n2 --> n4
+	style n4 fill:#00D0B1,stroke:#00D0B1,color:white
+    linkStyle 0,1,2 stroke:#757575,stroke-width:0.5px,marker-width:0.5px
+```
+
+Of course, this is just a simplification. Many steps are necessary to obtain the data, process it, fit the model, evaluate the models and finally make predictions. In this project we followed those steps:
+
+1. Obtain species list (all species occurring in the study area)
+2. Obtain occurrence data for the selected species
+3. Apply quality control procedures to the occurrence data
+4. Obtain environmental data
+5. Obtain ecological information (in our case, the habitat of species, benthic or pelagic)
+6. Fit models
+7. Evaluate models
+8. Produce map predictions
+
+Each of those are detailed on the next sections of this documentation. But first we detail the statistical framework adopted in the WP3.
+
+## Framework used in this project
+
+All modeling was done considering a point process framework. Spatial Point Process Models (PPMs) are used to model any type of events that arise as points in space [@renner2015]. Those points have random number and location, but are related to an underlying process. It was only recently that PPMs were more intensively applied to SDMs [@renner2015; @warton2010], although widely used in spatial analysis (examples of applications range from disease mapping to detection of landslides; e.g. @lombardo2018).
+
+The interest in PPMs for SDMs was mainly driven by the challenge of modelling presence-only data, when all the information available is the geographical locations where the species was recorded [@fithian2013]. Usually, one would sample pseudo-absences (points that should reflect places where the species is absent), but the number and place of pseudo-absences can have a great influence on models [@barbet-massin2012]. Also there is no clear justification to pseudo-absences: the location was not sampled and thus it is impossible to really know if the species is absent. Instead, on a PPM framework, quadrature (or background) points are used only as a device to describe the available environmental conditions [@fithian2013]. Points are sampled at random and the number of points can be chosen based on the accuracy of the likelihood estimate [@renner2015]. In theory, all the points of the environment could be used, but this would increase computational time.
+
+In the case of a PPM, and considering that the points does not present a strong bias, the resulting intensity of the point process can be used as a proxy to the suitability of the habitat (under the assumption that the species is more easily recorded where the habitat suitability is higher) [@renner2015]. One important point to note is that the results of any PPM model (and in general, any presence-only model) **should not be interpreted as probability of occurrence**, but instead as a relative occurrence rate (following [@merow2013]).
+
+PPMs are closely related to the widely used Maxent [@renner2013]. Indeed, even the pseudo-absence (or presence-background) modeling can approximate a Poisson point process model, under certain conditions [@renner2015; @warton2010].

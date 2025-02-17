@@ -19,16 +19,6 @@ Previous studies have already explored the performance of SDM algorithms and par
 
 In special, a very sensitive point for our study was the speed of fitting and prediction, given the necessity to fit a substantial number of models.
 
-## Point-process framework
-
-All modeling exercises were done considering a point process framework. Spatial Point Process Models (PPMs) are used to model any type of events that arise as points in space [@renner2015]. Those points have random number and location, but are related to an underlying process. It was only recently that PPMs were more intensively applied to SDMs [@renner2015; @warton2010], although widely used in spatial analysis (examples of applications range from disease mapping to detection of landslides; e.g. @lombardo2018).
-
-The interest in PPMs for SDMs was mainly driven by the challenge of modelling presence-only data, when all the information available is the points where the species was registered [@fithian2013]. Usually, one need to sample pseudo-absences (points that reflect places where the species is absent), but the number and place of pseudo-absences can have a great influence on models [@barbet-massin2012]. Instead, on a PPM framework, quadrature (or background) points are used as a device only to describe the available environmental conditions [@fithian2013]. Points are sampled at random and the number of points can be chosen based on the accuracy of the likelihood estimate [@renner2015]. In theory, all the points of the environment could be used, but this would increase computational time.
-
-In the case of a PPM, and considering that the points does not present a strong bias, the resulting intensity of the point process can be used as a proxy to the suitability of the habitat (under the assumption that the species is more easily registered where the habitat suitability is higher) [@renner2015]. One important point to note is that the results of any PPM model (and in general, any presence-only model) should not be interpreted as probability of occurrence, but instead as a relative occurrence rate (following [@merow2013]).
-
-PPMs are closely related to the widely used Maxent [@renner2013]. Indeed, even the pseudo-absence (or presence-background) modeling can approximate a Poisson point process model, under certain conditions [@renner2015; @warton2010].
-
 ## Chosen algorithms
 
 Based on @valavi2021 and in our previous experience, we selected the following algorithms to test:

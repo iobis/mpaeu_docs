@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Obtaining occurrence data from OBIS and GBIF – MPA Europe - OBIS contribution documentation</title>
+<title>8&nbsp; Citations – MPA Europe - OBIS contribution documentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./datamining.html" rel="next">
-<link href="./sdms.html" rel="prev">
+<link href="./datause.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -84,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./datadownload.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./citations.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Citations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datadownload.html" class="sidebar-item-text sidebar-link active">
+  <a href="./datadownload.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></span></a>
   </div>
 </li>
@@ -170,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./citations.html" class="sidebar-item-text sidebar-link">
+  <a href="./citations.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Citations</span></span></a>
   </div>
 </li>
@@ -181,28 +180,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#selecting-species-for-modeling" id="toc-selecting-species-for-modeling" class="nav-link active" data-scroll-target="#selecting-species-for-modeling"><span class="header-section-number">4.1</span> Selecting species for modeling</a></li>
-  <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">4.2</span> Downloading data</a></li>
-  <li><a href="#quality-control-steps-under-development" id="toc-quality-control-steps-under-development" class="nav-link" data-scroll-target="#quality-control-steps-under-development"><span class="header-section-number">4.3</span> Quality control steps (under development)</a>
-  <ul class="collapse">
-  <li><a href="#duplicate-records-removal" id="toc-duplicate-records-removal" class="nav-link" data-scroll-target="#duplicate-records-removal"><span class="header-section-number">4.3.1</span> Duplicate records removal</a></li>
-  <li><a href="#remove-records-on-land" id="toc-remove-records-on-land" class="nav-link" data-scroll-target="#remove-records-on-land"><span class="header-section-number">4.3.2</span> Remove records on land</a></li>
-  <li><a href="#geographical-and-environmental-outliers-flagging" id="toc-geographical-and-environmental-outliers-flagging" class="nav-link" data-scroll-target="#geographical-and-environmental-outliers-flagging"><span class="header-section-number">4.3.3</span> Geographical and environmental outliers (flagging)</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./datadownload.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./studyarea.html">Content</a></li><li class="breadcrumb-item"><a href="./citations.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Citations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Obtaining occurrence data from OBIS and GBIF</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Citations</span></h1>
 </div>
 
 
@@ -219,67 +205,119 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="selecting-species-for-modeling" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="selecting-species-for-modeling"><span class="header-section-number">4.1</span> Selecting species for modeling</h2>
-<p>The first step was to establish the species occurring on the study area. We used the <code>robis</code> function <code>dataset</code> to retrieve all species occurring on the study area. Further on we filtered the dataset to:</p>
-<ul>
-<li>retain only taxa at the species level</li>
-<li>retain only taxa with accepted taxonomic status</li>
-<li>remove Archaea, Bacteria, Fungi and Protozoa taxa</li>
-<li>include only marine or brackish species</li>
-</ul>
-<p>From that we obtained a final list of <span style="color: #006fdf">22159</span> species.</p>
-<p>In the case of GBIF, we first downloaded all data occurring within our study area. Then, using the <code>worrms</code> package we verified which of those species were marine. Then we performed the same filters used with the OBIS data. This resulted in <span style="color: #006fdf">22782</span> unique species.</p>
-</section>
-<section id="downloading-data" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">4.2</span> Downloading data</h2>
-<p>OBIS data was obtained from the full export available at <a href="https://obis.org/data/access/">https://obis.org/data/access/</a>. However, code for downloading the data through the <code>robis</code> package is available. This is done through the <code>obissdm</code> package (which is being developed to support this project)</p>
-<p>GBIF data was downloaded using the <code>rgbif</code> package, via the <code>obissdm</code> package.</p>
-</section>
-<section id="quality-control-steps-under-development" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="quality-control-steps-under-development"><span class="header-section-number">4.3</span> Quality control steps (under development)</h2>
-<section id="duplicate-records-removal" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="duplicate-records-removal"><span class="header-section-number">4.3.1</span> Duplicate records removal</h3>
-<p>We removed duplicated data points using <a href="https://www.ibm.com/docs/en/streams/4.3.0?topic=334-geohashes">GeoHash</a> with a precision of 6 (width ≤ 1.22km X height 0.61km), and the year. Thus, for each combination of GeoHash cell and year, only one record was kept. That part is implemented in the <code>mp_dup_check</code> function, of the project package <code>msdm</code>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We note that, specifically for the SDMs, before modeling we do an additional duplicate removal in order to keep only a single record per cell.</p>
-</div>
-</div>
-</section>
-<section id="remove-records-on-land" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="remove-records-on-land"><span class="header-section-number">4.3.2</span> Remove records on land</h3>
-<p>Records on land were removed based on <em>openmap</em>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We further filtered the records for the SDMs by keeping only those overlapping the environmental variable layers (which present some differences to the land layer used before).</p>
-</div>
-</div>
-</section>
-<section id="geographical-and-environmental-outliers-flagging" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="geographical-and-environmental-outliers-flagging"><span class="header-section-number">4.3.3</span> Geographical and environmental outliers (flagging)</h3>
-<p>For the assessment of geographical outliers we implemented an innovative method that considers the existence of barriers when calculating the distance between points. Usually, geographical outliers are calculated based on the cartesian distance between the points. However, for marine species (indeed, also for terrestrial ones) the barriers are important because it constrains dispersal. Consider for example one species on the two sides of the Panama strait (Atlantic and Pacific). A straight line between the two points would be a short distance. However, if we take in account the barrier, then the animal (or its larvae) would need to travel a much longer distance to reach the other side of the strait.</p>
-<p>In both the geographical and the environmental (Sea Surface Temperature, bathymetry and salinity) outlier assessment, we used a threshold of 3 times the inter quantile range to identify extreme points, but we just flagged the most extreme outlier until a limit of 1% of the points (i.e.&nbsp;if there were more points above the threshold, just the most extreme ones were flagged).</p>
+<style>
+    table { 
+      border-collapse: collapse; 
+      width: 100%;
+      table-layout: fixed;
+    }
+    th, td { 
+      border: 1px solid #ccc; 
+      padding: 8px; 
+      text-align: left; 
+    }
+    th { 
+      background-color: #f2f2f2; 
+    }
+    #searchInput {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 300px;
+      border-width: thin !important;
+      border-color: #c4c0c0;
+    }
+</style>
+
+<input type="text" id="searchInput" placeholder="Search table...">
+<div id="table-container">Loading data...</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      // Function to create and display the table from the datasets array
+      function generateTable(datasets) {
+        const container = document.getElementById('table-container');
+        container.innerHTML = ''; // Clear the loading message
+
+        const table = document.createElement('table');
+        table.id = "datasetsTable"; // assign an id for filtering
+        
+        // Create table header
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const headers = ['Title', 'Source', 'Nodes', 'URL'];
+        headers.forEach(headerText => {
+          const th = document.createElement('th');
+          th.textContent = headerText;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create table body
+        const tbody = document.createElement('tbody');
+        datasets.forEach(item => {
+          const row = document.createElement('tr');
+          headers.forEach(key => {
+            const td = document.createElement('td');
+            if (key === 'URL') {
+              const a = document.createElement('a');
+              a.href = item[key];
+              a.textContent = item[key];
+              a.target = '_blank';
+              td.appendChild(a);
+            } else {
+              td.textContent = item[key];
+            }
+            row.appendChild(td);
+          });
+          tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+        container.appendChild(table);
+      }
+
+      // Function to filter table rows based on search input
+      function filterTable() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById("datasetsTable");
+        if (!table) return;
+        const trs = table.getElementsByTagName("tr");
+        
+        // Loop over all table rows, skipping header row
+        for (let i = 1; i < trs.length; i++) {
+          let rowText = trs[i].textContent.toLowerCase();
+          trs[i].style.display = rowText.includes(filter) ? "" : "none";
+        }
+      }
+      
+      // Add event listener for search input
+      document.getElementById("searchInput").addEventListener("keyup", filterTable);
+
+      // Fetch the JSON file, parse it, and extract the datasets component
+      fetch('https://raw.githubusercontent.com/iobis/mpaeu_sdm/refs/heads/main/datasets_citation.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data && data.datasets && Array.isArray(data.datasets)) {
+            generateTable(data.datasets);
+          } else {
+            document.getElementById('table-container').textContent = 'JSON structure is not as expected.';
+          }
+        })
+        .catch(error => {
+          console.error('Error loading JSON:', error);
+          document.getElementById('table-container').textContent = 'Error loading data.';
+        });
+    });
+  </script>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -848,14 +886,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./sdms.html" class="pagination-link" aria-label="Species distribution models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Species distribution models</span></span>
+      <a href="./datause.html" class="pagination-link" aria-label="Accessing and using the distribution models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Accessing and using the distribution models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./datamining.html" class="pagination-link" aria-label="Obtaining additional biodiversity data">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Obtaining additional biodiversity data</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
