@@ -1,0 +1,367 @@
+# How to interpret SDM outputs?
+
+Species distribution models (SDMs) are valuable tools for understanding how species are currently distributed and how their distributions may shift in the future. SDMs predict the geographic distribution of a species based on environmental conditions and known occurrence records. These models use statistical or machine learning methods to identify correlations between species presence and environmental variables. They are widely used in conservation planning, invasive species management, and biodiversity research.
+
+SDMs indicate the **potential distribution of the species**. This is a key aspect: the "real" distribution of the species, specially on the small scale, may differ from the models because they do not incorporate aspecies such as competition, presence of specific substrates or dispersal capacity. However, SDMs give us a good overview of the **range** of the species, which is linked to the environmental conditions (e.g. temperature, salinity, oxygen, etc).
+
+::: {.callout-tip}
+# Potential range
+
+SDMs show the **potential range** of the species, and small scale aspects may not be captured by the model.
+:::
+
+Lets walk through an example. We will see the results for the species [__Sebastes norvegicus__](https://obis.org/taxon/151324). Here are the occurrence records for this species:
+
+``` {r}
+#| messages: false
+#| echo: false
+suppressPackageStartupMessages(library(terra))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
+
+wrld <- rnaturalearth::ne_countries(returnclass = "sf")
+
+suppressMessages(
+    try(sf::sf_use_s2(FALSE), silent = T)
+)
+eu <- sf::st_read("https://github.com/iobis/mpaeu_studyarea/raw/refs/heads/main/data/shapefiles/mpa_europe_starea_v3.gpkg", quiet = T)
+
+#wrld <- sf::st_crop(wrld, eu)
+
+# #layers <- mask(layers, eu)
+# layers <- as.data.frame(layers, xy = TRUE)
+
+# layers_h3 <- suppressMessages(h3jsr::point_to_cell(layers[,1:2], res = 5))
+# layers$h3_address <- layers_h3
+
+# layers <- layers |> group_by(h3_address) |>
+#     summarise(across(3:12, ~mean(.x, na.rm = T)))
+
+# layers_h3 <- h3jsr::cell_to_polygon(layers$h3_address, simple = FALSE)
+# layers <- dplyr::left_join(layers_h3, layers, by = "h3_address")
+
+# layers$ssp3_d <- layers$ssp3 - layers$current
+# layers$ssp3_d  <- layers$ssp3_d /100
+# layers$current_th <- layers$current_th/100
+
+pts <- arrow::read_parquet("files/results/taxonid=151324/model=mpaeu/taxonid=151324_model=mpaeu_what=fitocc.parquet")
+pts <- sf::st_as_sf(pts, coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+pts <- suppressMessages(
+    suppressWarnings(sf::st_crop(pts, wrld))
+)
+#pts <- suppressMessages(pts[sf::st_intersects(pts, eu, sparse = F),])
+tt <- theme(panel.border = element_blank(),
+          plot.background = element_blank(),
+          legend.position = "bottom")
+(p1 <- ggplot() +
+    geom_sf(data = wrld, fill = "grey80", color = "grey80") +
+   # geom_sf(data = layers, aes(fill = current_th), linewidth = 0) +
+    geom_sf(data = pts, color = "#006DD7", size = 1.5) +
+    #scale_x_continuous(expand = c(0, 0)) +
+    #scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_distiller(palette = "BuPu", direction = 1,
+    guide = guide_colorbar(title = "Suitability",
+                           show.limits = TRUE,
+                           barheight = unit(0.12, "in"),
+                           barwidth = unit(3.5, "in"),
+                           ticks = F,
+                           ticks.colour = "grey20",
+                           frame.colour = "#242121",
+                           title.position = "top")) +
+    xlab(NULL) + ylab(NULL) +
+    theme_light() + tt + coord_sf(
+        xlim = c(-80, 50), ylim = c(0, 90)
+    ))
+```
+
+When we fit the model, we predict it for the full area, even parts of the globe that are not (in principle) reachable by the species. This is important because those results can be used for studies of invasion potential, for example.
+
+``` {r}
+#| messages: false
+#| echo: false
+current <- rast(
+    "files/results/taxonid=151324/model=mpaeu/predictions/taxonid=151324_model=mpaeu_method=maxent_scen=current_cog.tif"
+)
+current <- as.data.frame(current, xy = T)
+current$current <- current$current/100
+
+(p2 <- ggplot() +
+    geom_sf(data = wrld, fill = "grey80", color = "grey80") +
+    geom_raster(data = current, aes(x = x, y = y, fill = current)) +
+    geom_sf(data = pts, color = "#006DD7", size = 1.5) +
+    #scale_x_continuous(expand = c(0, 0)) +
+    #scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_distiller(palette = "BuPu", direction = 1,
+    guide = guide_colorbar(title = "Suitability",
+                           show.limits = TRUE,
+                           barheight = unit(0.12, "in"),
+                           barwidth = unit(3.5, "in"),
+                           ticks = F,
+                           ticks.colour = "grey20",
+                           frame.colour = "#242121",
+                           title.position = "top"), limits = c(0, 1)) +
+    xlab(NULL) + ylab(NULL) +
+    theme_light() + tt + coord_sf(
+        xlim = c(-80, 50), ylim = c(0, 90)
+    ))
+```
+
+For most of the applications, however, we are interested in the actual range of the species (i.e. in its native range). For that we can work on the **post-processing** of the predictions.
+
+::: {.callout-tip}
+# Post-processing
+Post-processing enables us to to further constrain the predictions, depending on the aim of the study.
+:::
+
+The first post-processing that can be done is applying a mask to limit the predictions to the native range. Actually, native ranges are hard to delimit in an automated way. For this work we adopted marine realms to delimit native areas.
+
+``` {r}
+#| messages: false
+#| echo: false
+masks <- rast(
+    "files/results/taxonid=151324/model=mpaeu/predictions/taxonid=151324_model=mpaeu_mask_cog.tif"
+)
+NAflag(masks) <- 0
+
+current <- rast(
+    "files/results/taxonid=151324/model=mpaeu/predictions/taxonid=151324_model=mpaeu_method=maxent_scen=current_cog.tif"
+)
+current <- mask(current, masks$fit_ecoregions)
+current <- as.data.frame(current, xy = T)
+current$current <- current$current/100
+
+ggplot() +
+    geom_sf(data = wrld, fill = "grey80", color = "grey80") +
+    geom_raster(data = current, aes(x = x, y = y, fill = current)) +
+    geom_sf(data = pts, color = "#006DD7", size = 1, alpha = .3) +
+    #scale_x_continuous(expand = c(0, 0)) +
+    #scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_distiller(palette = "BuPu", direction = 1,
+    guide = guide_colorbar(title = "Suitability",
+                           show.limits = TRUE,
+                           barheight = unit(0.12, "in"),
+                           barwidth = unit(3.5, "in"),
+                           ticks = F,
+                           ticks.colour = "grey20",
+                           frame.colour = "#242121",
+                           title.position = "top"), limits = c(0, 1)) +
+    xlab(NULL) + ylab(NULL) +
+    theme_light() + tt + coord_sf(
+        xlim = c(-80, 50), ylim = c(0, 90)
+    )
+```
+
+We can go one step further and limit it to the maximum depth at which the species was ever observed:
+
+``` {r}
+#| messages: false
+#| echo: false
+current <- rast(
+    "files/results/taxonid=151324/model=mpaeu/predictions/taxonid=151324_model=mpaeu_method=maxent_scen=current_cog.tif"
+)
+current <- mask(current, masks$fit_region_max_depth)
+current <- as.data.frame(current, xy = T)
+current$current <- current$current/100
+
+ggplot() +
+    geom_sf(data = wrld, fill = "grey80", color = "grey80") +
+    geom_raster(data = current, aes(x = x, y = y, fill = current)) +
+    geom_sf(data = pts, color = "#006DD7", size = 1, alpha = .3) +
+    #scale_x_continuous(expand = c(0, 0)) +
+    #scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_distiller(palette = "BuPu", direction = 1,
+    guide = guide_colorbar(title = "Suitability",
+                           show.limits = TRUE,
+                           barheight = unit(0.12, "in"),
+                           barwidth = unit(3.5, "in"),
+                           ticks = F,
+                           ticks.colour = "grey20",
+                           frame.colour = "#242121",
+                           title.position = "top"), limits = c(0, 1)) +
+    xlab(NULL) + ylab(NULL) +
+    theme_light() + tt + coord_sf(
+        xlim = c(-80, 50), ylim = c(0, 90)
+    )
+```
+
+::: {.callout-note}
+This mask for maximum depth is a new feature, which will be available on the version 2. For now you can use the "Fit region" mask, which is similar, but include a buffer of 50m.
+:::
+
+Another important step that can be taken to restrict the predictions to a core area is applying a threshold. Here we apply the **P10** threshold, which remove the 10% of lowest values in occurrence records (i.e. remove areas with marginal conditions).
+
+``` {r}
+#| messages: false
+#| echo: false
+threshold <- arrow::read_parquet(
+    "files/results/taxonid=151324/model=mpaeu/metrics/taxonid=151324_model=mpaeu_what=thresholds.parquet"
+)
+th <- threshold$p10[threshold$model == "maxent"] * 100
+current <- rast(
+    "files/results/taxonid=151324/model=mpaeu/predictions/taxonid=151324_model=mpaeu_method=maxent_scen=current_cog.tif"
+)
+current[current < th] <- 0
+current <- mask(current, masks$fit_region_max_depth)
+current <- as.data.frame(current, xy = T)
+current$current <- current$current/100
+
+ggplot() +
+    geom_sf(data = wrld, fill = "grey80", color = "grey80") +
+    geom_raster(data = current, aes(x = x, y = y, fill = current)) +
+    geom_sf(data = pts, color = "#006DD7", size = 1, alpha = .3) +
+    #scale_x_continuous(expand = c(0, 0)) +
+    #scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_distiller(palette = "BuPu", direction = 1,
+    guide = guide_colorbar(title = "Suitability",
+                           show.limits = TRUE,
+                           barheight = unit(0.12, "in"),
+                           barwidth = unit(3.5, "in"),
+                           ticks = F,
+                           ticks.colour = "grey20",
+                           frame.colour = "#242121",
+                           title.position = "top"), limits = c(0, 1)) +
+    xlab(NULL) + ylab(NULL) +
+    theme_light() + tt + coord_sf(
+        xlim = c(-80, 50), ylim = c(0, 90)
+    )
+```
+
+But we can go one step further. We can convert this into a binary format (coverting areas to "possible presence" or "possible absence") and then remove patches that are not connected to the patches that have occurrence records. In the image below, the core area is shown in green.
+
+``` {r}
+#| messages: false
+#| echo: false
+limit_by_closest <- function(
+    results_folder,
+    model_acro,
+    species,
+    algo,
+    scenario,
+    max_dispersal = 100000,
+    target_th = "p10",
+    target_mask = "fit_region_max_depth",
+    verbose = TRUE
+) {
+
+    require(dplyr)
+    if (verbose) cli::cli_progress_step("Processing species {.val {species}}, model {.val {algo}}, scenario {.val {scenario}}, with maximum dispersal {.val {max_dispersal/1000}} km")
+
+    # Load prediction
+    pred <- terra::rast(file.path(
+        results_folder, glue::glue("taxonid={species}/model={model_acro}/predictions"),
+        glue::glue("taxonid={species}_model={model_acro}_method={algo}_scen={scenario}_cog.tif")
+    ))
+
+    # Load points and apply buffer
+    fit_pts <- arrow::read_parquet(file.path(
+        results_folder,
+        glue::glue("taxonid={species}/model={model_acro}/taxonid={species}_model={model_acro}_what=fitocc.parquet")
+    ))
+    fit_pts <- terra::vect(as.data.frame(fit_pts), geom = c("decimalLongitude", "decimalLatitude"), crs = "EPSG:4326")
+    max_dispersal <- 100000
+    fit_pts_buffer <- terra::buffer(fit_pts, max_dispersal)
+
+    # Load masks
+    masks <- terra::rast(file.path(
+        results_folder, glue::glue(
+            "taxonid={species}/model={model_acro}/predictions/taxonid={species}_model={model_acro}_mask_cog.tif"
+        )
+    ))
+    masks <- subset(masks, target_mask)
+    terra::NAflag(masks) <- 0
+
+    # Apply mask
+    pred <- terra::mask(pred, masks)
+
+    # Apply threshold
+    thresholds <- arrow::read_parquet(file.path(
+        results_folder,
+        glue::glue(
+            "taxonid={species}/model={model_acro}/metrics/taxonid={species}_model={model_acro}_what=thresholds.parquet"
+        )
+    ))
+    th <- thresholds |>
+        filter(model == ifelse(grepl("rf_", algo), "rf", algo)) |>
+        pull(target_th) |>
+        (\(x) {x * 100})()
+    pred_th <- terra::classify(pred, matrix(c(-Inf, th, NA), ncol = 3), right = F)
+
+    # Mask 0s
+    pred_masked <- terra::mask(pred_th, pred_th != 0, maskvalues = 0)
+
+    # Label patches and get polygon
+    pred_patches <- terra::patches(pred_masked, directions = 8)
+    patches_pols <- terra::as.polygons(pred_patches, dissolve = TRUE)
+
+    # Find intersections
+    touched_pt <- terra::intersect(patches_pols, fit_pts_buffer)
+    touched_pt_ids <- unique(terra::values(touched_pt)[[1]])
+
+    # Mask original
+    touched_pt_f <- terra::classify(pred_patches, rcl = cbind(setdiff(unique(terra::values(pred_patches)), touched_pt_ids), NA))
+    touched_pt_f <- terra::classify(touched_pt_f, matrix(c(-Inf, Inf, 1), ncol = 3))
+    touched_pt_f <- terra::as.int(touched_pt_f)
+
+    if (verbose) cli::cli_progress_done()
+    return(touched_pt_f)
+
+}
+
+patches <- limit_by_closest(
+    results_folder = "files/results",
+    model_acro = "mpaeu",
+    species = 151324,
+    algo = "maxent",
+    scenario = "current", verbose = FALSE
+)
+
+current <- as.data.frame(patches, xy = T)
+colnames(current)[3] <- "current"
+
+ggplot() +
+    geom_sf(data = wrld, fill = "grey80", color = "grey80") +
+    geom_raster(data = current, aes(x = x, y = y, fill = as.factor(current))) +
+    geom_sf(data = pts, color = "#006DD7", size = 1, alpha = .3) +
+    #scale_x_continuous(expand = c(0, 0)) +
+    #scale_y_continuous(expand = c(0, 0)) +
+    # scale_fill_distiller(palette = "BuPu", direction = 1,
+    scale_fill_manual(values = c("#2ca25f")) +
+    xlab(NULL) + ylab(NULL) +
+    theme_light() + tt + coord_sf(
+        xlim = c(-80, 50), ylim = c(0, 90)
+    ) + theme(legend.position = "none")
+```
+
+You can apply other post-processiing steps depending on your objective. For example, if your target species only occur in a specific substrate and you have a layer describing substrate conditions, you can mask the predictions according to your substrate layer.
+
+> Again, it is important to highlight that the models represent **the potential** range of the species and maps show the **relative** suitability of the species.
+
+## How can I critically assess an SDM?
+
+- Evaluate model performance metrics: check accuracy measures. Because we are using presence only data, the main one we are using is the Continuous Boyce Index (CBI). You can also check the AUC and TSS, to assess how well the model distinguishes between suitable and unsuitable areas.
+
+``` {r}
+#| echo: false
+
+metrics <- arrow::read_parquet("files/results/taxonid=151324/model=mpaeu/metrics/taxonid=151324_model=mpaeu_method=maxent_what=cvmetrics.parquet")
+metrics <- round(apply(metrics, 2, mean), 1)
+metrics <- metrics[c("auc", "cbi", "tss_maxsss")]
+metrics <- data.frame(t(metrics))
+colnames(metrics) <- c("AUC", "CBI", "TSS")
+metrics <- metrics[,c(2, 1,3)]
+knitr::kable(metrics)
+```
+
+- Inspect variable importance and ecological relevance: check that the environmental predictors used make ecological sense for the species and are not overfitted or redundant. You can also have a look at the response curves.  
+
+``` {r}
+#| echo: false
+
+respc <- arrow::read_parquet("files/results/taxonid=151324/model=mpaeu/metrics/taxonid=151324_model=mpaeu_method=maxent_what=respcurves.parquet")
+obissdm:::plot.sdm_respcur(respc)
+```
+
+
+- Check data quality and bias: review the quality and spatial bias of occurrence records used in the model.  
+- Check evaluation with independent data (if available): for some species, a separate dataset was available to test model robustness beyond the training data.  
+- Interpret model outputs cautiously: remember that high predicted suitability doesn't guarantee actual presence; consider dispersal limits, biotic interactions, and sampling errors.  

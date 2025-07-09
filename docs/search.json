@@ -326,5 +326,27 @@
       "Content",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Citations</span>"
     ]
+  },
+  {
+    "objectID": "understanding.html",
+    "href": "understanding.html",
+    "title": "8  How to interpret SDM outputs?",
+    "section": "",
+    "text": "8.1 How can I critically assess an SDM?\nCBI\nAUC\nTSS\n\n\n\n\n0.8\n0.9\n0.6",
+    "crumbs": [
+      "Content",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>How to interpret SDM outputs?</span>"
+    ]
+  },
+  {
+    "objectID": "understanding.html#how-can-i-critically-assess-an-sdm",
+    "href": "understanding.html#how-can-i-critically-assess-an-sdm",
+    "title": "8  How to interpret SDM outputs?",
+    "section": "",
+    "text": "Evaluate model performance metrics: check accuracy measures. Because we are using presence only data, the main one we are using is the Continuous Boyce Index (CBI). You can also check the AUC and TSS, to assess how well the model distinguishes between suitable and unsuitable areas.\n\n\n\nInspect variable importance and ecological relevance: check that the environmental predictors used make ecological sense for the species and are not overfitted or redundant. You can also have a look at the response curves.\n\n\n\nCheck data quality and bias: review the quality and spatial bias of occurrence records used in the model.\n\nCheck evaluation with independent data (if available): for some species, a separate dataset was available to test model robustness beyond the training data.\n\nInterpret model outputs cautiously: remember that high predicted suitability doesn’t guarantee actual presence; consider dispersal limits, biotic interactions, and sampling errors.",
+    "crumbs": [
+      "Content",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>How to interpret SDM outputs?</span>"
+    ]
   }
 ]

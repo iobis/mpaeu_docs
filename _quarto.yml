@@ -28,6 +28,7 @@ book:
         - datamining.qmd
         - methods-testing.qmd
         - datause.qmd
+        - understanding.qmd
         - citations.qmd
   # appendices:
   #   - references.qmd
