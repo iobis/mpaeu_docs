@@ -1,0 +1,93 @@
+# Main results
+
+In the version 2 of the MPA Europe SDMs (concluded on August 2025), we obtained species range maps for **12,039** species. All maps can be explored through the [MPA Europe application.](https://shiny.obis.org/distmaps/)
+
+Below you can find a list of all species that had at least 1 record in the study area, and the SDM status for them (_available_ or _not available_). You will also find a column with additional information about the SDM status (either if there was not enough records or no good model was fitted, according to our quality threshold). The column _availableRecords_ represent the number of records available for that species **after** the data cleaning process (and that is why some species may have no record available). Finally, there are three columns with conservation status information (_euRedList_, _globalRedList_, and _mpaeuropeConsStatus_) and one with the invasive status (_invasiveStatus_), showing wether the species is considered non-native in Europe. This data comes from the deliverable 3.4 and more details [can be found here.](https://zenodo.org/records/11075390)
+
+``` {r}
+#| echo: false
+library(reactable)
+library(fontawesome)
+library(htmltools)
+
+data <- read.csv("files/sdm_list_iss_cons_20250903.csv")
+
+redlistfun <- function(value) {
+    if (is.null(value) || is.na(value)) return("")
+    col <- dplyr::case_when(
+        value == "CR" ~ "#d51f08",
+        value == "EN" ~ "#fc7f3f",
+        value == "VU" ~ "#f9e814",
+        value == "NT" ~ "#cce225",
+        value == "LC" ~ "#60c659",
+        value == "DD" ~ "#d1d1c7",
+        .default = "#bababaff"
+    )
+    tags$span(value, style = glue::glue(
+        "border-radius: 20px; background-color: {col}; padding: 2px 8px; color: white"
+    ))
+}
+
+htmltools::browsable(
+  tagList(
+    tags$style(
+        ".download-btn {
+            border-radius: 20px;
+            border-width: 0px;
+            background-color: #f7f7f7;
+            padding: 6px 10px;
+            font-size: small;
+            cursor: pointer;
+        }
+        .download-btn:hover {
+            background-color: #e0e0e0;
+        }"
+    ),
+
+    tags$button(
+        class = "download-btn",
+      tagList(fontawesome::fa("download"), "Download as CSV"),
+      onclick = "Reactable.downloadDataCSV('sdm-download-table', 'mpaeurope_sdm_list.csv')"
+    ),
+
+    reactable(
+      data,
+      searchable = TRUE,
+      defaultPageSize = 15,
+      resizable = TRUE,
+      elementId = "sdm-download-table",
+    #   defaultColDef = colDef(
+    #     #minWidth = 120, 
+    #     style = list(whiteSpace = "nowrap")
+    #     ),
+      columns = list(
+        scientificName = colDef(minWidth = 220),
+        taxonID = colDef(cell = function(value) {
+            url <- paste0("https://obis.org/taxon/", value)
+            htmltools::tags$a(href = url, target = "_blank", as.character(value))
+        }),
+        SDM = colDef(cell = function(value) {
+            if (value == "available") {
+                tags$span(value, style = "border-radius: 20px; background-color: #149e86; padding: 2px 8px; color: white")
+            } else {
+                tags$span(value, style = "border-radius: 20px; background-color: #c57c0fff; padding: 2px 8px; color: white")
+            }
+        }),
+        globalRedList = colDef(cell = redlistfun),
+        euRedList = colDef(cell = redlistfun),
+        mpaeuropeConsStatus = colDef(minWidth = 200, cell = function(value) {
+            if (is.null(value) || is.na(value)) return("")
+            if (value == "Conservation importance") {
+                tags$span(value, style = "border-radius: 20px; background-color: #0e57aaff; padding: 2px 8px; color: white")
+            } else if (value == "Threatened") {
+                tags$span(value, style = "border-radius: 20px; background-color: #c50f40ff; padding: 2px 8px; color: white")
+            } else {
+                value
+            }
+        }),
+        invasiveStatus = colDef(minWidth = 200)
+        )
+    )
+  )
+)
+```
