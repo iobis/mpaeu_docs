@@ -2,46 +2,137 @@
 
 ## Explore through the map platform
 
-To be updated
+The main gateway to explore the species range maps of the MPA Europe project is the [Shiny application](https://shiny.obis.org/distmaps/) (https://shiny.obis.org/distmaps/). It provides an interactive experience, with full access to all species, models and predictions. It also includes important details like the model metrics and partial response curves, helping users to more carefully evaluate the model quality and its uncertainty. Users can also directly download results and reports.
 
-## Download to analyze locally
+Once you access the application, you will land in a page like that:
+
+![Landing page of the Shiny application](images/how_to/map_1.png)
+
+On the top, the user can choose between four tabs. The first show the species range maps, the second species thermal ranges (estimated from the occurrence records), the third the habitat models (based on Stacked SDMs), and the fourth gives access to the Atlas for MSP. On the species tab, the user can type scientific names or use the filter option to limit the search to specific groups/areas of interest.
+
+![](images/how_to/map_2.png)
+
+![](images/how_to/map_3.png)
+
+Once a species is selected, a set of new options become available. The first shown map is always for the **current period** and, by default, mask the prediction by the area used to fit the model limited to the maximum depth where the species was observed^[It is important to note that this is not linked to the depth the records were found, but rather the maximum bathymetry extracted for the records.]. It is possible do activate or deactivate the mask by clicking on the "eye" symbol on the left panel, over the map. The occurrence records used to fit the model are also shown by default, but can be deactivated by clicking on the "records" button on the bottom-right of the map.
+
+![](images/how_to/map_4.png)
+
+Below the map, on the left side, you will find the options to change the mask type, apply a threshold (under the "filter" option), and also to show the uncertainty map instead (the bootstrap result).
+
+![](images/how_to/map_5b.png)
+
+Applying a threshold will automatically update the map, removing areas of low suitability according to the selected threshold.
+
+![](images/how_to/map_6.png)
+
+On the right side, it is possible to overlay some additional layers to provide context to the map.
+
+![](images/how_to/map_5c.png)
+
+On the right panel, details about the species are available, including it threatened status according to the IUCN Red List and, if available, the expert review.
+
+![](images/how_to/map_5d.png)
+
+Right below the species details you will find the control to select the model and the time period of the predictions.
+
+![](images/how_to/map_5e.png)
+
+Scrolling-down you will have access to the model metrics, variable importance, the explanation of the selected model and the partial response curves. All of those are **extremelly important** to enable you to **critically** evaluate the model. Does the metrics indicate that the model has a good capacity of prediction? The partial response curves show patterns that are biologically plausible?
+
+![](images/how_to/map_7.png)
+
+Below this section, there are two buttons to either **download a species report** or to **show additional information**. Under additional information the user has access to metrics of spatial bias in the data, extrapolation measures, and full model details.
+
+![](images/how_to/map_8.png)
+
+![](images/how_to/map_9.png)
+
+Back on the right panel, once you select a scenario different than the current, a control of the time period will also appear. At the same time, on the map panel, on the bottom-left corner you will find a button to split the viewer, showing at the same time the current and future prediction. This is useful to compare how the future prediction relates to the prediction of the current range of the species.
+
+![](images/how_to/map_10.png)
+
+![](images/how_to/map_11.png)
+
+The user can also explore the additional tabs, like maps of the thermal range of the species (derived from the occurrence records) and the habitat maps (SSDMs).
+
+![](images/how_to/map_12.png)
+
+![](images/how_to/map_13.png)
+
+## Analyzing locally
+
+All predictions and the raw (quality-controlled) data, as well as additional files (e.g. model metrics) are available through an AWS S3 bucket.
+
+To explore the available files, go to https://obis-maps.s3.amazonaws.com/index.html and select **`sdm`**.
+
+### Using a file without dowloading
+
+In many cases you can directly access the files from the S3 bucket. For example, on R, using the `terra` package, you can directly open the cloud-optimized GeoTIFF by providing the http address of the file:
+
+``` {r}
+library(terra)
+
+sdm <- rast("https://obis-maps.s3.amazonaws.com/sdm/species/taxonid=151324/model=mpaeu/predictions/taxonid=151324_model=mpaeu_method=maxent_scen=current_cog.tif")
+
+sdm
+```
+
+Appending `/vsicurl/` to the file will make access faster:
+
+``` {r}
+library(tictoc)
+
+tic("With vsicurl")
+sdm <- rast(paste0(
+  "/vsicurl/",
+  "https://obis-maps.s3.amazonaws.com/sdm/species/taxonid=151324/model=mpaeu/predictions/taxonid=151324_model=mpaeu_method=maxent_scen=current_cog.tif"
+))
+toc()
+
+tic("Standard")
+sdm <- rast("https://obis-maps.s3.amazonaws.com/sdm/species/taxonid=151324/model=mpaeu/predictions/taxonid=151324_model=mpaeu_method=maxent_scen=current_cog.tif")
+toc()
+```
+
+You can also directly access those files on QGIS:
+
+![](images/how_to/qgis_http1.png)
+
+![](images/how_to/qgis_http2.png)
 
 ### Downloading the data
 
-Predictions and the raw (quality-controlled) data, as well as additional files (e.g. model metrics) are available through both the mapping platform and AWS S3.
-
-To explore the files available, go to https://mpaeu-dist.s3.amazonaws.com/index.html
-
 **Download a specific file**
 
-If you want to download only a specific file, you can use the [explorer](https://mpaeu-dist.s3.amazonaws.com/index.html) to locate the file and then click on it to download.
+If you want to download only a specific file, you can use the [explorer](https://obis-maps.s3.amazonaws.com/index.html) to locate the file and then click on it to download.
 
 **Download complete species folders**
 
 To download a specific folder, the best way is to use the `aws` CLI program ([see here](https://aws.amazon.com/cli/)). For example, if we want to download data for the species _Echinus esculentus_, we need only its AphiaID, which you can find on [WoRMS](https://www.marinespecies.org/). In this case the AphiaID is **124287** Then, from the command line we can do:
 
 ``` bash
-aws s3 sync s3://mpaeu-dist/results/species/taxonid=124287 ./your-folder --no-sign-request
+aws s3 sync s3://obis-maps/sdm/species/taxonid=124287 ./your-folder --no-sign-request
 ```
 
 Note that the bucket is organized this way:
 
 ```
 ├── index.html
-├── results                    : All distribution modelling results for the MPA Europe project
-│   ├── species                : Species Distribution Modelling results
-│   │   ├── ...
-│   │   └── taxonid=[AphiaID]  : Data for each species
-│   │
-│   ├── habitat                : Habitat Distribution Modelling results
-│   └── diversity              : Diversity maps and analyses
-│
-└── source                     : Additional data necessary for running the models, not possible to store on GitHub
+├── sdm                    : All distribution modelling results for the MPA Europe project
+    ├── species                : Species Distribution Modelling results
+    │   ├── ...
+    │   └── taxonid=[AphiaID]  : Data for each species
+    │
+    ├── habitat                : Habitat Distribution Modelling results
+    ├── diversity              : Diversity maps and analyses
+    ├── source                 : Additional data necessary for running the models, not possible to store on GitHub
+    └── stac                   : STAC catalogue for the files
 ```
 
 And thus for accessing any species folder you just need:
 
-`s3://bucket-name/subfolder/` + the AphiaID of the species
+`s3://obis-maps/sdm/species/taxonid=` + the AphiaID of the species
 
 It is also possible to do this operation through R using the `aws.s3` package:
 
@@ -50,13 +141,25 @@ install.packages("aws.s3")
 
 # Sync the contents of an S3 bucket subfolder to your local folder
 s3sync(
-  bucket = "bucket-name", 
-  prefix = "results/species/taxonid=124287",         # Subfolder in the bucket
+  bucket = "obis-maps", 
+  prefix = "sdm/species/taxonid=124287",         # Subfolder in the bucket
   save_to = "./your-folder",                        # Local folder
   region = "",              # Region can be left empty for public buckets
   use_https = TRUE # This is equivalent to "--no-sign-request"
 )
 ```
+
+::: {.callout-warning}
+You can also sync (download) the full results folder using the AWS CLI with the following command:
+
+`aws s3 sync s3://obis-maps/sdm/species/ ./your-folder --no-sign-request`
+
+However, this will download a few **terabytes** of data. So, we **definitely** do not recommend this approach.
+:::
+
+::: {.callout-tip}
+See the section @sec-stac to understand how you can use the STAC catalogue to organize your downloads and/or data access in a more efficient way.
+:::
 
 ### Data structure
 
@@ -69,7 +172,7 @@ Additional information also follow a similar syntax (inspired on the hive format
 
 `taxonid=135185_model=mpaeu_method=maxent_scen=ssp126_dec100_cog.tif`
 
-`method` is the algorithm used for the model and `scen` the scenario and period of the prediction. In this case `_cog` simply indicates that the output is COG optimized.
+`method` is the algorithm used for the model and `scen` the scenario and period of the prediction. In this case `_cog` simply indicates that the output is a [cloud-optimized GeoTIFF](https://cogeo.org/).
 
 A species folder have the following structure:
 
@@ -133,7 +236,7 @@ There are many files available, but some are just the same for different methods
 8. `..._what=thermmetrics.json`: thermal metrics
 
 ::: {.callout-note}
-Most files are in parquet format, which is a very efficient [storage format](https://resources.obis.org/tutorials/arrow-obis/). The easiest way to work with this type of data is through R, using the arrow package: `arrow::open_dataset("parquet-file.parquet")`. This will open a data.frame (`tibble`) that you can use as usual. If you don't know R or any other programming language, then you can use an extension ([on Google Drive, for example](https://workspace.google.com/marketplace/app/tab_lab_csv_and_parquet_viewer_and_graph/91285510383)) or you can download the specific file you need in `csv` format using [this tool](https://shiny.obis.org/mpaeutools).
+Most files are in parquet format, which is a very efficient [storage format](https://resources.obis.org/tutorials/arrow-obis/). The easiest way to work with this type of data is through R, using the arrow package: `arrow::open_dataset("parquet-file.parquet")`. This will open a data.frame (`tibble`) that you can use as usual. If you don't know R or any other programming language, then you can use an extension ([on Google Drive, for example](https://workspace.google.com/marketplace/app/tab_lab_csv_and_parquet_viewer_and_graph/91285510383)).
 :::
 
 Two files are specially important: the `cvmetrics` which contain the metrics to assess the model predictive capacity, and `thresholds` which contains the values necessary for converting the predictions into binary format (if necessary). See the section "Analyzing the data" to understand more about the content of these files.
@@ -174,7 +277,7 @@ Even more files available, but again many are just the same for different method
 
 1. predictions: spatial predictions of models (following the pattern `..._method=[name of algorithm]_scen=[scenario and if applicable period]_cog.tif`)
 2. bootstrap: uncertainty in the models assessed as bootstrap. May not be available to all algorithms. Files follow the same pattern as the predictions, with `what=boot` added.
-3. mask: the file named `_mask_cog.tif` contains the mask to limit predictions to specific areas (e.g. the native areas)
+3. mask: the file named `_what=mask_cog.tif` contains the mask to limit predictions to specific areas (e.g. the native areas)
 4. MESS map (uncertainty): the file `_what=mess_cog.tif` contains the MESS analysis, which measures extrapolation
 5. SHAPE map (uncertainty): as MESS, the file `_what=shape_cog.tif` contains the SHAPE analysis which measures extrapolation
 6. Thermal envelopes: the only file that is not a GeoTIFF is the `_what=thermenvelope.parquet`. This is a GeoParquet which contains the shapefiles of thermal envelopes for the species in different scenarios.
@@ -183,7 +286,7 @@ Even more files available, but again many are just the same for different method
 
 You can analyze the SDM data in the tool you prefer - either through a programming language like R or Python, or using GIS programs like QGIS and ArcGIS. Here we will provide codes examples in R, the language used to produce the models, and also some examples in QGIS.
 
-Note that for working in GIS programs, for some applications you will need to convert the Parquet files to CSV. There are multiple ways of doing that: you can use our R function (see below), [this online tool](https://shiny.obis.org/mpaeutools), or Python `pandas` library. If you downloaded your data through the [maps platform](https://shiny.obis.org/distmaps), then files are already in `.csv` format.
+Note that for working in GIS programs, for some applications you will need to convert the Parquet files to CSV. There are multiple ways of doing that: you can use the R `arrow` package or Python `pandas` library. If you downloaded your data through the [maps platform](https://shiny.obis.org/distmaps), then files are already in `.csv` format.
 
 ### Loading predictions
 
@@ -205,14 +308,14 @@ current
 plot(current)
 ```
 
-All predictions folders always include a `mask` file. Let's also open this file. The `mask`file is a multiband raster, with each band being a different mask. We plot here the "native_ecoregions" mask.
+All predictions folders always include a `mask` file. Let's also open this file. The `mask`file is a multiband raster, with each band being a different mask. We plot here the "fit_region_max_depth" mask.
 
 ``` {r}
-mask_file <- rast("files/results/taxonid=135185/model=mpaeu/predictions/taxonid=135185_model=mpaeu_mask_cog.tif")
+mask_file <- rast("files/results/taxonid=135185/model=mpaeu/predictions/taxonid=135185_model=mpaeu_what=mask_cog.tif")
 
 mask_file
 
-plot(mask_file$native_ecoregions)
+plot(mask_file$fit_region_max_depth)
 ```
 
 
@@ -220,19 +323,19 @@ plot(mask_file$native_ecoregions)
 
 Open the file on QGIS clicking on the `Open data source manager` on the corner. Chose the raster file you want to open and click ok.
 
-![how-to-1](images/how_to/qgis_1.png)
+![](images/how_to/qgis_1.png)
 
 Once opened, click with the right button on the layer and click in properties.
 
-![how-to-2](images/how_to/qgis_2.png)
+![](images/how_to/qgis_2.png)
 
 Then, on the `Symbology` tab change render type to 'Singleband pseudocolor', chose the color ramp and click ok.
 
-![how-to-3](images/how_to/qgis_3.png)
+![](images/how_to/qgis_3.png)
 
 All predictions folders always include a `mask` file. Let's also open this file. The `mask`file is a multiband raster, with each band being a different mask. You can click with the right button, enter in properties and chose to visualize only one of the bands. Use the "Paletted/Unique values" option to color this layer (0/1).
 
-![how-to-4](images/how_to/qgis_4.png)
+![](images/how_to/qgis_4.png)
 
 :::
 
@@ -244,10 +347,10 @@ Predictions show the relative suitability of a place, in terms of its environmen
 
 ## R
 
-On R, the first step is to convert the 0 values (negative mask) to `NA` values, as necessary by the function. Then we apply the target mask to our prediction:
+On R, the first step is to set the 0 values (negative mask) as the `NA` values, which is necessary by the function. Then we apply the target mask to our prediction:
 
 ``` {r}
-mask_file[mask_file == 0] <- NA
+NAflag(mask_file) <- 0 # terra function to set 0 as the NA flag
 
 current <- mask(current, mask_file$native_ecoregions)
 plot(current, main = "Native area mask")
@@ -256,14 +359,29 @@ plot(current, main = "Native area mask")
 
 ## QGIS
 
-On QGIS we can apply the mask by using the 
+On QGIS we can apply the mask by using the `Raster Calculator`. Go to Raster > Raster Calculator. 
 
-`if ( "taxonid=135185_model=mpaeu_mask_cog@1" = 1, 1, -99999)`
+![](images/how_to/qgis_5.png)
 
+Since the mask is a 0/1 file, this is a very simple operation: we will simply multiply the model prediction with the mask. You can select the raster bands on the menu. Note that the band names are not exhibited on this menu. You can first explore the band names by right clicking on the layer and selecting "Properties". Under the "Information" tab you will find the bands list with its names.
+
+![](images/how_to/qgis_6.png)
+
+We use the following expression in the calculator:
+
+`"taxonid=135185_model=mpaeu_what=mask_cog@1" * "taxonid=135185_model=mpaeu_method=maxent_scen=current_cog@1"`
+
+That is, we are multiplying the first band of the mask (the @1 in the end of the name) with the first (unique) band of the prediction. Areas in the prediction where the mask is 0 will become 0 in the result.
+
+Note that we selected "Create on-the-fly raster instead of writing layer to disk" to create an in-memory result layer (you can also directly save the result by not chosing this option).
+
+The result is now available in the main panel:
+
+![](images/how_to/qgis_7.png)
 
 :::
 
-Now that we masked the prediction, we may want to limit it to only areas that are more likely to have the species according to a certain threshold. Ideally, you should always work with **continuous** predictions, but in some cases a **binary** map (presence/absence of species) may be desirable. We will also load the occurrence data to show how the mode influences our view of suitable areas.
+Now that we masked the prediction, we may want to limit it to only areas that are more likely to have the species according to a certain threshold. Ideally, you should always work with **continuous** predictions, but in some cases a **binary** map (presence/absence of species) may be desirable. We will also load the occurrence data.
 
 ::: {.panel-tabset}
 
@@ -279,7 +397,12 @@ records <- read_parquet("files/results/taxonid=135185/model=mpaeu/taxonid=135185
 thresholds <- read_parquet("files/results/taxonid=135185/model=mpaeu/metrics/taxonid=135185_model=mpaeu_what=thresholds.parquet")
 
 p10 <- thresholds$p10[thresholds$model == "maxent"]
+p10 <- p10 * 100 # to put on the same scale, see note below
 ```
+
+::: {.callout-important}
+The thresholds are expressed on the scale 0-1 (with decimals), the same as the original predictions. However, to improve the storage efficiency, all predictions are first multiplied by 100, and then saved as integers. Thus, before applying the threshold you should multiply it by 100 (or divide the prediction by 100, if you prefer it in the original scale).
+:::
 
 And then we apply the threshold to the map. We will do the two modes: the first simply remove areas below the threshold and the second actually converts in binary format.
 
@@ -305,6 +428,192 @@ points(records, pch = 20, cex = .5)
 
 ## QGIS
 
-Soon...
+On QGIS, we start by adding the occurrence records. We use a CSV file (we first converted the Parquet file to CSV on R).
+
+![](images/how_to/qgis_8.png)
+
+![](images/how_to/qgis_9.png)
+
+To apply the thrshold, we open the CSV file and look at the column with the corresponding threshold and the line for the target model. Here we will apply the P10 threshold, which removes all values lower than the 10th percentile of values in the occurrence records.
+
+![](images/how_to/qgis_10.png)
+
+::: {.callout-important}
+The thresholds are expressed on the scale 0-1 (with decimals), the same as the original predictions. However, to improve the storage efficiency, all predictions are first multiplied by 100, and then saved as integers. Thus, before applying the threshold you should multiply it by 100 (or divide the prediction by 100, if you prefer it in the original scale).
+:::
+
+We will once more use the Raster Calculator, which you access from Raster > Raster Calculator.
+
+We need to get a "mask" of the areas where the values are higher or equal the threshold (in this case 0.58 * 100 = 58). This will produce a file with 0 and 1 (1 for the areas that are >= the threshold). We then multiply this by the original layer, what removes (turn into 0) the areas that are below the threshold. This is the expression we use:
+
+`( "Masked SDM@1" >= 58 )  * "Masked SDM@1"`
+
+![](images/how_to/qgis_11.png)
+
+Which results in the areas with low suitability according to the threshold being removed:
+
+![](images/how_to/qgis_12.png)
+
+If we want to produce a binary version (0/1), we can use the Raster Calculator with the expression `"Thresholded SDM@1" > 0`:
+
+![](images/how_to/qgis_13.png)
+
+This works, producing the following:
+
+![](images/how_to/qgis_14.png)
+
+However, as you can notice, the areas that were originally NA (i.e. the land) also become 0. An alternative is to use the following expression:
+
+`if ( "Thresholded SDM@1" = 0, 0, if ( "Thresholded SDM@1" > 0, 1, "Thresholded SDM@1" ))`
+
+![](images/how_to/qgis_15.png)
+
+Which will keep the original values when the value is neither 0 or 1.
+
+![](images/how_to/qgis_16.png)
 
 :::
+
+### The STAC catalogue {#sec-stac}
+
+Since version 2, the MPA Europe SDMs are organized in a STAC catalogue which you can find on `s3://obis-maps/sdm/stac`. The easiest way to explore it is through this [page](https://radiantearth.github.io/stac-browser/#/external/obis-maps.s3.us-east-1.amazonaws.com/sdm/stac/catalog.json).
+
+Depending on your needs, it might be interesting to use the STAC catalogue to organize your downloads. For example, suppose you are interested in obtaining the SDM for all species, but you just want one model and the current scenario. Not all models are available to all species, so first you need to know which models are available.
+
+We start by loading the STAC metadata file. You can sync the full STAC to a local folder, but in this case we are going to directly access just the JSON file for the [species collection](https://radiantearth.github.io/stac-browser/#/external/obis-maps.s3.us-east-1.amazonaws.com/sdm/stac/species-catalog/species-mpaeu/species-mpaeu-collection/collection.json):
+
+```{r}
+library(jsonlite)
+
+species_collection <- read_json("https://obis-maps.s3.us-east-1.amazonaws.com/sdm/stac/species-catalog/species-mpaeu/species-mpaeu-collection/collection.json")
+```
+
+If you check the structure of this JSON you will see that it is something like that:
+
+```
+List of 7
+ $ type        : chr "Collection"
+ $ id          : chr "species-mpaeu-collection"
+ $ stac_version: chr "1.1.0"
+ $ description : chr "Species distribution models for model=mpaeu"
+ $ links       :List of 12041
+  ..$ :List of 3
+  .. ..$ rel : chr "root"
+  .. ..$ href: chr "../../../catalog.json"
+  .. ..$ type: chr "application/json"
+  ..$ :List of 3
+  .. ..$ rel : chr "item"
+  .. ..$ href: chr "./taxonid=1005391/taxonid=1005391.json"
+  .. ..$ type: chr "application/geo+json"
+```
+
+Under "links" you will see a root file (the `catalog.json`) and one item for each species. We will retrieve only the species items:
+
+```{r}
+species_items <- species_collection$links |>
+  lapply(\(item) {
+    item <- item$href
+    if (grepl("catalog", item)) NULL else item
+  }) |>
+  unlist(use.names = F)
+
+head(species_items)
+```
+
+And then create a `data.frame` containing the reference and the species id.
+
+``` {r}
+items_df <- data.frame(
+  taxonid = as.integer(gsub("taxonid=", "", gsub("\\.json", "", basename(species_items)))),
+  href = gsub("\\./", "", species_items)
+)
+
+head(items_df)
+```
+
+We can now access each species catalogue:
+
+```{r}
+base_add <- "https://obis-maps.s3.us-east-1.amazonaws.com/sdm/stac/species-catalog/species-mpaeu/species-mpaeu-collection/"
+
+sp_item <- read_json(paste0(base_add, items_df$href[1]))
+```
+
+Which has a structure like that:
+
+```
+List of 9
+ $ type           : chr "Feature"
+ $ stac_version   : chr "1.1.0"
+ $ stac_extensions: list()
+ $ id             : chr "taxonid=1005391"
+ $ geometry       : NULL
+ $ properties     :List of 9
+  ..$ taxonid       : int 1005391
+  ..$ model         : chr "mpaeu"
+  ..$ scientificName: chr "Hexaplex kuesterianus"
+  ..$ group         : chr "others"
+  ..$ hab_depth     : chr "depthmean"
+  ..$ fit_bbox      :List of 4
+  .. ..$ : num 48.2
+  .. ..$ : num 17
+  .. ..$ : num 58.9
+  .. ..$ : num 29.2
+  ..$ fit_n_points  : int 17
+  ..$ methods       : chr "esm"
+  ..$ datetime      : chr "2025-01-01T00:00:00Z"
+ $ links          :List of 3
+  ..$ :List of 3
+  .. ..$ rel : chr "root"
+  .. ..$ href: chr "../../../../catalog.json"
+  .. ..$ type: chr "application/json"
+  ..$ :List of 3
+  .. ..$ rel : chr "collection"
+  .. ..$ href: chr "../collection.json"
+  .. ..$ type: chr "application/json"
+```
+
+In this case we are interested in the **properties**. The option `methods` contain the name of the methods that are available for this species.
+
+```{r}
+sp_item$properties$methods
+```
+
+We can then read this information for all species and select one method. Suppose you have a preference for methods in this order:
+
+Ensemble > Maxent > RandomForest > XGBoost > ESM
+
+We would then use this code:
+
+```{r}
+pref_order <- c("ensemble", "maxent", "rf", "xgboost", "esm")
+
+# We will do to only the first 10 to speed up here
+items_df <- items_df[1:10, ]
+
+items_df$scientificName <- NA
+items_df$model <- NA
+
+for (i in seq_len(nrow(items_df))) {
+  sp_item <- read_json(paste0(base_add, items_df$href[i]))
+  items_df$scientificName[i] <- sp_item$properties$scientificName
+  items_df$model[i] <- pref_order[which.min(match(sp_item$properties$methods, pref_order))]
+}
+
+head(items_df)
+```
+
+And then you can download/use only those files. For example:
+
+```{r, eval=FALSE} 
+library(glue)
+for (i in seq_len(nrow(items_df))) {
+  target_sp <- items_df$taxonid[i]
+  target_model <- items_df$model[i]
+  if (target_model == "rf") target_model <- "rf_ds_classification"
+  download.file(
+    glue("https://obis-maps.s3.amazonaws.com/sdm/species/taxonid={target_sp}/model=mpaeu/predictions/taxonid={target_sp}_model=mpaeu_method={target_model}_scen=current_cog.tif"),
+    glue("taxonid={target_sp}_sdm.tif")
+  )
+}
+```

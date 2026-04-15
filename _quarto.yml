@@ -26,8 +26,8 @@ book:
         - sdms.qmd
         - datadownload.qmd
         - datamining.qmd
-        - methods-testing.qmd
-        - results.qmd
+        #- methods-testing.qmd
+        #- results.qmd
         - datause.qmd
         - understanding.qmd
         - citations.qmd

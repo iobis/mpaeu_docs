@@ -60,3 +60,4 @@ file_explorer/
 files/results/
 
 _freeze/
+**/*.quarto_ipynb
