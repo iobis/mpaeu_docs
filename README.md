@@ -1,4 +1,4 @@
-# mpaeu_docs
+# Documentation for the OBIS Species Distribution Models (part of the MPA Europe project)
 
 Documentation for the OBIS contribution to [MPA Europe](https://mpa-europe.eu) (WP3): species distribution models (SDMs), diversity metrics and habitat maps for European marine species.
 
