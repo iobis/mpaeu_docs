@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>MPA Europe - OBIS contribution documentation</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -35,19 +38,18 @@ ul.task-list li input[type="checkbox"] {
 <link href="./studyarea.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4711a9c5645ea7bef0850688b668343a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-1578f313420fe876b0cee9aa9dbd3f15.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4711a9c5645ea7bef0850688b668343a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e150a58a3528d0c1571fd3e3068d00a4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-3a5f6c9a94d476332ed3f9de52bc107c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e150a58a3528d0c1571fd3e3068d00a4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-78e9d005941aa69c371cadd8b253acac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-2b7749bb8bfb0f3e799fe1211c7b30dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-78e9d005941aa69c371cadd8b253acac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d14e68c29675aa812761273b774675f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0e10ff4ce0c6233de030bf9d0d8f741d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d14e68c29675aa812761273b774675f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/bookup_fonts_embed-0.0/fonts-download.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -398,10 +400,24 @@ ul.task-list li input[type="checkbox"] {
 <section id="introduction-to-the-obis-contribution-to-mpa-europe" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction to the OBIS contribution to MPA Europe</h1>
 <p>The EU Horizon project “Marine Protected Areas Europe <a href="https://mpa-europe.eu">(MPA Europe, https://mpa-europe.eu)</a> aims to identify the locations within the European seas where MPAs would protect the highest number of species, habitats and ecosystems. This information is crucial to establish a functional MPA network and will help managers to propose further areas for conservation in the future. Innovative and bold, MPA Europe will also go one step further by considering the potential blue carbon benefits of the prioritization.</p>
-<p><a href="https://obis.org/">OBIS (Ocean Biodiversity Information System)</a> will contribute with three pieces of information which will be supplied to the area prioritization process: (i) species distribution models (SDMs) of at least half of the European marine species; (ii) diversity metrics for European seas; and (iii) habitat maps considering habitat forming species. In all cases, models will be created using OBIS data and will include predictions for future scenarios according to CMIP6.</p>
+<p><a href="https://obis.org/">OBIS (Ocean Biodiversity Information System)</a> contributed two pieces of information which will be supplied to the area prioritization process: (i) species distribution models (SDMs) of European marine species (12,039 species in version 2, concluded in August 2025); and (ii) habitat maps considering habitat forming species. In all cases, models were created using OBIS and GBIF data and include predictions for future scenarios according to CMIP6.</p>
 <section id="about-this-documentation" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="about-this-documentation"><span class="header-section-number">1.1</span> About this documentation</h2>
 <p>Transparency and reproducibility are an integral part of our contribution to the project. Thus, here you will find included all the details about the approaches and decisions we took in each part of the work. This is a complement to the available codes/data.</p>
+<p>The code is available in the <a href="https://github.com/iobis/mpaeu_sdm">mpaeu_sdm</a> repository. The maps can be explored through the <a href="https://iobis.github.io/mpaeu_map_plat_static">map platform</a> and downloaded as described in <a href="./datause.html">Accessing and using the distribution models</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The MPA Europe project concluded in 2025. The predictions reflect the data available at the time of the project and the modelling decisions made. Before using the maps, please read <a href="./understanding.html">How to interpret SDM outputs?</a></p>
+</div>
+</div>
 
 
 </section>

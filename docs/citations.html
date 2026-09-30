@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>8&nbsp; Citations – MPA Europe - OBIS contribution documentation</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -33,19 +36,18 @@ ul.task-list li input[type="checkbox"] {
 <link href="./understanding.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4711a9c5645ea7bef0850688b668343a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-1578f313420fe876b0cee9aa9dbd3f15.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4711a9c5645ea7bef0850688b668343a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e150a58a3528d0c1571fd3e3068d00a4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-3a5f6c9a94d476332ed3f9de52bc107c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e150a58a3528d0c1571fd3e3068d00a4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-78e9d005941aa69c371cadd8b253acac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-2b7749bb8bfb0f3e799fe1211c7b30dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-78e9d005941aa69c371cadd8b253acac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d14e68c29675aa812761273b774675f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0e10ff4ce0c6233de030bf9d0d8f741d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d14e68c29675aa812761273b774675f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/bookup_fonts_embed-0.0/fonts-download.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -373,10 +375,25 @@ ul.task-list li input[type="checkbox"] {
 
 
 <style>
-    table { 
-      border-collapse: collapse; 
+    #table-container {
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
       width: 100%;
+      min-width: 2000px;
       table-layout: fixed;
+    }
+    /* Column widths: Title, Source, Nodes, URL, Citation, DOI, License */
+    th:nth-child(1) { width: 340px; }
+    th:nth-child(2) { width: 80px; }
+    th:nth-child(3) { width: 120px; }
+    th:nth-child(4) { width: 420px; }
+    th:nth-child(5) { width: 520px; }
+    th:nth-child(6) { width: 260px; }
+    th:nth-child(7) { width: 260px; }
+    td {
+      overflow-wrap: anywhere;
     }
     th, td { 
       border: 1px solid #ccc; 
@@ -395,6 +412,9 @@ ul.task-list li input[type="checkbox"] {
     }
 </style>
 
+<p>This work was only possible thanks to the contribution of thousands of data providers to OBIS and GBIF.
+</p>
+
 <input type="text" id="searchInput" placeholder="Search table...">
 <div id="table-container">Loading data...</div>
 
@@ -412,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
         // Create table header
         const thead = document.createElement('thead');
         const headerRow = document.createElement('tr');
-        const headers = ['Title', 'Source', 'Nodes', 'URL'];
+        const headers = ['Title', 'Source', 'Nodes', 'URL', 'Citation', 'DOI', 'License'];
         headers.forEach(headerText => {
           const th = document.createElement('th');
           th.textContent = headerText;

@@ -2,8 +2,14 @@
 
 The EU Horizon project "Marine Protected Areas Europe [(MPA Europe, https://mpa-europe.eu)](https://mpa-europe.eu) aims to identify the locations within the European seas where MPAs would protect the highest number of species, habitats and ecosystems. This information is crucial to establish a functional MPA network and will help managers to propose further areas for conservation in the future. Innovative and bold, MPA Europe will also go one step further by considering the potential blue carbon benefits of the prioritization.
 
-[OBIS (Ocean Biodiversity Information System)](https://obis.org/) will contribute with three pieces of information which will be supplied to the area prioritization process: (i) species distribution models (SDMs) of at least half of the European marine species; (ii) diversity metrics for European seas; and (iii) habitat maps considering habitat forming species. In all cases, models will be created using OBIS data and will include predictions for future scenarios according to CMIP6.
+[OBIS (Ocean Biodiversity Information System)](https://obis.org/) contributed two pieces of information which will be supplied to the area prioritization process: (i) species distribution models (SDMs) of European marine species (12,039 species in version 2, concluded in August 2025); and (ii) habitat maps considering habitat forming species. In all cases, models were created using OBIS and GBIF data and include predictions for future scenarios according to CMIP6.
 
 ## About this documentation
 
 Transparency and reproducibility are an integral part of our contribution to the project. Thus, here you will find included all the details about the approaches and decisions we took in each part of the work. This is a complement to the available codes/data.
+
+The code is available in the [mpaeu_sdm](https://github.com/iobis/mpaeu_sdm) repository. The maps can be explored through the [map platform](https://iobis.github.io/mpaeu_map_plat_static) and downloaded as described in [Accessing and using the distribution models](datause.qmd).
+
+::: {.callout-note}
+The MPA Europe project concluded in 2025. The predictions reflect the data available at the time of the project and the modelling decisions made. Before using the maps, please read [How to interpret SDM outputs?](understanding.qmd)
+:::

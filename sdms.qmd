@@ -42,12 +42,13 @@ Of course, this is just a simplification. Many steps are necessary to obtain the
 2. Obtain occurrence data for the selected species
 3. Apply quality control procedures to the occurrence data
 4. Obtain environmental data
-5. Obtain ecological information (in our case, the habitat of species, benthic or pelagic)
+5. Obtain ecological information (in our case, the mode of life of species, e.g. benthic or pelagic)
 6. Fit models
 7. Evaluate models
 8. Produce map predictions
+9. Post-process the predictions (ensembles, uncertainty, thermal ranges, diversity metrics and habitat maps)
 
-Each of those are detailed on the next sections of this documentation. But first we detail the statistical framework adopted in the WP3.
+Steps 1 to 3 and 5 are detailed in the [next chapter](datadownload.qmd), and steps 4 and 6 to 9 are summarized at the end of this one. But first we detail the statistical framework adopted in the WP3.
 
 ## Framework used in this project
 
@@ -58,3 +59,31 @@ The interest in PPMs for SDMs was mainly driven by the challenge of modelling pr
 In the case of a PPM, and considering that the points does not present a strong bias, the resulting intensity of the point process can be used as a proxy to the suitability of the habitat (under the assumption that the species is more easily recorded where the habitat suitability is higher) [@renner2015]. One important point to note is that the results of any PPM model (and in general, any presence-only model) **should not be interpreted as probability of occurrence**, but instead as a relative occurrence rate (following [@merow2013]).
 
 PPMs are closely related to the widely used Maxent [@renner2013]. Indeed, even the pseudo-absence (or presence-background) modeling can approximate a Poisson point process model, under certain conditions [@renner2015; @warton2010].
+
+## Modelling workflow
+
+The workflow is operationalized in the [mpaeu_sdm](https://github.com/iobis/mpaeu_sdm) repository (`model_fit.R` and `functions/model_species.R`), while the underlying functions are provided by the [`obissdm` package](https://github.com/iobis/mpaeu_msdm). Below is a summary of what was done for each species.
+
+### Environmental data
+
+Environmental layers were obtained from [Bio-ORACLE](https://bio-oracle.org) for the baseline period (2000-2020) and for five future scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, SSP4-6.0 and SSP5-8.5), for two decades: 2040-2050 (`dec50`) and 2090-2100 (`dec100`). Both surface and mean-depth layers were used, according to the mode of life of the species. Additional layers (e.g. wave fetch, rugosity, distance to coast) were also included.
+
+Species were split in four groups (defined in `sdm_conf.yml`): seabirds, mammals, photosynthesizers (Chromista and Plantae) and others. Each group has its own set of candidate variables (e.g. sea temperature, salinity, sea ice concentration, bathymetry, wave stress, oxygen, nitrate and light, depending on the group), which was defined after testing for collinearity (`prepare_envdata.R`). For each group, alternative sets of variables (hypotheses, e.g. *basevars*, *coastal* and *complexity*) were compared using a Random Forest, and the best one was used for the species. Species restricted to shallow areas (up to 50 m) do not use bathymetry and distance to coast.
+
+### Fitting
+
+Models are fitted only for species with at least 30 occurrence points after quality control. The algorithms used were Maxent, Random Forest (down-sampled classification) and XGBoost, all under the point process framework described above. Quadrature points were sampled at 1% of the available environmental cells (with a minimum of 10,000). Before fitting, we tested for spatial autocorrelation in the records and, when present, thinned the points accordingly.
+
+For each species, the environmental data used for fitting was limited to the marine realms where the species occurs (plus adjacent ones) and to the depth range of the records (with a buffer of 50 m). Predictions are made for the whole extent of the environmental layers, and masks are provided so that users can restrict them (see [how to interpret SDM outputs](understanding.qmd)).
+
+### Evaluation
+
+Models were evaluated with cross-validation using spatial blocks. The main metric is the Continuous Boyce Index (CBI), as the data is presence-only. A model was considered of good quality (and thus retained) if its mean CBI was at least 0.3. Species for which no algorithm reached this threshold have no SDM available. Additional metrics (e.g. AUC and TSS) are provided, and where an independent dataset was available it was also used to evaluate the model. A post-evaluation was performed comparing the predictions with the thermal niche of the species, niche equivalency and hypervolume estimates.
+
+### Predictions and ensemble
+
+Good models were used to predict the current and future scenarios. When more than one algorithm produced a good model, an ensemble (median) with an associated uncertainty layer was also produced. Variable importance and partial response curves are saved with each model. Several thresholds for binarization are also stored. Details on the files produced are in the [data use chapter](datause.qmd).
+
+### Post-processing
+
+After the models were fitted, the following products were derived: bootstrapped predictions (to assess uncertainty; `post_bootstrap.R`), thermal range maps (`model_thermal.R`), and habitat maps of biogenic habitats generated by stacking the SDMs of habitat-forming species (`post_habitat.R`). Results were organized in a STAC catalogue (`post_generate_stac.R`).

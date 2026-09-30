@@ -3,7 +3,7 @@
 As part of the __Deliverable 1__ of the __WP3__, we looked for additional marine biodiversity data related to Europe that was available elsewhere but not on OBIS. This included data published in the literature, data repositories and other biodiversity databases like [GBIF](https://gbif.org). 
 
 ::: {.callout-note title="Continuous process"}
-This process is still ongoing and will keep until the end of the project.
+This process was carried out during the project (which concluded in 2025). The description below reflects the state of the work at the time it was documented.
 :::
 
 We used the following procedures for each source:

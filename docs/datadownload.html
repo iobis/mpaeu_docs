@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>4&nbsp; Obtaining occurrence data from OBIS and GBIF – MPA Europe - OBIS contribution documentation</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -34,19 +37,18 @@ ul.task-list li input[type="checkbox"] {
 <link href="./sdms.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4711a9c5645ea7bef0850688b668343a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-1578f313420fe876b0cee9aa9dbd3f15.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4711a9c5645ea7bef0850688b668343a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e150a58a3528d0c1571fd3e3068d00a4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-3a5f6c9a94d476332ed3f9de52bc107c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e150a58a3528d0c1571fd3e3068d00a4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-78e9d005941aa69c371cadd8b253acac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-2b7749bb8bfb0f3e799fe1211c7b30dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-78e9d005941aa69c371cadd8b253acac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d14e68c29675aa812761273b774675f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0e10ff4ce0c6233de030bf9d0d8f741d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d14e68c29675aa812761273b774675f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/bookup_fonts_embed-0.0/fonts-download.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -324,32 +326,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./methods-testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Testing SDM methods</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./results.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Main results</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./datause.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Accessing and using the distribution models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Accessing and using the distribution models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./understanding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">How to interpret SDM outputs?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">How to interpret SDM outputs?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./citations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Citations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Citations</span></span></a>
   </div>
 </li>
       </ul>
@@ -366,12 +356,15 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#selecting-species-for-modeling" id="toc-selecting-species-for-modeling" class="nav-link active" data-scroll-target="#selecting-species-for-modeling"><span class="header-section-number">4.1</span> Selecting species for modeling</a></li>
   <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">4.2</span> Downloading data</a></li>
-  <li><a href="#quality-control-steps-under-development" id="toc-quality-control-steps-under-development" class="nav-link" data-scroll-target="#quality-control-steps-under-development"><span class="header-section-number">4.3</span> Quality control steps (under development)</a>
+  <li><a href="#quality-control-steps" id="toc-quality-control-steps" class="nav-link" data-scroll-target="#quality-control-steps"><span class="header-section-number">4.3</span> Quality control steps</a>
   <ul class="collapse">
-  <li><a href="#duplicate-records-removal" id="toc-duplicate-records-removal" class="nav-link" data-scroll-target="#duplicate-records-removal"><span class="header-section-number">4.3.1</span> Duplicate records removal</a></li>
-  <li><a href="#remove-records-on-land" id="toc-remove-records-on-land" class="nav-link" data-scroll-target="#remove-records-on-land"><span class="header-section-number">4.3.2</span> Remove records on land</a></li>
-  <li><a href="#geographical-and-environmental-outliers-flagging" id="toc-geographical-and-environmental-outliers-flagging" class="nav-link" data-scroll-target="#geographical-and-environmental-outliers-flagging"><span class="header-section-number">4.3.3</span> Geographical and environmental outliers (flagging)</a></li>
+  <li><a href="#filtering-by-year-and-type-of-record" id="toc-filtering-by-year-and-type-of-record" class="nav-link" data-scroll-target="#filtering-by-year-and-type-of-record"><span class="header-section-number">4.3.1</span> Filtering by year and type of record</a></li>
+  <li><a href="#duplicate-records-removal" id="toc-duplicate-records-removal" class="nav-link" data-scroll-target="#duplicate-records-removal"><span class="header-section-number">4.3.2</span> Duplicate records removal</a></li>
+  <li><a href="#records-on-land" id="toc-records-on-land" class="nav-link" data-scroll-target="#records-on-land"><span class="header-section-number">4.3.3</span> Records on land</a></li>
+  <li><a href="#geographical-and-environmental-outliers" id="toc-geographical-and-environmental-outliers" class="nav-link" data-scroll-target="#geographical-and-environmental-outliers"><span class="header-section-number">4.3.4</span> Geographical and environmental outliers</a></li>
+  <li><a href="#separation-of-an-independent-evaluation-dataset" id="toc-separation-of-an-independent-evaluation-dataset" class="nav-link" data-scroll-target="#separation-of-an-independent-evaluation-dataset"><span class="header-section-number">4.3.5</span> Separation of an independent evaluation dataset</a></li>
   </ul></li>
+  <li><a href="#habitat-information" id="toc-habitat-information" class="nav-link" data-scroll-target="#habitat-information"><span class="header-section-number">4.4</span> Habitat information</a></li>
   </ul>
 </nav>
     </div>
@@ -398,28 +391,59 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The code for all steps below is in the <a href="https://github.com/iobis/mpaeu_sdm">mpaeu_sdm</a> repository (scripts <code>p2_download_data.R</code> and <code>p3_prepare_data.R</code> and the scripts they call). Core functions are in the <a href="https://github.com/iobis/mpaeu_msdm"><code>obissdm</code> package</a>.</p>
+</div>
+</div>
 <section id="selecting-species-for-modeling" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="selecting-species-for-modeling"><span class="header-section-number">4.1</span> Selecting species for modeling</h2>
-<p>The first step was to establish the species occurring on the study area. We used the <code>robis</code> function <code>dataset</code> to retrieve all species occurring on the study area. Further on we filtered the dataset to:</p>
+<p>The first step was to establish the species occurring in the study area. We used the OBIS gridded species product (<a href="https://github.com/iobis/speciesgrids">speciesgrids</a>), which lists the species (from both OBIS and GBIF) recorded in each H3 cell. We converted the study area to H3 cells (resolution 7) and retrieved all species recorded in them (<code>get_species_list_grid.R</code>).</p>
+<p>We then obtained the taxonomic information from WoRMS (using the <code>worrms</code> package) and filtered the list to:</p>
 <ul>
 <li>retain only taxa at the species level</li>
-<li>retain only taxa with accepted taxonomic status</li>
-<li>remove Archaea, Bacteria, Fungi and Protozoa taxa</li>
-<li>include only marine or brackish species</li>
+<li>remove Archaea, Bacteria, Fungi, Protozoa and Viruses</li>
+<li>remove taxa without habitat information (marine, brackish, terrestrial or freshwater) and freshwater-only species</li>
+<li>retain a single entry per AphiaID</li>
 </ul>
-<p>From that we obtained a final list of <span style="color: #006fdf">22159</span> species.</p>
-<p>In the case of GBIF, we first downloaded all data occurring within our study area. Then, using the <code>worrms</code> package we verified which of those species were marine. Then we performed the same filters used with the OBIS data. This resulted in <span style="color: #006fdf">22782</span> unique species.</p>
+<p>For each species we kept track of whether it had records in OBIS, in GBIF or in both, and we also obtained the GBIF taxon key (using <code>rgbif</code>) to enable retrieving the GBIF data.</p>
 </section>
 <section id="downloading-data" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">4.2</span> Downloading data</h2>
-<p>OBIS data was obtained from the full export available at <a href="https://obis.org/data/access/">https://obis.org/data/access/</a>. However, code for downloading the data through the <code>robis</code> package is available. This is done through the <code>obissdm</code> package (which is being developed to support this project)</p>
-<p>GBIF data was downloaded using the <code>rgbif</code> package, via the <code>obissdm</code> package.</p>
+<p>OBIS data was obtained from the full export available at <a href="https://obis.org/data/access/">https://obis.org/data/access/</a>.</p>
+<p>GBIF data was obtained for the species in the list from the GBIF monthly export on AWS, using the DuckDB backend through the <code>obissdm</code> package (<code>occurrence_gbif_db</code>). This returns only the subset of interest, instead of the full GBIF export.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The OBIS full export path used in the code was deprecated in January 2026. New data access options are available (see <a href="https://github.com/iobis/obis-open-data">obis-open-data</a>), so the download scripts may need adaptation if you want to replicate the work. Also note that new data is continuously added to OBIS and GBIF, so results will differ from those of the project.</p>
+</div>
+</div>
 </section>
-<section id="quality-control-steps-under-development" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="quality-control-steps-under-development"><span class="header-section-number">4.3</span> Quality control steps (under development)</h2>
-<section id="duplicate-records-removal" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="duplicate-records-removal"><span class="header-section-number">4.3.1</span> Duplicate records removal</h3>
-<p>We removed duplicated data points using <a href="https://www.ibm.com/docs/en/streams/4.3.0?topic=334-geohashes">GeoHash</a> with a precision of 6 (width ≤ 1.22km X height 0.61km), and the year. Thus, for each combination of GeoHash cell and year, only one record was kept. That part is implemented in the <code>mp_dup_check</code> function, of the project package <code>msdm</code>.</p>
+<section id="quality-control-steps" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="quality-control-steps"><span class="header-section-number">4.3</span> Quality control steps</h2>
+<p>Quality control is done by the <code>mp_standardize</code> function of the <code>obissdm</code> package (called by <code>prepare_dataqc.R</code>), applied species by species. The default values of the function are the ones used in the project. The steps are:</p>
+<section id="filtering-by-year-and-type-of-record" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="filtering-by-year-and-type-of-record"><span class="header-section-number">4.3.1</span> Filtering by year and type of record</h3>
+<p>Records before 1950 were removed. Records of fossil and living specimens (i.e.&nbsp;<code>basisOfRecord</code> equal to <code>FOSSIL_SPECIMEN</code>/<code>FossilSpecimen</code> or <code>LIVING_SPECIMEN</code>/<code>LivingSpecimen</code>) were also excluded.</p>
+</section>
+<section id="duplicate-records-removal" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="duplicate-records-removal"><span class="header-section-number">4.3.2</span> Duplicate records removal</h3>
+<p>We removed duplicated data points using <a href="https://www.ibm.com/docs/en/streams/4.3.0?topic=334-geohashes">GeoHash</a> with a precision of 6, and the year. Thus, for each combination of GeoHash cell and year, only one record was kept. When both OBIS and GBIF data were available for a species, they were combined before the duplicate check. That part is implemented in the <code>outqc_dup_check</code> function of the <code>obissdm</code> package.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -434,30 +458,30 @@ Note
 </div>
 </div>
 </section>
-<section id="remove-records-on-land" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="remove-records-on-land"><span class="header-section-number">4.3.2</span> Remove records on land</h3>
-<p>Records on land were removed based on <em>openmap</em>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We further filtered the records for the SDMs by keeping only those overlapping the environmental variable layers (which present some differences to the land layer used before).</p>
-</div>
-</div>
+<section id="records-on-land" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="records-on-land"><span class="header-section-number">4.3.3</span> Records on land</h3>
+<p>Records on land were identified using the environmental layers as reference (cells with no marine data). Instead of discarding them immediately, records on land were moved to the closest valid cell when this was within one adjacent cell (i.e.&nbsp;very close to the coast); records further than that were discarded.</p>
 </section>
-<section id="geographical-and-environmental-outliers-flagging" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="geographical-and-environmental-outliers-flagging"><span class="header-section-number">4.3.3</span> Geographical and environmental outliers (flagging)</h3>
-<p>For the assessment of geographical outliers we implemented an innovative method that considers the existence of barriers when calculating the distance between points. Usually, geographical outliers are calculated based on the cartesian distance between the points. However, for marine species (indeed, also for terrestrial ones) the barriers are important because it constrains dispersal. Consider for example one species on the two sides of the Panama strait (Atlantic and Pacific). A straight line between the two points would be a short distance. However, if we take in account the barrier, then the animal (or its larvae) would need to travel a much longer distance to reach the other side of the strait.</p>
-<p>In both the geographical and the environmental (Sea Surface Temperature, bathymetry and salinity) outlier assessment, we used a threshold of 3 times the inter quantile range to identify extreme points, but we just flagged the most extreme outlier until a limit of 1% of the points (i.e.&nbsp;if there were more points above the threshold, just the most extreme ones were flagged).</p>
+<section id="geographical-and-environmental-outliers" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="geographical-and-environmental-outliers"><span class="header-section-number">4.3.4</span> Geographical and environmental outliers</h3>
+<p>For the assessment of geographical outliers we implemented a method that considers the existence of barriers when calculating the distance between points. Usually, geographical outliers are calculated based on the cartesian distance between the points. However, for marine species (indeed, also for terrestrial ones) the barriers are important because they constrain dispersal. Consider for example one species on the two sides of the Panama strait (Atlantic and Pacific). A straight line between the two points would be a short distance. However, if we take in account the barrier, then the animal (or its larvae) would need to travel a much longer distance to reach the other side of the strait. The distances with barriers are pre-calculated on a grid (<code>get_distances_grid.R</code>).</p>
+<p>Outliers were detected by three methods: distance-based IQR (3 times the inter-quartile range), distance-based MAD, and isolation forest. For the environmental assessment, the same approach was applied to bathymetry, temperature, salinity and distance to shore. In the final data used for modelling, we removed:</p>
+<ul>
+<li>geographical outliers flagged by the <strong>isolation forest</strong> method</li>
+<li>environmental outliers flagged by the <strong>MAD</strong> method on <strong>bathymetry</strong></li>
+</ul>
+<p>In all cases we only removed the most extreme outliers, up to a limit of 1% of the points. At least 5 records were necessary to apply the outlier procedures.</p>
+</section>
+<section id="separation-of-an-independent-evaluation-dataset" class="level3" data-number="4.3.5">
+<h3 data-number="4.3.5" class="anchored" data-anchor-id="separation-of-an-independent-evaluation-dataset"><span class="header-section-number">4.3.5</span> Separation of an independent evaluation dataset</h3>
+<p>When possible, one dataset was set aside to be used as independent evaluation data. To do that, points were reduced to one per cell for each dataset, and the spread of the points in geographical space was measured. From the 50% of datasets with the highest spread, the one with the lowest impact on the total number of points was selected (with a limit of 10% of the total number of points). Points from this dataset were marked as evaluation points, and the remaining as fitting points.</p>
+</section>
+</section>
+<section id="habitat-information" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="habitat-information"><span class="header-section-number">4.4</span> Habitat information</h2>
+<p>We obtained the mode of life of each species (e.g.&nbsp;benthic, demersal, pelagic) from WoRMS, SeaLifeBase and FishBase (<code>get_habitat_information.R</code>). When information was not available for a species, we tried to infer it from the other species of the same genus and, if that was not possible, of the same family, whenever all species with known information in that group shared the same mode of life. This information is used to define which environmental layers to use: for benthic, demersal and bottom-living species we use the layers of the mean depth, and for the remaining species the surface layers. When no information was found, surface layers were used.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

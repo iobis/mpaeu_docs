@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>3&nbsp; Species distribution models – MPA Europe - OBIS contribution documentation</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -24,7 +27,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -54,19 +56,18 @@ div.csl-indent {
 <link href="./studyarea.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4711a9c5645ea7bef0850688b668343a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-1578f313420fe876b0cee9aa9dbd3f15.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4711a9c5645ea7bef0850688b668343a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e150a58a3528d0c1571fd3e3068d00a4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-3a5f6c9a94d476332ed3f9de52bc107c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e150a58a3528d0c1571fd3e3068d00a4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-78e9d005941aa69c371cadd8b253acac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-2b7749bb8bfb0f3e799fe1211c7b30dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-78e9d005941aa69c371cadd8b253acac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d14e68c29675aa812761273b774675f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0e10ff4ce0c6233de030bf9d0d8f741d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d14e68c29675aa812761273b774675f3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/bookup_fonts_embed-0.0/fonts-download.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -347,32 +348,20 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./methods-testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Testing SDM methods</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./results.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Main results</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./datause.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Accessing and using the distribution models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Accessing and using the distribution models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./understanding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">How to interpret SDM outputs?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">How to interpret SDM outputs?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./citations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Citations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Citations</span></span></a>
   </div>
 </li>
       </ul>
@@ -389,6 +378,14 @@ div.csl-indent {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
   <li><a href="#framework-used-in-this-project" id="toc-framework-used-in-this-project" class="nav-link" data-scroll-target="#framework-used-in-this-project"><span class="header-section-number">3.2</span> Framework used in this project</a></li>
+  <li><a href="#modelling-workflow" id="toc-modelling-workflow" class="nav-link" data-scroll-target="#modelling-workflow"><span class="header-section-number">3.3</span> Modelling workflow</a>
+  <ul class="collapse">
+  <li><a href="#environmental-data" id="toc-environmental-data" class="nav-link" data-scroll-target="#environmental-data"><span class="header-section-number">3.3.1</span> Environmental data</a></li>
+  <li><a href="#fitting" id="toc-fitting" class="nav-link" data-scroll-target="#fitting"><span class="header-section-number">3.3.2</span> Fitting</a></li>
+  <li><a href="#evaluation" id="toc-evaluation" class="nav-link" data-scroll-target="#evaluation"><span class="header-section-number">3.3.3</span> Evaluation</a></li>
+  <li><a href="#predictions-and-ensemble" id="toc-predictions-and-ensemble" class="nav-link" data-scroll-target="#predictions-and-ensemble"><span class="header-section-number">3.3.4</span> Predictions and ensemble</a></li>
+  <li><a href="#post-processing" id="toc-post-processing" class="nav-link" data-scroll-target="#post-processing"><span class="header-section-number">3.3.5</span> Post-processing</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -458,22 +455,48 @@ flowchart LR
 <li>Obtain occurrence data for the selected species</li>
 <li>Apply quality control procedures to the occurrence data</li>
 <li>Obtain environmental data</li>
-<li>Obtain ecological information (in our case, the habitat of species, benthic or pelagic)</li>
+<li>Obtain ecological information (in our case, the mode of life of species, e.g.&nbsp;benthic or pelagic)</li>
 <li>Fit models</li>
 <li>Evaluate models</li>
 <li>Produce map predictions</li>
+<li>Post-process the predictions (ensembles, uncertainty, thermal ranges, diversity metrics and habitat maps)</li>
 </ol>
-<p>Each of those are detailed on the next sections of this documentation. But first we detail the statistical framework adopted in the WP3.</p>
+<p>Steps 1 to 3 and 5 are detailed in the <a href="./datadownload.html">next chapter</a>, and steps 4 and 6 to 9 are summarized at the end of this one. But first we detail the statistical framework adopted in the WP3.</p>
 </section>
 <section id="framework-used-in-this-project" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="framework-used-in-this-project"><span class="header-section-number">3.2</span> Framework used in this project</h2>
-<p>All modeling was done considering a point process framework. Spatial Point Process Models (PPMs) are used to model any type of events that arise as points in space <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. Those points have random number and location, but are related to an underlying process. It was only recently that PPMs were more intensively applied to SDMs <span class="citation" data-cites="renner2015 warton2010">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>; <a href="#ref-warton2010" role="doc-biblioref">Warton and Shepherd 2010</a>)</span>, although widely used in spatial analysis (examples of applications range from disease mapping to detection of landslides; e.g. <span class="citation" data-cites="lombardo2018">Lombardo, Opitz, and Huser (<a href="#ref-lombardo2018" role="doc-biblioref">2018</a>)</span>).</p>
+<p>All modeling was done considering a point process framework. Spatial Point Process Models (PPMs) are used to model any type of events that arise as points in space <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. Those points have random number and location, but are related to an underlying process. It was only recently that PPMs were more intensively applied to SDMs <span class="citation" data-cites="renner2015 warton2010">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>; <a href="#ref-warton2010" role="doc-biblioref">Warton and Shepherd 2010</a>)</span>, although widely used in spatial analysis (examples of applications range from disease mapping to detection of landslides; e.g. <span class="citation" data-cites="lombardo2018">Lombardo et al. (<a href="#ref-lombardo2018" role="doc-biblioref">2018</a>)</span>).</p>
 <p>The interest in PPMs for SDMs was mainly driven by the challenge of modelling presence-only data, when all the information available is the geographical locations where the species was recorded <span class="citation" data-cites="fithian2013">(<a href="#ref-fithian2013" role="doc-biblioref">Fithian and Hastie 2013</a>)</span>. Usually, one would sample pseudo-absences (points that should reflect places where the species is absent), but the number and place of pseudo-absences can have a great influence on models <span class="citation" data-cites="barbet-massin2012">(<a href="#ref-barbet-massin2012" role="doc-biblioref">Barbet-Massin et al. 2012</a>)</span>. Also there is no clear justification to pseudo-absences: the location was not sampled and thus it is impossible to really know if the species is absent. Instead, on a PPM framework, quadrature (or background) points are used only as a device to describe the available environmental conditions <span class="citation" data-cites="fithian2013">(<a href="#ref-fithian2013" role="doc-biblioref">Fithian and Hastie 2013</a>)</span>. Points are sampled at random and the number of points can be chosen based on the accuracy of the likelihood estimate <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. In theory, all the points of the environment could be used, but this would increase computational time.</p>
-<p>In the case of a PPM, and considering that the points does not present a strong bias, the resulting intensity of the point process can be used as a proxy to the suitability of the habitat (under the assumption that the species is more easily recorded where the habitat suitability is higher) <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. One important point to note is that the results of any PPM model (and in general, any presence-only model) <strong>should not be interpreted as probability of occurrence</strong>, but instead as a relative occurrence rate (following <span class="citation" data-cites="merow2013">(<a href="#ref-merow2013" role="doc-biblioref">Merow, Smith, and Silander 2013</a>)</span>).</p>
+<p>In the case of a PPM, and considering that the points does not present a strong bias, the resulting intensity of the point process can be used as a proxy to the suitability of the habitat (under the assumption that the species is more easily recorded where the habitat suitability is higher) <span class="citation" data-cites="renner2015">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>)</span>. One important point to note is that the results of any PPM model (and in general, any presence-only model) <strong>should not be interpreted as probability of occurrence</strong>, but instead as a relative occurrence rate (following <span class="citation" data-cites="merow2013">(<a href="#ref-merow2013" role="doc-biblioref">Merow et al. 2013</a>)</span>).</p>
 <p>PPMs are closely related to the widely used Maxent <span class="citation" data-cites="renner2013">(<a href="#ref-renner2013" role="doc-biblioref">Renner and Warton 2013</a>)</span>. Indeed, even the pseudo-absence (or presence-background) modeling can approximate a Poisson point process model, under certain conditions <span class="citation" data-cites="renner2015 warton2010">(<a href="#ref-renner2015" role="doc-biblioref">Renner et al. 2015</a>; <a href="#ref-warton2010" role="doc-biblioref">Warton and Shepherd 2010</a>)</span>.</p>
+</section>
+<section id="modelling-workflow" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="modelling-workflow"><span class="header-section-number">3.3</span> Modelling workflow</h2>
+<p>The workflow is operationalized in the <a href="https://github.com/iobis/mpaeu_sdm">mpaeu_sdm</a> repository (<code>model_fit.R</code> and <code>functions/model_species.R</code>), while the underlying functions are provided by the <a href="https://github.com/iobis/mpaeu_msdm"><code>obissdm</code> package</a>. Below is a summary of what was done for each species.</p>
+<section id="environmental-data" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="environmental-data"><span class="header-section-number">3.3.1</span> Environmental data</h3>
+<p>Environmental layers were obtained from <a href="https://bio-oracle.org">Bio-ORACLE</a> for the baseline period (2000-2020) and for five future scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, SSP4-6.0 and SSP5-8.5), for two decades: 2040-2050 (<code>dec50</code>) and 2090-2100 (<code>dec100</code>). Both surface and mean-depth layers were used, according to the mode of life of the species. Additional layers (e.g.&nbsp;wave fetch, rugosity, distance to coast) were also included.</p>
+<p>Species were split in four groups (defined in <code>sdm_conf.yml</code>): seabirds, mammals, photosynthesizers (Chromista and Plantae) and others. Each group has its own set of candidate variables (e.g.&nbsp;sea temperature, salinity, sea ice concentration, bathymetry, wave stress, oxygen, nitrate and light, depending on the group), which was defined after testing for collinearity (<code>prepare_envdata.R</code>). For each group, alternative sets of variables (hypotheses, e.g.&nbsp;<em>basevars</em>, <em>coastal</em> and <em>complexity</em>) were compared using a Random Forest, and the best one was used for the species. Species restricted to shallow areas (up to 50 m) do not use bathymetry and distance to coast.</p>
+</section>
+<section id="fitting" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="fitting"><span class="header-section-number">3.3.2</span> Fitting</h3>
+<p>Models are fitted only for species with at least 30 occurrence points after quality control. The algorithms used were Maxent, Random Forest (down-sampled classification) and XGBoost, all under the point process framework described above. Quadrature points were sampled at 1% of the available environmental cells (with a minimum of 10,000). Before fitting, we tested for spatial autocorrelation in the records and, when present, thinned the points accordingly.</p>
+<p>For each species, the environmental data used for fitting was limited to the marine realms where the species occurs (plus adjacent ones) and to the depth range of the records (with a buffer of 50 m). Predictions are made for the whole extent of the environmental layers, and masks are provided so that users can restrict them (see <a href="./understanding.html">how to interpret SDM outputs</a>).</p>
+</section>
+<section id="evaluation" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="evaluation"><span class="header-section-number">3.3.3</span> Evaluation</h3>
+<p>Models were evaluated with cross-validation using spatial blocks. The main metric is the Continuous Boyce Index (CBI), as the data is presence-only. A model was considered of good quality (and thus retained) if its mean CBI was at least 0.3. Species for which no algorithm reached this threshold have no SDM available. Additional metrics (e.g.&nbsp;AUC and TSS) are provided, and where an independent dataset was available it was also used to evaluate the model. A post-evaluation was performed comparing the predictions with the thermal niche of the species, niche equivalency and hypervolume estimates.</p>
+</section>
+<section id="predictions-and-ensemble" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="predictions-and-ensemble"><span class="header-section-number">3.3.4</span> Predictions and ensemble</h3>
+<p>Good models were used to predict the current and future scenarios. When more than one algorithm produced a good model, an ensemble (median) with an associated uncertainty layer was also produced. Variable importance and partial response curves are saved with each model. Several thresholds for binarization are also stored. Details on the files produced are in the <a href="./datause.html">data use chapter</a>.</p>
+</section>
+<section id="post-processing" class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="post-processing"><span class="header-section-number">3.3.5</span> Post-processing</h3>
+<p>After the models were fitted, the following products were derived: bootstrapped predictions (to assess uncertainty; <code>post_bootstrap.R</code>), thermal range maps (<code>model_thermal.R</code>), and habitat maps of biogenic habitats generated by stacking the SDMs of habitat-forming species (<code>post_habitat.R</code>). Results were organized in a STAC catalogue (<code>post_generate_stac.R</code>).</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-barbet-massin2012" class="csl-entry" role="listitem">
 Barbet-Massin, Morgane, Frédéric Jiguet, Cécile Hélène Albert, and Wilfried Thuiller. 2012. <span>“Selecting Pseudo-Absences for Species Distribution Models: How, Where and How Many?: <span><em>How to Use Pseudo-Absences in Niche Modelling?</em></span>”</span> <em>Methods in Ecology and Evolution</em> 3 (2): 327–38. <a href="https://doi.org/10.1111/j.2041-210X.2011.00172.x">https://doi.org/10.1111/j.2041-210X.2011.00172.x</a>.
 </div>
@@ -490,10 +513,10 @@ Lombardo, Luigi, Thomas Opitz, and Raphaël Huser. 2018. <span>“Point Process-
 Merow, Cory, Matthew J. Smith, and John A. Silander. 2013. <span>“A Practical Guide to MaxEnt for Modeling Species’ Distributions: What It Does, and Why Inputs and Settings Matter.”</span> <em>Ecography</em> 36 (10): 1058–69. <a href="https://doi.org/10.1111/j.1600-0587.2013.07872.x">https://doi.org/10.1111/j.1600-0587.2013.07872.x</a>.
 </div>
 <div id="ref-peterson_ecological_2011" class="csl-entry" role="listitem">
-Peterson, A. Townsend, Jorge Soberón, Richard G. Pearson, Robert P. Anderson, Enrique Martínez-Meyer, Miguel Nakamura, and Miguel B. Araújo. 2011. <em>Ecological <span>Niches</span> and <span>Geographic</span> <span>Distributions</span> (<span>MPB</span>-49)</em>. 1st ed. Princeton University Press. <a href="https://doi.org/10.23943/princeton/9780691136868.001.0001">https://doi.org/10.23943/princeton/9780691136868.001.0001</a>.
+Peterson, A. Townsend, Jorge Soberón, Richard G. Pearson, et al. 2011. <em>Ecological <span>Niches</span> and <span>Geographic</span> <span>Distributions</span> (<span>MPB</span>-49)</em>. 1st ed. Princeton University Press. <a href="https://doi.org/10.23943/princeton/9780691136868.001.0001">https://doi.org/10.23943/princeton/9780691136868.001.0001</a>.
 </div>
 <div id="ref-renner2015" class="csl-entry" role="listitem">
-Renner, Ian W., Jane Elith, Adrian Baddeley, William Fithian, Trevor Hastie, Steven J. Phillips, Gordana Popovic, and David I. Warton. 2015. <span>“Point Process Models for Presence<span>-</span>Only Analysis.”</span> Edited by Robert B. O’Hara. <em>Methods in Ecology and Evolution</em> 6 (4): 366–79. <a href="https://doi.org/10.1111/2041-210X.12352">https://doi.org/10.1111/2041-210X.12352</a>.
+Renner, Ian W., Jane Elith, Adrian Baddeley, et al. 2015. <span>“Point Process Models for Presence<span>-</span>Only Analysis.”</span> <em>Methods in Ecology and Evolution</em> 6 (4): 366–79. <a href="https://doi.org/10.1111/2041-210X.12352">https://doi.org/10.1111/2041-210X.12352</a>.
 </div>
 <div id="ref-renner2013" class="csl-entry" role="listitem">
 Renner, Ian W., and David I. Warton. 2013. <span>“Equivalence of MAXENT and Poisson Point Process Models for Species Distribution Modeling in Ecology.”</span> <em>Biometrics</em> 69 (1): 274–81. <a href="https://doi.org/10.1111/j.1541-0420.2012.01824.x">https://doi.org/10.1111/j.1541-0420.2012.01824.x</a>.
@@ -502,6 +525,7 @@ Renner, Ian W., and David I. Warton. 2013. <span>“Equivalence of MAXENT and Po
 Warton, David I., and Leah C. Shepherd. 2010. <span>“Poisson Point Process Models Solve the <span>“</span>Pseudo-Absence Problem<span>”</span> for Presence-Only Data in Ecology.”</span> <em>The Annals of Applied Statistics</em> 4 (3). <a href="https://doi.org/10.1214/10-AOAS331">https://doi.org/10.1214/10-AOAS331</a>.
 </div>
 </div>
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>

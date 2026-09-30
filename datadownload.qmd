@@ -1,44 +1,67 @@
 # Obtaining occurrence data from OBIS and GBIF
 
+::: {.callout-note}
+The code for all steps below is in the [mpaeu_sdm](https://github.com/iobis/mpaeu_sdm) repository (scripts `p2_download_data.R` and `p3_prepare_data.R` and the scripts they call). Core functions are in the [`obissdm` package](https://github.com/iobis/mpaeu_msdm).
+:::
+
 ## Selecting species for modeling
 
-The first step was to establish the species occurring on the study area. We used the `robis` function `dataset` to retrieve all species occurring on the study area. Further on we filtered the dataset to:
+The first step was to establish the species occurring in the study area. We used the OBIS gridded species product ([speciesgrids](https://github.com/iobis/speciesgrids)), which lists the species (from both OBIS and GBIF) recorded in each H3 cell. We converted the study area to H3 cells (resolution 7) and retrieved all species recorded in them (`get_species_list_grid.R`).
+
+We then obtained the taxonomic information from WoRMS (using the `worrms` package) and filtered the list to:
 
 - retain only taxa at the species level
-- retain only taxa with accepted taxonomic status
-- remove Archaea, Bacteria, Fungi and Protozoa taxa
-- include only marine or brackish species
+- remove Archaea, Bacteria, Fungi, Protozoa and Viruses
+- remove taxa without habitat information (marine, brackish, terrestrial or freshwater) and freshwater-only species
+- retain a single entry per AphiaID
 
-From that we obtained a final list of [22159]{style="color: #006fdf"} species.
-
-In the case of GBIF, we first downloaded all data occurring within our study area. Then, using the `worrms` package we verified which of those species were marine. Then we performed the same filters used with the OBIS data. This resulted in [22782]{style="color: #006fdf"} unique species.
+For each species we kept track of whether it had records in OBIS, in GBIF or in both, and we also obtained the GBIF taxon key (using `rgbif`) to enable retrieving the GBIF data.
 
 ## Downloading data
 
-OBIS data was obtained from the full export available at [https://obis.org/data/access/](https://obis.org/data/access/). However, code for downloading the data through the `robis` package is available. This is done through the `obissdm` package (which is being developed to support this project)
+OBIS data was obtained from the full export available at [https://obis.org/data/access/](https://obis.org/data/access/).
 
-GBIF data was downloaded using the `rgbif` package, via the `obissdm` package.
+GBIF data was obtained for the species in the list from the GBIF monthly export on AWS, using the DuckDB backend through the `obissdm` package (`occurrence_gbif_db`). This returns only the subset of interest, instead of the full GBIF export.
 
-## Quality control steps (under development)
+::: {.callout-warning}
+The OBIS full export path used in the code was deprecated in January 2026. New data access options are available (see [obis-open-data](https://github.com/iobis/obis-open-data)), so the download scripts may need adaptation if you want to replicate the work. Also note that new data is continuously added to OBIS and GBIF, so results will differ from those of the project.
+:::
+
+## Quality control steps
+
+Quality control is done by the `mp_standardize` function of the `obissdm` package (called by `prepare_dataqc.R`), applied species by species. The default values of the function are the ones used in the project. The steps are:
+
+### Filtering by year and type of record
+
+Records before 1950 were removed. Records of fossil and living specimens (i.e. `basisOfRecord` equal to `FOSSIL_SPECIMEN`/`FossilSpecimen` or `LIVING_SPECIMEN`/`LivingSpecimen`) were also excluded.
 
 ### Duplicate records removal
 
-We removed duplicated data points using [GeoHash](https://www.ibm.com/docs/en/streams/4.3.0?topic=334-geohashes) with a precision of 6 (width ≤ 1.22km X height 0.61km), and the year. Thus, for each combination of GeoHash cell and year, only one record was kept. That part is implemented in the `mp_dup_check` function, of the project package `msdm`.
+We removed duplicated data points using [GeoHash](https://www.ibm.com/docs/en/streams/4.3.0?topic=334-geohashes) with a precision of 6, and the year. Thus, for each combination of GeoHash cell and year, only one record was kept. When both OBIS and GBIF data were available for a species, they were combined before the duplicate check. That part is implemented in the `outqc_dup_check` function of the `obissdm` package.
 
 ::: {.callout-note}
 We note that, specifically for the SDMs, before modeling we do an additional duplicate removal in order to keep only a single record per cell.
 :::
 
-### Remove records on land
+### Records on land
 
-Records on land were removed based on _openmap_.
+Records on land were identified using the environmental layers as reference (cells with no marine data). Instead of discarding them immediately, records on land were moved to the closest valid cell when this was within one adjacent cell (i.e. very close to the coast); records further than that were discarded.
 
-::: {.callout-note}
-We further filtered the records for the SDMs by keeping only those overlapping the environmental variable layers (which present some differences to the land layer used before).
-:::
+### Geographical and environmental outliers
 
-### Geographical and environmental outliers (flagging)
+For the assessment of geographical outliers we implemented a method that considers the existence of barriers when calculating the distance between points. Usually, geographical outliers are calculated based on the cartesian distance between the points. However, for marine species (indeed, also for terrestrial ones) the barriers are important because they constrain dispersal. Consider for example one species on the two sides of the Panama strait (Atlantic and Pacific). A straight line between the two points would be a short distance. However, if we take in account the barrier, then the animal (or its larvae) would need to travel a much longer distance to reach the other side of the strait. The distances with barriers are pre-calculated on a grid (`get_distances_grid.R`).
 
-For the assessment of geographical outliers we implemented an innovative method that considers the existence of barriers when calculating the distance between points. Usually, geographical outliers are calculated based on the cartesian distance between the points. However, for marine species (indeed, also for terrestrial ones) the barriers are important because it constrains dispersal. Consider for example one species on the two sides of the Panama strait (Atlantic and Pacific). A straight line between the two points would be a short distance. However, if we take in account the barrier, then the animal (or its larvae) would need to travel a much longer distance to reach the other side of the strait.
+Outliers were detected by three methods: distance-based IQR (3 times the inter-quartile range), distance-based MAD, and isolation forest. For the environmental assessment, the same approach was applied to bathymetry, temperature, salinity and distance to shore. In the final data used for modelling, we removed:
 
-In both the geographical and the environmental (Sea Surface Temperature, bathymetry and salinity) outlier assessment, we used a threshold of 3 times the inter quantile range to identify extreme points, but we just flagged the most extreme outlier until a limit of 1% of the points (i.e. if there were more points above the threshold, just the most extreme ones were flagged).
+- geographical outliers flagged by the **isolation forest** method
+- environmental outliers flagged by the **MAD** method on **bathymetry**
+
+In all cases we only removed the most extreme outliers, up to a limit of 1% of the points. At least 5 records were necessary to apply the outlier procedures.
+
+### Separation of an independent evaluation dataset
+
+When possible, one dataset was set aside to be used as independent evaluation data. To do that, points were reduced to one per cell for each dataset, and the spread of the points in geographical space was measured. From the 50% of datasets with the highest spread, the one with the lowest impact on the total number of points was selected (with a limit of 10% of the total number of points). Points from this dataset were marked as evaluation points, and the remaining as fitting points.
+
+## Habitat information
+
+We obtained the mode of life of each species (e.g. benthic, demersal, pelagic) from WoRMS, SeaLifeBase and FishBase (`get_habitat_information.R`). When information was not available for a species, we tried to infer it from the other species of the same genus and, if that was not possible, of the same family, whenever all species with known information in that group shared the same mode of life. This information is used to define which environmental layers to use: for benthic, demersal and bottom-living species we use the layers of the mean depth, and for the remaining species the surface layers. When no information was found, surface layers were used.

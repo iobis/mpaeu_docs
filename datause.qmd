@@ -2,13 +2,19 @@
 
 ## Explore through the map platform
 
-The main gateway to explore the species range maps of the MPA Europe project is the [Shiny application](https://shiny.obis.org/distmaps/) (https://shiny.obis.org/distmaps/). It provides an interactive experience, with full access to all species, models and predictions. It also includes important details like the model metrics and partial response curves, helping users to more carefully evaluate the model quality and its uncertainty. Users can also directly download results and reports.
+The main gateway to explore the species range maps from IOC-OBIS produced as part of the MPA Europe project is the [map explorer](https://iobis.github.io/mpaeu_map_plat_static) (https://iobis.github.io/mpaeu_map_plat_static). It provides an interactive experience, with full access to all species, models and predictions. It also includes important details like the model metrics and partial response curves, helping users to more carefully evaluate the model quality and its uncertainty. Users can also directly download results and reports.
 
-Once you access the application, you will land in a page like that:
+Once you access the application, you will land in a page like that, containing a welcome modal:
 
-![Landing page of the Shiny application](images/how_to/map_1.png)
+![](images/how_to/map_0.png)
 
-On the top, the user can choose between four tabs. The first show the species range maps, the second species thermal ranges (estimated from the occurrence records), the third the habitat models (based on Stacked SDMs), and the fourth gives access to the Atlas for MSP. On the species tab, the user can type scientific names or use the filter option to limit the search to specific groups/areas of interest.
+::: {.callout-tip}
+We recommend reading the first link "Learn how to interpret range maps" before using the application.
+:::
+
+Once the modal is closed, on the top, the user can choose between four tabs. The first show the species range maps, the second species thermal ranges (estimated from the occurrence records), the third the habitat models (based on Stacked SDMs), and the fourth gives access to the Atlas for MSP. On the species tab, the user can type scientific names or use the filter option to limit the search to specific groups/areas of interest.
+
+![](images/how_to/map_1.png)
 
 ![](images/how_to/map_2.png)
 
@@ -20,7 +26,7 @@ Once a species is selected, a set of new options become available. The first sho
 
 Below the map, on the left side, you will find the options to change the mask type, apply a threshold (under the "filter" option), and also to show the uncertainty map instead (the bootstrap result).
 
-![](images/how_to/map_5b.png)
+![](images/how_to/map_5.png)
 
 Applying a threshold will automatically update the map, removing areas of low suitability according to the selected threshold.
 
@@ -28,37 +34,41 @@ Applying a threshold will automatically update the map, removing areas of low su
 
 On the right side, it is possible to overlay some additional layers to provide context to the map.
 
-![](images/how_to/map_5c.png)
+![](images/how_to/map_7.png)
 
 On the right panel, details about the species are available, including it threatened status according to the IUCN Red List and, if available, the expert review.
 
-![](images/how_to/map_5d.png)
+![](images/how_to/map_8.png)
 
 Right below the species details you will find the control to select the model and the time period of the predictions.
 
-![](images/how_to/map_5e.png)
+![](images/how_to/map_9.png)
 
 Scrolling-down you will have access to the model metrics, variable importance, the explanation of the selected model and the partial response curves. All of those are **extremelly important** to enable you to **critically** evaluate the model. Does the metrics indicate that the model has a good capacity of prediction? The partial response curves show patterns that are biologically plausible?
 
-![](images/how_to/map_7.png)
+![](images/how_to/map_10.png)
 
 Below this section, there are two buttons to either **download a species report** or to **show additional information**. Under additional information the user has access to metrics of spatial bias in the data, extrapolation measures, and full model details.
 
-![](images/how_to/map_8.png)
-
-![](images/how_to/map_9.png)
-
-Back on the right panel, once you select a scenario different than the current, a control of the time period will also appear. At the same time, on the map panel, on the bottom-left corner you will find a button to split the viewer, showing at the same time the current and future prediction. This is useful to compare how the future prediction relates to the prediction of the current range of the species.
-
-![](images/how_to/map_10.png)
-
 ![](images/how_to/map_11.png)
-
-The user can also explore the additional tabs, like maps of the thermal range of the species (derived from the occurrence records) and the habitat maps (SSDMs).
 
 ![](images/how_to/map_12.png)
 
+Clicking to generate the report will open a new window that can be printed or saved as PDF.
+
 ![](images/how_to/map_13.png)
+
+Back on the right panel, once you select a scenario different than the current, a control of the time period will also appear. At the same time, on the map panel, on the bottom-left corner you will find a button to split the viewer, showing at the same time the current and future prediction. This is useful to compare how the future prediction relates to the prediction of the current range of the species.
+
+![](images/how_to/map_14.png)
+
+![](images/how_to/map_15.png)
+
+The user can also explore the additional tabs, like maps of the thermal range of the species (derived from the occurrence records) and the habitat maps (SSDMs).
+
+![](images/how_to/map_16.png)
+
+![](images/how_to/map_17.png)
 
 ## Analyzing locally
 
